@@ -1179,3 +1179,937 @@
     </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>आरिश टाइल्स - पहासू का नंबर 1 टाइल नेटवर्क</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(145deg, #f0f4fa 0%, #e6ecf5 100%);
+            padding: 15px;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: linear-gradient(145deg, #1e2b3a, #0f1a24);
+            color: white;
+            padding: 30px 20px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #d4af37;
+        }
+        
+        .phone-badge {
+            background: #d4af37;
+            color: #1e2b3a;
+            padding: 12px 25px;
+            border-radius: 60px;
+            display: inline-block;
+            font-weight: bold;
+            font-size: 20px;
+            margin-top: 10px;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px 10px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .stat-number {
+            font-size: 32px;
+            font-weight: 800;
+            color: #d4af37;
+            line-height: 1.2;
+        }
+        
+        .stat-label {
+            color: #1e2b3a;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .section-title {
+            font-size: 22px;
+            margin: 25px 0 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #1e2b3a;
+        }
+        
+        .section-title i {
+            color: #d4af37;
+            font-size: 26px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 30px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+            border: 1px solid rgba(255,255,255,0.8);
+        }
+        
+        .mason-card {
+            background: #f8fafd;
+            border-radius: 25px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 1px solid #eef2f7;
+            transition: 0.2s;
+        }
+        
+        .mason-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .rank-badge {
+            width: 50px;
+            height: 50px;
+            background: #d4af37;
+            color: #1e2b3a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 20px;
+            box-shadow: 0 5px 10px rgba(212, 175, 55, 0.3);
+        }
+        
+        .mason-info h3 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        
+        .mason-info p {
+            color: #4a5a6e;
+            font-size: 14px;
+        }
+        
+        .mason-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+            padding: 15px 0;
+            border-top: 2px dashed #d4af37;
+            border-bottom: 2px dashed #d4af37;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-weight: 800;
+            font-size: 18px;
+            color: #1e2b3a;
+        }
+        
+        .stat-desc {
+            font-size: 12px;
+            color: #64748b;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #e9eef3;
+            border-radius: 20px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 12px;
+            background: linear-gradient(90deg, #d4af37, #f5d742);
+            border-radius: 20px;
+            width: 0%;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .call-btn, .whatsapp-btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        
+        .call-btn {
+            background: #1e2b3a;
+            color: white;
+        }
+        
+        .whatsapp-btn {
+            background: #25d366;
+            color: white;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1e2b3a;
+        }
+        
+        .input-group input, .input-group select, .input-group textarea {
+            width: 100%;
+            padding: 18px;
+            border: 2px solid #e2e8f0;
+            border-radius: 20px;
+            font-size: 16px;
+            background: #f8fafc;
+        }
+        
+        .input-group input:focus, .input-group select:focus {
+            border-color: #d4af37;
+            outline: none;
+        }
+        
+        .calc-btn {
+            width: 100%;
+            background: #d4af37;
+            color: #1e2b3a;
+            border: none;
+            padding: 20px;
+            border-radius: 60px;
+            font-weight: 800;
+            font-size: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+            margin: 10px 0;
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+        }
+        
+        .result-box {
+            background: #f0f4fa;
+            border-radius: 25px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid #d4af37;
+        }
+        
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px dashed #d4af37;
+        }
+        
+        .total-row {
+            font-size: 22px;
+            font-weight: 800;
+            color: #1e2b3a;
+            border-bottom: none;
+        }
+        
+        .total-row span:last-child {
+            color: #d4af37;
+        }
+        
+        .rate-table {
+            background: #f8fafc;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .rate-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+            font-weight: 500;
+        }
+        
+        .rate-row.header {
+            background: #1e2b3a;
+            color: white;
+            font-weight: 700;
+        }
+        
+        .rate-row.highlight {
+            background: #d4af37;
+            color: #1e2b3a;
+            font-weight: 800;
+        }
+        
+        .pdf-section {
+            background: linear-gradient(145deg, #f8fafc, #ffffff);
+            border: 2px dashed #d4af37;
+        }
+        
+        .success-message {
+            background: #4caf50;
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            background: white;
+            padding: 10px;
+            border-radius: 60px;
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .tab-btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            background: transparent;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        
+        .tab-btn.active {
+            background: #d4af37;
+            color: #1e2b3a;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* मोबाइल के लिए खास */
+        @media (max-width: 480px) {
+            .tab-btn {
+                padding: 12px 8px;
+                font-size: 14px;
+            }
+            .header h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+    <h1>🏠 आरिश टाइल्स एंड स्टोन्स</h1>
+    <p style="font-size: 18px; margin: 10px 0;">पहासू का सबसे भरोसेमंद टाइल नेटवर्क</p>
+    <div class="phone-badge">
+        <i class="fas fa-phone-alt"></i> 8755-687-268
+    </div>
+</div>
+
+<!-- टैब नेविगेशन -->
+<div class="tab-buttons">
+    <button class="tab-btn active" onclick="switchTab('home')">🏠 होम</button>
+    <button class="tab-btn" onclick="switchTab('calculator')">🧮 कैलकुलेटर</button>
+    <button class="tab-btn" onclick="switchTab('masons')">👷 मिस्त्री</button>
+    <button class="tab-btn" onclick="switchTab('admin')">⚙️ एडमिन</button>
+</div>
+
+<!-- होम टैब -->
+<div id="home-tab" class="tab-content active">
+    <!-- स्टैट्स कार्ड -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-number" id="totalMasons">47</div>
+            <div class="stat-label">मिस्त्री</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" id="monthlyBags">823</div>
+            <div class="stat-label">कट्टे इस महीने</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" id="totalVillages">12</div>
+            <div class="stat-label">गांव पार्टनर</div>
+        </div>
+    </div>
+    
+    <!-- केमिकल कट्टा रेट -->
+    <div class="card">
+        <div class="section-title">
+            <i class="fas fa-rupee-sign"></i>
+            <h2>केमिकल कट्टा रेट 2024</h2>
+        </div>
+        
+        <div class="rate-table" id="rateTable">
+            <!-- यहाँ JavaScript से रेट अपडेट होंगे -->
+        </div>
+        
+        <!-- टाइम लिमिट सेक्शन (नया) -->
+        <div style="margin-top: 20px; padding: 15px; background: #e8f0fe; border-radius: 15px;">
+            <h3 style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                <i class="fas fa-hourglass-half" style="color: #d4af37;"></i> 
+                टाइम लिमिट (महीने के हिसाब से)
+            </h3>
+            <div id="timeLimitDisplay">
+                <!-- टाइम लिमिट यहाँ दिखेगी -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- टॉप मिस्त्री -->
+    <div class="card">
+        <div class="section-title">
+            <i class="fas fa-trophy"></i>
+            <h2>टॉप 3 मिस्त्री</h2>
+        </div>
+        
+        <div id="topMasons">
+            <!-- JavaScript से मिस्त्री लोड होंगे -->
+        </div>
+    </div>
+</div>
+
+<!-- कैलकुलेटर टैब -->
+<div id="calculator-tab" class="tab-content">
+    <div class="card">
+        <div class="section-title">
+            <i class="fas fa-calculator"></i>
+            <h2>टाइल कैलकुलेटर</h2>
+        </div>
+        
+        <div class="input-group">
+            <label>📐 कमरे की लंबाई (फीट)</label>
+            <input type="number" id="length" placeholder="जैसे: 12" value="12">
+        </div>
+        
+        <div class="input-group">
+            <label>📏 कमरे की चौड़ाई (फीट)</label>
+            <input type="number" id="width" placeholder="जैसे: 10" value="10">
+        </div>
+        
+        <div class="input-group">
+            <label>🧱 टाइल का साइज</label>
+            <select id="tileSize">
+                <option value="16">2x2 फीट (16 sqft/पेटी) - 4 टाइल</option>
+                <option value="16">2x4 फीट (16 sqft/पेटी) - 2 टाइल</option>
+                <option value="8.5">12x18 इंच (8.5 sqft/पेटी)</option>
+                <option value="4.5">12x12 इंच (4.5 sqft/पेटी)</option>
+            </select>
+        </div>
+        
+        <div class="input-group">
+            <label>🚚 दूरी (किमी)</label>
+            <input type="number" id="distance" placeholder="पहासू से दूरी" value="5">
+        </div>
+        
+        <button class="calc-btn" onclick="calculateTiles()">
+            <i class="fas fa-magic"></i> हिसाब लगाएं
+        </button>
+        
+        <div id="resultBox" class="result-box" style="display: none;">
+            <div class="result-row">
+                <span>कुल एरिया:</span>
+                <span id="totalArea">0 वर्ग फीट</span>
+            </div>
+            <div class="result-row">
+                <span>टाइल की पेटी:</span>
+                <span id="totalBoxes">0 पेटी</span>
+            </div>
+            <div class="result-row">
+                <span>10% वेस्टेज:</span>
+                <span id="wasteBoxes">0 पेटी</span>
+            </div>
+            <div class="result-row">
+                <span>कुल पेटी:</span>
+                <span id="totalWithWaste">0 पेटी</span>
+            </div>
+            <div class="result-row">
+                <span>टाइल की कीमत:</span>
+                <span id="tileCost">₹0</span>
+            </div>
+            <div class="result-row">
+                <span>डिलीवरी चार्ज:</span>
+                <span id="deliveryCharge">₹0</span>
+            </div>
+            <div class="result-row total-row">
+                <span>कुल भुगतान:</span>
+                <span id="grandTotal">₹0</span>
+            </div>
+            
+            <a href="#" id="whatsappOrderBtn" style="display: block; background: #25d366; color: white; text-align: center; padding: 18px; border-radius: 60px; text-decoration: none; margin-top: 20px; font-weight: 800;">
+                <i class="fab fa-whatsapp"></i> व्हाट्सएप पर ऑर्डर करें
+            </a>
+        </div>
+    </div>
+</div>
+<!-- मिस्त्री टैब -->
+<div id="masons-tab" class="tab-content">
+    <div class="card">
+        <div class="section-title">
+            <i class="fas fa-user-plus"></i>
+            <h2>नया मिस्त्री जुड़ें</h2>
+        </div>
+        
+        <div class="input-group">
+            <label>👤 पूरा नाम</label>
+            <input type="text" id="masonName" placeholder="जैसे: रफीक मिस्त्री">
+        </div>
+        
+        <div class="input-group">
+            <label>📱 मोबाइल नंबर</label>
+            <input type="tel" id="masonPhone" placeholder="9876543210">
+        </div>
+        
+        <div class="input-group">
+            <label>📍 गांव</label>
+            <input type="text" id="masonVillage" placeholder="जैसे: खैर, पहासू">
+        </div>
+        
+        <div class="input-group">
+            <label>⏳ अनुभव (साल)</label>
+            <input type="number" id="masonExp" placeholder="10">
+        </div>
+        
+        <div class="input-group">
+            <label>🛠️ किस काम में माहिर?</label>
+            <select id="masonSpecialty">
+                <option>फ्लोर टाइल</option>
+                <option>वॉल टाइल</option>
+                <option>बाथरूम टाइल</option>
+                <option>किचन टाइल</option>
+                <option>सभी टाइल</option>
+            </select>
+        </div>
+        
+        <button class="calc-btn" onclick="registerMason()">
+            <i class="fas fa-check-circle"></i> मिस्त्री जुड़ें
+        </button>
+        
+        <div id="masonSuccessMessage" class="success-message">
+            🎉 धन्यवाद! आपका पंजीकरण हो गया। जल्द ही संपर्क करेंगे।
+        </div>
+    </div>
+    
+    <!-- PDF अपलोड सेक्शन -->
+    <div class="card pdf-section">
+        <div class="section-title">
+            <i class="fas fa-file-pdf"></i>
+            <h2>📄 टाइल कैटलॉग PDF</h2>
+        </div>
+        
+        <div class="input-group">
+            <label>PDF का नाम</label>
+            <input type="text" id="pdfName" placeholder="जैसे: प्रीमियम टाइल कलेक्शन">
+        </div>
+        
+        <div class="input-group">
+            <label>PDF लिंक (Google Drive या Direct)</label>
+            <input type="url" id="pdfLink" placeholder="https://...">
+        </div>
+        
+        <button class="calc-btn" onclick="addPDF()">
+            <i class="fas fa-upload"></i> PDF अपलोड करें
+        </button>
+        
+        <div id="pdfList" style="margin-top: 20px;">
+            <h3>📚 उपलब्ध कैटलॉग:</h3>
+            <div style="margin-top: 10px;" id="pdfContainer"></div>
+        </div>
+    </div>
+</div>
+
+<!-- एडमिन टैब -->
+<div id="admin-tab" class="tab-content">
+    <div class="card">
+        <div class="section-title">
+            <i class="fas fa-lock"></i>
+            <h2>एडमिन पैनल (केवल आरिश भाई के लिए)</h2>
+        </div>
+        
+        <div class="input-group">
+            <label>🔑 पासवर्ड</label>
+            <input type="password" id="adminPassword" placeholder="पासवर्ड डालें">
+        </div>
+        
+        <button class="calc-btn" onclick="checkAdmin()">
+            <i class="fas fa-sign-in-alt"></i> लॉगिन करें
+        </button>
+        
+        <div id="adminPanel" style="display: none;">
+            <!-- केमिकल रेट अपडेट सेक्शन -->
+            <div style="margin-top: 20px;">
+                <h3>💰 केमिकल रेट अपडेट करें</h3>
+                <div id="rateInputs">
+                    <!-- JavaScript से इनपुट बनेंगे -->
+                </div>
+            </div>
+            
+            <!-- टाइम लिमिट सेक्शन (नया) -->
+            <div style="margin-top: 30px;">
+                <h3>⏱️ टाइम लिमिट सेट करें (महीने के हिसाब से)</h3>
+                <div id="timeLimitInputs">
+                    <!-- JavaScript से टाइम लिमिट इनपुट बनेंगे -->
+                </div>
+            </div>
+            
+            <!-- स्टैट्स -->
+            <div class="stats-grid" style="margin-top: 30px;">
+                <div class="stat-card">
+                    <div class="stat-number" id="adminTotalMasons">47</div>
+                    <div class="stat-label">कुल मिस्त्री</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="adminMonthlyBags">823</div>
+                    <div class="stat-label">महीने के कट्टे</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="adminTotalRevenue">₹4,12,000</div>
+                    <div class="stat-label">महीने की कमाई</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- WhatsApp फ्लोटिंग बटन -->
+<a href="https://wa.me/918755687268" class="whatsapp-btn" style="position: fixed; bottom: 20px; right: 20px; width: auto; padding: 15px 25px; border-radius: 60px; box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); z-index: 1000;">
+    <i class="fab fa-whatsapp" style="font-size: 24px;"></i> ऑर्डर करें
+</a>
+
+<script>
+    // ==================== डेटा स्टोरेज ====================
+    let chemicalRates = JSON.parse(localStorage.getItem('chemicalRates')) || [
+        { min: 0, max: 100, rate: 120, timeLimit: 30 }, // 30 दिन
+        { min: 101, max: 300, rate: 125, timeLimit: 60 }, // 60 दिन
+        { min: 301, max: 700, rate: 135, timeLimit: 120 }, // 120 दिन
+        { min: 701, max: 1000, rate: 140, timeLimit: 180 }, // 180 दिन
+        { min: 1001, max: 1500, rate: 150, timeLimit: 300 } // 300 दिन (जैकपॉट)
+    ];
+    
+    let masons = JSON.parse(localStorage.getItem('masons')) || [
+        { name: "रफीक मिस्त्री", village: "खैर", exp: 15, bags: 420, phone: "9876543210", specialty: "फ्लोर टाइल" },
+        { name: "सलीम मिस्त्री", village: "पहासू", exp: 12, bags: 380, phone: "9876543211", specialty: "वॉल टाइल" },
+        { name: "इकबाल मिस्त्री", village: "चांदपुर", exp: 10, bags: 310, phone: "9876543212", specialty: "बाथरूम" }
+    ];
+    
+    let pdfs = JSON.parse(localStorage.getItem('pdfs')) || [];
+    
+    // ==================== फंक्शन ====================
+    
+    // टैब स्विच करें
+    function switchTab(tabName) {
+        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById(tabName + '-tab').classList.add('active');
+        event.target.classList.add('active');
+    }
+    
+    // केमिकल रेट टेबल दिखाएं
+    function displayRates() {
+        const table = document.getElementById('rateTable');
+        let html = `
+            <div class="rate-row header">
+                <span>कट्टे (बैग)</span>
+                <span>रेट/कट्टा</span>
+                <span>टाइम लिमिट</span>
+            </div>
+        `;
+        
+        chemicalRates.forEach((rate, index) => {
+            const isHighlight = rate.max === 1500 ? 'highlight' : '';
+            const days = rate.timeLimit ? rate.timeLimit + ' दिन' : 'कोई लिमिट नहीं';
+            
+            html += `
+                <div class="rate-row ${isHighlight}">
+                    <span>${rate.min}-${rate.max} कट्टे</span>
+                    <span>₹${rate.rate}</span>
+                    <span>${days}</span>
+                </div>
+            `;
+        });
+        
+        table.innerHTML = html;
+    }
+    
+    // टाइम लिमिट दिखाएं
+    function displayTimeLimits() {
+        const display = document.getElementById('timeLimitDisplay');
+        let html = '';
+        
+        chemicalRates.forEach(rate => {
+            html += `
+                <div style="background: white; padding: 10px; border-radius: 10px; margin-bottom: 10px;">
+                    <strong>${rate.min}-${rate.max} कट्टे:</strong> 
+                    ${rate.timeLimit ? rate.timeLimit + ' दिन में पूरे करें' : 'कोई समय सीमा नहीं'}
+                </div>
+            `;
+        });
+        
+        display.innerHTML = html;
+    }
+    
+    // टॉप मिस्त्री दिखाएं
+    function displayTopMasons() {
+        const container = document.getElementById('topMasons');
+        let html = '';
+        
+        // सॉर्ट करें (ज्यादा बैग वाले पहले)
+        const sorted = [...masons].sort((a, b) => b.bags - a.bags).slice(0, 3);
+        
+        sorted.forEach((mason, index) => {
+            const earnings = mason.bags * 120; // बेसिक रेट से कैलकुलेट
+            
+            html += `
+                <div class="mason-card">
+                    <div class="mason-header">
+                        <div class="rank-badge">${index + 1}</div>
+                        <div class="mason-info">
+                            <h3>${mason.name}</h3>
+                            <p><i class="fas fa-map-marker-alt"></i> ${mason.village} • ${mason.exp} साल</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 10px 0;">
+                        <span><strong>${mason.bags} कट्टे</strong> (कुल)</span>
+                        <span><strong>₹${earnings.toLocaleString('hi-IN')}</strong> (कमाई)</span>
+                    </div>
+                    <div class="action-buttons">
+                        <a href="tel:${mason.phone}" class="call-btn"><i class="fas fa-phone"></i> कॉल</a>
+                        <a href="https://wa.me/91${mason.phone}?text=नमस्ते%20${mason.name}%20भाई,%20टाइल%20लगवानी%20है।" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> व्हाट्सएप</a>
+                    </div>
+                </div>
+            `;
+        });
+        
+        container.innerHTML = html;
+    }
+    
+    // कैलकुलेटर
+    function calculateTiles() {
+        const length = parseFloat(document.getElementById('length').value) || 0;
+        const width = parseFloat(document.getElementById('width').value) || 0;
+        const tileSize = parseFloat(document.getElementById('tileSize').value);
+        const distance = parseFloat(document.getElementById('distance').value) || 0;
+        
+        if(length === 0 || width === 0) {
+            alert("लंबाई और चौड़ाई सही भरें!");
+            return;
+        }
+        
+        const area = length * width;
+        const boxes = Math.ceil(area / tileSize);
+        const wasteBoxes = Math.ceil(boxes * 0.1);
+        const totalBoxes = boxes + wasteBoxes;
+        const pricePerBox = 500;
+        const tileCost = totalBoxes * pricePerBox;
+        
+        let deliveryCharge = 0;
+        if(distance > 10 && distance <= 30) deliveryCharge = 500;
+        else if(distance > 30) deliveryCharge = 800;
+        
+        const grandTotal = tileCost + deliveryCharge;
+        
+        document.getElementById('totalArea').innerText = area + ' वर्ग फीट';
+        document.getElementById('totalBoxes').innerText = boxes + ' पेटी';
+        document.getElementById('wasteBoxes').innerText = wasteBoxes + ' पेटी';
+        document.getElementById('totalWithWaste').innerText = totalBoxes + ' पेटी';
+        document.getElementById('tileCost').innerText = '₹' + tileCost.toLocaleString('hi-IN');
+        document.getElementById('deliveryCharge').innerText = '₹' + deliveryCharge;
+        document.getElementById('grandTotal').innerText = '₹' + grandTotal.toLocaleString('hi-IN');
+        
+        const message = `नमस्ते आरिश टाइल्स!%0A%0A🧮 नया ऑर्डर:%0A📐 एरिया: ${area} वर्ग फीट%0A📦 पेटी: ${totalBoxes}%0A💰 कुल: ₹${grandTotal}%0A📍 पता: ...`;
+        document.getElementById('whatsappOrderBtn').href = `https://wa.me/918755687268?text=${message}`;
+        
+        document.getElementById('resultBox').style.display = 'block';
+    }
+    
+    // मिस्त्री रजिस्ट्रेशन
+    function registerMason() {
+        const name = document.getElementById('masonName').value;
+        const phone = document.getElementById('masonPhone').value;
+        const village = document.getElementById('masonVillage').value;
+        const exp = document.getElementById('masonExp').value;
+        const specialty = document.getElementById('masonSpecialty').value;
+        
+        if(!name || !phone || !village) {
+            alert("सभी जानकारी भरें!");
+            return;
+        }
+        
+        masons.push({
+            name, phone, village, exp: parseInt(exp), 
+            bags: 0, specialty
+        });
+        
+        localStorage.setItem('masons', JSON.stringify(masons));
+        
+        document.getElementById('masonSuccessMessage').style.display = 'block';
+        setTimeout(() => {
+            document.getElementById('masonSuccessMessage').style.display = 'none';
+        }, 3000);
+        
+        // फॉर्म खाली करें
+        document.getElementById('masonName').value = '';
+        document.getElementById('masonPhone').value = '';
+        document.getElementById('masonVillage').value = '';
+        document.getElementById('masonExp').value = '';
+        
+        displayTopMasons();
+    }
+    
+    // PDF फंक्शन
+    function addPDF() {
+        const name = document.getElementById('pdfName').value;
+        const link = document.getElementById('pdfLink').value;
+        
+        if(!name || !link) {
+            alert("PDF का नाम और लिंक डालें!");
+            return;
+        }
+        
+        pdfs.push({name, link});
+        localStorage.setItem('pdfs', JSON.stringify(pdfs));
+        displayPDFs();
+        
+        document.getElementById('pdfName').value = '';
+        document.getElementById('pdfLink').value = '';
+        alert("PDF अपलोड हो गया!");
+    }
+    
+    function displayPDFs() {
+        const container = document.getElementById('pdfContainer');
+        container.innerHTML = '';
+        
+        pdfs.forEach((pdf, index) => {
+            container.innerHTML += `
+                <div style="background: #f0f4fa; padding: 15px; border-radius: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                    <span><i class="fas fa-file-pdf" style="color: #d4af37;"></i> ${pdf.name}</span>
+                    <a href="${pdf.link}" target="_blank" style="background: #1e2b3a; color: white; padding: 8px 15px; border-radius: 30px; text-decoration: none;">खोलें</a>
+                </div>
+            `;
+        });
+    }
+    
+    // एडमिन फंक्शन
+    function checkAdmin() {
+        const password = document.getElementById('adminPassword').value;
+        
+        if(password === "arish@123") {
+            document.getElementById('adminPanel').style.display = 'block';
+            displayAdminControls();
+        } else {
+            alert("गलत पासवर्ड!");
+        }
+    }
+    
+    function displayAdminControls() {
+        // रेट इनपुट
+        let rateHtml = '';
+        let timeHtml = '';
+        
+        chemicalRates.forEach((rate, index) => {
+            rateHtml += `
+                <div style="background: #f5f5f5; padding: 15px; border-radius: 15px; margin-bottom: 15px;">
+                    <h4>${rate.min}-${rate.max} कट्टे</h4>
+                    <input type="number" id="rate_${index}" value="${rate.rate}" placeholder="रेट" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 2px solid #d4af37; border-radius: 10px;">
+                </div>
+            `;
+            
+            timeHtml += `
+                <div style="background: #f5f5f5; padding: 15px; border-radius: 15px; margin-bottom: 15px;">
+                    <h4>${rate.min}-${rate.max} कट्टे के लिए टाइम लिमिट (दिनों में)</h4>
+                    <input type="number" id="time_${index}" value="${rate.timeLimit || ''}" placeholder="जैसे: 30 दिन" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 2px solid #d4af37; border-radius: 10px;">
+                    <small>खाली छोड़ें = कोई लिमिट नहीं</small>
+                </div>
+            `;
+        });
+        
+        rateHtml += `<button class="calc-btn" onclick="saveRates()">रेट सेव करें</button>`;
+        timeHtml += `<button class="calc-btn" onclick="saveTimeLimits()">टाइम लिमिट सेव करें</button>`;
+        
+        document.getElementById('rateInputs').innerHTML = rateHtml;
+        document.getElementById('timeLimitInputs').innerHTML = timeHtml;
+    }
+    
+    function saveRates() {
+        chemicalRates.forEach((rate, index) => {
+            const newRate = document.getElementById(`rate_${index}`).value;
+            if(newRate) rate.rate = parseInt(newRate);
+        });
+        
+        localStorage.setItem('chemicalRates', JSON.stringify(chemicalRates));
+        displayRates();
+        alert("रेट अपडेट हो गए!");
+    }
+    
+    function saveTimeLimits() {
+        chemicalRates.forEach((rate, index) => {
+            const newTime = document.getElementById(`time_${index}`).value;
+            rate.timeLimit = newTime ? parseInt(newTime) : null;
+        });
+        
+        localStorage.setItem('chemicalRates', JSON.stringify(chemicalRates));
+        displayTimeLimits();
+        alert("टाइम लिमिट अपडेट हो गई!");
+    }
+    
+    // पेज लोड होने पर
+    window.onload = function() {
+        displayRates();
+        displayTimeLimits();
+        displayTopMasons();
+        displayPDFs();
+    };
+</script>
+</body>
+</html>
