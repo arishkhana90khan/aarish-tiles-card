@@ -3,221 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>आरिश टाइल्स नेटवर्क | पहासू</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <title>Aarish Tiles Network | पहासू</title>
     <style>
-        :root {
-            --gold: #D4AF37;
-            --black: #050505;
-            --white: #ffffff;
-            --deep: #111111;
-        }
+        :root { --gold: #D4AF37; --black: #0b0b0b; --gray: #1a1a1a; --white: #ffffff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+        body { background: var(--black); color: var(--white); text-align: center; padding-bottom: 50px; }
+        
+        header { padding: 50px 20px; border-bottom: 3px solid var(--gold); background: #000; }
+        .logo { font-size: 2.5rem; color: var(--gold); font-weight: 900; }
+        
+        .btn { display: inline-block; padding: 15px; margin: 10px; width: 90%; max-width: 350px; text-decoration: none; border-radius: 8px; font-weight: bold; cursor: pointer; border: none; }
+        .btn-call { background: var(--white); color: #000; }
+        .btn-gold { background: var(--gold); color: #000; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background: var(--black); color: var(--white); scroll-behavior: smooth; }
+        .card { background: var(--gray); margin: 20px auto; padding: 25px; width: 95%; max-width: 600px; border-radius: 15px; border: 1px solid #333; text-align: left; }
+        h2 { color: var(--gold); margin-bottom: 15px; font-size: 1.2rem; text-transform: uppercase; }
 
-        /* --- 1. Header Section --- */
-        header { 
-            padding: 80px 20px; 
-            text-align: center; 
-            border-bottom: 5px solid var(--gold);
-            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80');
-            background-size: cover;
-            background-position: center;
-        }
-        .logo { font-size: 3.5rem; font-weight: 900; color: var(--gold); text-transform: uppercase; letter-spacing: 4px; line-height: 1; }
-        .tagline { margin-top: 10px; font-size: 1rem; opacity: 0.8; letter-spacing: 2px; }
-
-        .contact-box { margin-top: 35px; display: flex; flex-direction: column; gap: 15px; align-items: center; }
-        .btn { 
-            width: 90%; max-width: 400px; padding: 18px; border-radius: 50px; 
-            text-decoration: none; font-weight: bold; font-size: 1.1rem; 
-            display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s;
-        }
-        .btn-call { background: var(--white); color: #000; box-shadow: 0 5px 15px rgba(255,255,255,0.2); }
-        .btn-insta { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
-        .btn:hover { transform: scale(1.03); }
-
-        /* --- 2. Main Content Cards --- */
-        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
-        .card { 
-            background: var(--deep); border: 1px solid rgba(212, 175, 55, 0.2); 
-            padding: 30px; border-radius: 25px; margin-bottom: 35px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-        }
-        h2 { color: var(--gold); margin-bottom: 20px; font-size: 1.5rem; text-transform: uppercase; border-left: 5px solid var(--gold); padding-left: 15px; }
-
-        input, select { 
-            width: 100%; padding: 15px; margin: 10px 0; border-radius: 12px; 
-            background: #000; border: 1px solid #333; color: white; font-size: 1rem;
-        }
-        .action-btn { 
-            width: 100%; padding: 18px; background: var(--gold); color: black; 
-            border: none; border-radius: 12px; font-weight: 900; font-size: 1.1rem; 
-            cursor: pointer; margin-top: 10px;
-        }
-
-        /* --- 3. Progress & Mason Section --- */
-        .progress-container { margin-top: 30px; text-align: left; }
-        .bar-bg { background: #222; height: 35px; border-radius: 20px; overflow: hidden; border: 1px solid #444; margin: 15px 0; }
-        .bar-fill { background: linear-gradient(90deg, #b8860b, #ffd700); height: 100%; width: 0%; transition: 2s ease-in-out; }
-        .status-tag { display: inline-block; padding: 8px 15px; background: rgba(212, 175, 55, 0.1); border: 1px dashed var(--gold); border-radius: 10px; color: var(--gold); font-size: 0.9rem; margin-top: 10px; }
-
-        /* --- 4. Footer --- */
-        footer { padding: 60px 20px; text-align: center; opacity: 0.6; border-top: 1px solid #222; font-size: 0.8rem; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: 1px solid #444; background: #000; color: #fff; }
+        
+        /* Dashboard */
+        .progress-bar { background: #333; height: 25px; border-radius: 15px; margin: 15px 0; overflow: hidden; }
+        .fill { background: var(--gold); height: 100%; width: 0%; transition: 1s; }
+        .bonus-box { padding: 10px; background: rgba(212, 175, 55, 0.1); border-left: 4px solid var(--gold); margin-top: 10px; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">आरिश टाइल्स</div>
-    <p class="tagline">दुकान नहीं, एक भरोसा | पहासू (बुलंदशहर)</p>
-    
-    <div class="contact-box">
-        <a href="tel:8755687268" class="btn btn-call">📞 8755687268</a>
-        <a href="tel:9528340961" class="btn btn-call">📞 9528340961</a>
-        <a href="https://www.instagram.com/arishkhan3992__" target="_blank" class="btn btn-insta">📸 इंस्टाग्राम @arishkhan3992__</a>
-    </div>
+    <div class="logo">AARISH TILES</div>
+    <p style="opacity:0.7;">पहासू का अपना भरोसेमंद नेटवर्क</p>
+    <a href="tel:8755687268" class="btn btn-call">📞 कॉल: 8755687268</a>
 </header>
 
-<div class="container">
-
-    <div class="card" id="calculator">
-        <h2>📊 प्रोजेक्ट बजट कैलकुलेटर</h2>
-        <p style="font-size: 0.9rem; opacity: 0.7;">सिर्फ टाइल नहीं, पूरा बजट जानें (वेस्टेज + भाड़ा शामिल)</p>
-        <input type="number" id="length" placeholder="कमरे की लंबाई (Feet)">
-        <input type="number" id="width" placeholder="कमरे की चौड़ाई (Feet)">
-        <select id="tileType">
-            <option value="4">2x2 फ्लोर टाइल्स (Standard)</option>
-            <option value="8">2x4 प्रीमियम विट्रिफाइड</option>
-            <option value="1.5">12x18 वॉल टाइल्स (Bath/Kitchen)</option>
-        </select>
-        <button class="action-btn" onclick="runCalculation()">हिसाब निकालें</button>
-        <div id="calcOutput" style="display:none; margin-top: 25px; padding: 20px; background: rgba(255,255,255,0.03); border-radius: 15px; text-align: left;"></div>
-    </div>
-
-    <div class="card" id="mason-portal">
-        <h2>🔐 मिस्त्री पार्टनर लॉगिन</h2>
-        <div id="login-area">
-            <p style="font-size: 0.9rem; opacity: 0.7; margin-bottom: 10px;">अपना प्रोग्रेस और ₹1.5 लाख का बोनस ट्रैक करें</p>
-            <input type="password" id="mistryPin" placeholder="अपना सीक्रेट पिन कोड डालें">
-            <button class="action-btn" onclick="attemptLogin()">डैशबोर्ड खोलें</button>
-        </div>
-
-        <div id="dashboard-area" style="display:none;">
-            <h3 id="mName" style="color: var(--gold); font-size: 1.8rem;">---</h3>
-            <p id="mInfo" style="opacity: 0.7;"></p>
-            
-            <div class="progress-container">
-                <p>प्रोग्रेस: <b id="bagsCount" style="color: var(--gold);">0</b> / 1000 कट्टे</p>
-                <div class="bar-bg"><div id="barFill" class="bar-fill"></div></div>
-                <div id="bonusStatus" class="status-tag"></div>
-            </div>
-
-            <div style="margin-top: 30px; text-align: left;">
-                <h4 style="font-size: 0.9rem; color: var(--gold);">📋 हालिया गतिविधि:</h4>
-                <div id="historyData" style="font-size: 0.85rem; margin-top: 10px; line-height: 1.8;"></div>
-            </div>
-            <button class="action-btn" onclick="location.reload()" style="background:transparent; border: 1px solid #444; color: #777; font-size: 0.8rem; margin-top: 20px;">लॉग आउट</button>
-        </div>
-    </div>
-
+<div class="card">
+    <h2>📊 टाइल कैलकुलेटर</h2>
+    <input type="number" id="ft_l" placeholder="लंबाई (Feet)">
+    <input type="number" id="ft_w" placeholder="चौड़ाई (Feet)">
+    <button onclick="calculate()" class="btn btn-gold" style="width:100%; margin:10px 0;">चेक करें</button>
+    <div id="res" style="margin-top:10px; font-weight:bold; color:var(--gold);"></div>
 </div>
 
-<footer>
-    <p>📍 आरिश टाइल्स एंड स्टोन्स - मेन रोड, पहासू</p>
-    <p>प्रीमियम क्वालिटी | पक्की गारंटी | फ्रेश स्टॉक प्रॉमिस</p>
-    <p style="margin-top: 20px;">© 2026 Aarish Tiles Network. All Rights Reserved.</p>
-</footer>
+<div class="card" id="mainPortal">
+    <h2>🔐 मिस्त्री पार्टनर लॉगिन</h2>
+    <div id="loginBox">
+        <input type="password" id="userPin" placeholder="अपना 4 अंकों का पिन डालें">
+        <button onclick="login()" class="btn btn-gold" style="width:100%; margin:10px 0;">लॉगिन करें</button>
+    </div>
+
+    <div id="dashboard" style="display:none;">
+        <h3 id="uName" style="color:var(--gold);">---</h3>
+        <p id="uCity" style="font-size:0.8rem; opacity:0.6;"></p>
+        
+        <div class="progress-bar"><div id="uBar" class="fill"></div></div>
+        <p>टारगेट: <span id="uBags">0</span> / 1000 कट्टे</p>
+        <div id="uBonus" class="bonus-box"></div>
+        
+        <div style="margin-top:20px;">
+            <p style="font-size:0.8rem; color:var(--gold);">हालिया रिकॉर्ड:</p>
+            <div id="uHistory" style="font-size:0.75rem; margin-top:5px; opacity:0.8;"></div>
+        </div>
+    </div>
+</div>
 
 <script>
-    // 🔗 GOOGLE SHEET CONNECTION
-    const sheetCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQWgeMIGGRNoH1Fj0IKmZgYBgsbPNRoHIxeOU6CBL53o3mVkwp8-_f2Zm7YIqho9T9-qoUqgL2MpUVm/pub?gid=0&single=true&output=csv";
+    // 🔗 आपकी Google Sheet का लिंक
+    const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQWgeMIGGRNoH1Fj0IKmZgYBgsbPNRoHIxeOU6CBL53o3mVkwp8-_f2Zm7YIqho9T9-qoUqgL2MpUVm/pub?gid=0&single=true&output=csv";
     
-    let masterData = [];
+    let db = [];
 
-    // डेटा खींचना (Google Sheet से)
-    async function loadData() {
+    // डेटा लोड करना
+    async function init() {
         try {
-            const response = await fetch(sheetCSV);
-            const raw = await response.text();
-            const lines = raw.split('\n').slice(1);
-            
-            masterData = lines.map(row => {
-                const cols = row.split(',');
-                if(cols.length >= 4) {
-                    return {
-                        name: cols[0].trim(),
-                        pin: cols[1].trim(),
-                        bags: parseInt(cols[2]) || 0,
-                        city: cols[3].trim(),
-                        history: cols[4] ? cols[4].trim().split('|') : []
-                    };
-                }
-            }).filter(d => d);
-            console.log("Empire Data Loaded!");
-        } catch (e) { console.error("Sync Error"); }
+            const res = await fetch(sheetURL);
+            const data = await res.text();
+            const rows = data.split('\n').slice(1);
+            db = rows.map(r => {
+                const c = r.split(',');
+                return { name: c[0], pin: c[1], bags: parseInt(c[2]), city: c[3], hist: c[4] };
+            });
+            console.log("System Ready");
+        } catch(e) { alert("इंटरनेट या लिंक की समस्या!"); }
     }
-    loadData();
+    init();
 
-    // कैलकुलेटर का दिमाग
-    function runCalculation() {
-        const l = parseFloat(document.getElementById('length').value);
-        const w = parseFloat(document.getElementById('width').value);
-        const t = parseFloat(document.getElementById('tileType').value);
-        const out = document.getElementById('calcOutput');
-
+    function calculate() {
+        let l = document.getElementById('ft_l').value;
+        let w = document.getElementById('ft_w').value;
         if(l && w) {
-            const area = l * w;
-            const waste = area * 0.10; // 10% वेस्टेज
-            const totalArea = area + waste;
-            const peti = Math.ceil(totalArea / t);
-            
-            out.style.display = "block";
-            out.innerHTML = `
-                <p>✅ <b>एरिया:</b> ${area} Sq.Ft (+10% वेस्टेज)</p>
-                <p>✅ <b>जरूरी माल:</b> ${peti} पेटी</p>
-                <p>🚚 <b>डिलीवरी:</b> <span style="color:var(--gold)">पहासू में फ्री होम डिलीवरी</span></p>
-                <hr style="border:0; border-top:1px solid #333; margin:15px 0;">
-                <p style="font-size:0.8rem; opacity:0.8;">*पक्के रेट और स्टॉक के लिए आरिश भाई को कॉल करें।</p>
-            `;
-        } else { alert("आरिश भाई, रूम का साइज तो डालो!"); }
+            let area = l * w;
+            let boxes = Math.ceil((area * 1.1) / 4);
+            document.getElementById('res').innerHTML = `कुल एरिया: ${area} Sq.Ft <br> जरूरी माल: ${boxes} पेटी (लगभग)`;
+        }
     }
 
-    // लॉगिन और जैकपॉट ट्रैकर
-    function attemptLogin() {
-        const pin = document.getElementById('mistryPin').value;
-        const user = masterData.find(u => u.pin === pin);
+    function login() {
+        let p = document.getElementById('userPin').value;
+        let user = db.find(u => u.pin.trim() === p.trim());
 
         if(user) {
-            document.getElementById('login-area').style.display = "none";
-            document.getElementById('dashboard-area').style.display = "block";
+            document.getElementById('loginBox').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+            document.getElementById('uName').innerText = user.name;
+            document.getElementById('uCity').innerText = "क्षेत्र: " + user.city;
+            document.getElementById('uBags').innerText = user.bags;
             
-            document.getElementById('mName').innerText = "आरिश पार्टनर: " + user.name;
-            document.getElementById('mInfo').innerText = "क्षेत्र: " + user.city;
-            document.getElementById('bagsCount').innerText = user.bags;
-            
-            // बार अपडेट
-            let p = (user.bags / 1000) * 100;
-            if(p > 100) p = 100;
-            document.getElementById('barFill').style.width = p + "%";
+            let per = (user.bags / 1000) * 100;
+            document.getElementById('uBar').style.width = (per > 100 ? 100 : per) + "%";
 
-            // जैकपॉट लॉजिक
-            let b = user.bags;
-            let status = "";
-            if(b < 50) status = "अगला इनाम: ₹5,000 बोनस (50 कट्टे पर)";
-            else if(b < 100) status = "अगला इनाम: ₹12,000 बोनस (100 कट्टे पर)";
-            else if(b < 500) status = "अगला इनाम: ₹62,500 बोनस (500 कट्टे पर)";
-            else if(b < 1000) status = "🔥 महा-जैकपॉट: ₹1,50,000 बोनस (1000 कट्टे पर)";
-            else status = "👑 मुबारक हो! आपने जैकपॉट जीत लिया है।";
-            
-            document.getElementById('bonusStatus').innerText = status;
-            document.getElementById('historyData').innerHTML = user.history.map(h => `• ${h}`).join("<br>");
+            let bMsg = "";
+            if(user.bags < 50) bMsg = "50 कट्टे पर ₹5,000 बोनस!";
+            else if(user.bags < 100) bMsg = "100 कट्टे पर ₹12,000 बोनस!";
+            else if(user.bags < 1000) bMsg = "जैकपॉट: 1000 कट्टे पर ₹1,50,000!";
+            else bMsg = "बधाई! आपने ₹1.5 लाख जीत लिए!";
+            document.getElementById('uBonus').innerText = bMsg;
+
+            document.getElementById('uHistory').innerHTML = user.hist ? user.hist.replace(/\|/g, '<br>• ') : "कोई रिकॉर्ड नहीं";
         } else {
-            alert("गलत पिन! यह पोर्टल सिर्फ आरिश भाई के अधिकृत मिस्त्रियों के लिए है।");
+            alert("पिन गलत है! शीट चेक करें।");
         }
     }
 </script>
-
 </body>
-  </html>
+</html>
