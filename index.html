@@ -1051,3 +1051,131 @@
     </div>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>आरिश टाइल्स - मास्टर नेटवर्क</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* DeepSeek वाला प्रीमियम डिजाइन */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background: #f5f7fa; }
+        .header { background: linear-gradient(145deg, #1e2b3a, #2c3e50); color: white; padding: 30px 20px; text-align: center; border-bottom: 5px solid #d4af37; }
+        .quick-buttons { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 15px; max-width: 500px; margin: 0 auto; }
+        .quick-btn { background: #d4af37; color: #1e2b3a; text-decoration: none; padding: 15px; border-radius: 12px; font-weight: bold; text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: none; cursor: pointer; }
+        .stats-card { background: white; margin: 20px; padding: 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; }
+        .stats-number { font-size: 32px; font-weight: bold; color: #d4af37; }
+        .mason-section { background: white; margin: 20px; padding: 20px; border-radius: 20px; }
+        .mason-card { display: flex; align-items: center; gap: 15px; padding: 15px; border-bottom: 1px solid #eee; transition: 0.3s; }
+        .mason-info h3 { color: #1e2b3a; font-size: 1.1rem; }
+        .progress-bar { width: 100%; height: 8px; background: #eee; border-radius: 10px; margin: 10px 0; overflow: hidden; }
+        .progress-fill { height: 100%; background: #d4af37; width: 0%; transition: 1s; }
+        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 5px 20px rgba(37,211,102,0.4); text-decoration: none; z-index: 1000; }
+        #loading { color: #d4af37; font-weight: bold; padding: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>🏠 आरिश टाइल्स एंड स्टोन्स</h1>
+        <p>पहासू का भरोसेमंद टाइल नेटवर्क</p>
+        <p style="margin-top:10px; color: #d4af37; font-weight: bold;">📞 8755687268</p>
+    </div>
+
+    <div class="quick-buttons">
+        <button onclick="window.location.reload()" class="quick-btn"><i class="fas fa-sync"></i> डेटा रिफ्रेश</button>
+        <a href="https://wa.me/918755687268" class="quick-btn"><i class="fab fa-whatsapp"></i> व्हाट्सएप</a>
+    </div>
+
+    <div class="stats-card">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+            <div>
+                <div class="stats-number" id="totalMasons">0</div>
+                <div>कुल मिस्त्री</div>
+            </div>
+            <div>
+                <div class="stats-number" id="totalBags">0</div>
+                <div>कुल कट्टे</div>
+            </div>
+            <div>
+                <div class="stats-number" id="activeVillages">0</div>
+                <div>गांव पार्टनर</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mason-section">
+        <h2 style="margin-bottom: 15px;">👷 लाइव मिस्त्री नेटवर्क (Top 5)</h2>
+        <div id="loading">डेटा लोड हो रहा है...</div>
+        <div id="masonsList"></div>
+    </div>
+
+    <a href="https://wa.me/918755687268" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
+
+    <script>
+        // 🔗 आपकी Google Sheet का लिंक (CSV format)
+        const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQWgeMIGGRNoH1Fj0IKmZgYBgsbPNRoHIxeOU6CBL53o3mVkwp8-_f2Zm7YIqho9T9-qoUqgL2MpUVm/pub?gid=0&single=true&output=csv";
+
+        async function fetchData() {
+            try {
+                const response = await fetch(sheetURL);
+                const data = await response.text();
+                const rows = data.split('\n').slice(1); // पहली लाइन (Header) छोड़कर
+                
+                let totalBags = 0;
+                let villages = new Set();
+                let html = "";
+
+                rows.forEach((row, index) => {
+                    const columns = row.split(',');
+                    if (columns.length < 4) return;
+
+                    const name = columns[0].trim();
+                    const bags = parseInt(columns[2]) || 0;
+                    const village = columns[3].trim();
+                    const phone = columns[1].trim();
+                    
+                    totalBags += bags;
+                    villages.add(village);
+
+                    // टॉप 5 मिस्त्री दिखाना
+                    if (index < 5) {
+                        const progress = (bags / 1500) * 100; // 1500 जैकपॉट टारगेट
+                        html += `
+                            <div class="mason-card">
+                                <div style="background: #1e2b3a; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">${index + 1}</div>
+                                <div style="flex: 1">
+                                    <div class="mason-info">
+                                        <h3>${name}</h3>
+                                        <p>${village} • ${bags} कट्टे</p>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: ${progress}%"></div>
+                                    </div>
+                                </div>
+                                <a href="tel:+91${phone}" class="quick-btn" style="padding: 8px 15px; font-size: 12px;"><i class="fas fa-phone"></i></a>
+                            </div>
+                        `;
+                    }
+                });
+
+                // स्क्रीन पर डेटा अपडेट करना
+                document.getElementById('totalMasons').innerText = rows.length;
+                document.getElementById('totalBags').innerText = totalBags;
+                document.getElementById('activeVillages').innerText = villages.size;
+                document.getElementById('masonsList').innerHTML = html;
+                document.getElementById('loading').style.display = "none";
+
+            } catch (error) {
+                console.error("Error loading data:", error);
+                document.getElementById('loading').innerText = "डेटा लोड करने में समस्या आई। कृपया शीट चेक करें।";
+            }
+        }
+
+        // पेज लोड होते ही डेटा लाओ
+        window.onload = fetchData;
+    </script>
+</body>
+</html>
