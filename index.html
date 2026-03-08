@@ -3,125 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aarish Tiles Network | पहासू</title>
+    <title>आरिश टाइल्स नेटवर्क | पहासू</title>
     <style>
-        :root { --gold: #D4AF37; --black: #0b0b0b; --gray: #1a1a1a; --white: #ffffff; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
-        body { background: var(--black); color: var(--white); text-align: center; padding-bottom: 50px; }
+        :root { --gold: #D4AF37; --black: #050505; --deep: #111111; --white: #ffffff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { background: var(--black); color: var(--white); text-align: center; }
         
-        header { padding: 50px 20px; border-bottom: 3px solid var(--gold); background: #000; }
-        .logo { font-size: 2.5rem; color: var(--gold); font-weight: 900; }
+        header { padding: 60px 20px; border-bottom: 4px solid var(--gold); background: #000; }
+        .logo { font-size: 2.8rem; color: var(--gold); font-weight: 900; letter-spacing: 2px; }
         
-        .btn { display: inline-block; padding: 15px; margin: 10px; width: 90%; max-width: 350px; text-decoration: none; border-radius: 8px; font-weight: bold; cursor: pointer; border: none; }
+        .btn { display: block; padding: 18px; margin: 15px auto; width: 85%; max-width: 380px; text-decoration: none; font-weight: bold; border-radius: 12px; transition: 0.3s; border: none; font-size: 1.1rem; }
         .btn-call { background: var(--white); color: #000; }
-        .btn-gold { background: var(--gold); color: #000; }
+        .btn-insta { background: linear-gradient(45deg, #f09433, #bc1888); color: #fff; }
+        .btn-gold { background: var(--gold); color: #000; cursor: pointer; width: 100%; }
 
-        .card { background: var(--gray); margin: 20px auto; padding: 25px; width: 95%; max-width: 600px; border-radius: 15px; border: 1px solid #333; text-align: left; }
-        h2 { color: var(--gold); margin-bottom: 15px; font-size: 1.2rem; text-transform: uppercase; }
-
-        input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: 1px solid #444; background: #000; color: #fff; }
+        .card { background: var(--deep); margin: 25px auto; padding: 25px; width: 90%; max-width: 600px; border-radius: 20px; border: 1px solid #333; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        h2 { color: var(--gold); margin-bottom: 20px; font-size: 1.4rem; border-left: 4px solid var(--gold); padding-left: 10px; }
         
-        /* Dashboard */
-        .progress-bar { background: #333; height: 25px; border-radius: 15px; margin: 15px 0; overflow: hidden; }
-        .fill { background: var(--gold); height: 100%; width: 0%; transition: 1s; }
-        .bonus-box { padding: 10px; background: rgba(212, 175, 55, 0.1); border-left: 4px solid var(--gold); margin-top: 10px; font-size: 0.9rem; }
+        input, select { width: 100%; padding: 15px; margin: 10px 0; border-radius: 10px; border: 1px solid #444; background: #000; color: #fff; font-size: 1rem; }
+        
+        /* Dashboard System */
+        .progress-container { margin: 20px 0; }
+        .bar-bg { background: #222; height: 30px; border-radius: 15px; overflow: hidden; border: 1px solid #444; }
+        .bar-fill { background: linear-gradient(90deg, #b8860b, var(--gold)); height: 100%; width: 0%; transition: 1.5s; }
+        .bonus-tag { background: rgba(212, 175, 55, 0.1); padding: 15px; border-radius: 12px; color: var(--gold); margin-top: 15px; border: 1px dashed var(--gold); font-weight: bold; }
     </style>
 </head>
 <body>
 
 <header>
     <div class="logo">AARISH TILES</div>
-    <p style="opacity:0.7;">पहासू का अपना भरोसेमंद नेटवर्क</p>
-    <a href="tel:8755687268" class="btn btn-call">📞 कॉल: 8755687268</a>
+    <p style="opacity: 0.7; margin-bottom: 25px;">पहासू का सबसे शक्तिशाली टाइल्स नेटवर्क</p>
+    <a href="tel:8755687268" class="btn btn-call">📞 कॉल करें: 8755687268</a>
+    <a href="tel:9528340961" class="btn btn-call">📞 कॉल करें: 9528340961</a>
+    <a href="https://www.instagram.com/arishkhan3992__" target="_blank" class="btn btn-insta">📸 इंस्टाग्राम पर जुड़ें</a>
 </header>
 
 <div class="card">
-    <h2>📊 टाइल कैलकुलेटर</h2>
-    <input type="number" id="ft_l" placeholder="लंबाई (Feet)">
-    <input type="number" id="ft_w" placeholder="चौड़ाई (Feet)">
-    <button onclick="calculate()" class="btn btn-gold" style="width:100%; margin:10px 0;">चेक करें</button>
-    <div id="res" style="margin-top:10px; font-weight:bold; color:var(--gold);"></div>
+    <h2>📊 स्मार्ट टाइल कैलकुलेटर</h2>
+    <input type="number" id="roomL" placeholder="कमरे की लंबाई (Feet)">
+    <input type="number" id="roomW" placeholder="कमरे की चौड़ाई (Feet)">
+    <select id="sizeType">
+        <option value="16">2x2 टाइल्स (1 पेटी = 16 फीट)</option>
+        <option value="16">2x4 टाइल्स (1 पेटी = 16 फीट)</option>
+        <option value="8.5">12x18 टाइल्स (1 पेटी = 8.5 फीट)</option>
+    </select>
+    <button onclick="calculatePeti()" class="btn btn-gold">जरूरी पेटी चेक करें</button>
+    <div id="calcResult" style="margin-top: 20px; font-weight: bold; color: var(--gold); font-size: 1.2rem;"></div>
 </div>
 
-<div class="card" id="mainPortal">
+<div class="card" id="portal">
     <h2>🔐 मिस्त्री पार्टनर लॉगिन</h2>
-    <div id="loginBox">
-        <input type="password" id="userPin" placeholder="अपना 4 अंकों का पिन डालें">
-        <button onclick="login()" class="btn btn-gold" style="width:100%; margin:10px 0;">लॉगिन करें</button>
+    <div id="loginSection">
+        <input type="password" id="mPin" placeholder="अपना 4 अंकों का सीक्रेट पिन डालें">
+        <button onclick="mistryLogin()" class="btn btn-gold">डैशबोर्ड खोलें</button>
     </div>
 
-    <div id="dashboard" style="display:none;">
-        <h3 id="uName" style="color:var(--gold);">---</h3>
-        <p id="uCity" style="font-size:0.8rem; opacity:0.6;"></p>
+    <div id="dashSection" style="display:none;">
+        <h3 id="mName" style="color:var(--gold); font-size: 1.6rem;">---</h3>
+        <p id="mLoc" style="opacity: 0.6; margin-bottom: 20px;">---</p>
         
-        <div class="progress-bar"><div id="uBar" class="fill"></div></div>
-        <p>टारगेट: <span id="uBags">0</span> / 1000 कट्टे</p>
-        <div id="uBonus" class="bonus-box"></div>
-        
-        <div style="margin-top:20px;">
-            <p style="font-size:0.8rem; color:var(--gold);">हालिया रिकॉर्ड:</p>
-            <div id="uHistory" style="font-size:0.75rem; margin-top:5px; opacity:0.8;"></div>
+        <div class="progress-container">
+            <p>प्रोग्रेस: <b id="mBags">0</b> / 1000 कट्टे</p>
+            <div class="bar-bg"><div id="mBar" class="bar-fill"></div></div>
+            <div id="mJackpot" class="bonus-tag"></div>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <h4 style="color:var(--gold); font-size: 0.9rem;">🕒 हालिया हिस्ट्री:</h4>
+            <div id="mHistory" style="font-size: 0.85rem; margin-top: 10px; line-height: 1.6; opacity: 0.8;"></div>
         </div>
     </div>
 </div>
 
 <script>
-    // 🔗 आपकी Google Sheet का लिंक
+    // 🔗 आरिश भाई की Google Sheet का CSV लिंक
     const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQWgeMIGGRNoH1Fj0IKmZgYBgsbPNRoHIxeOU6CBL53o3mVkwp8-_f2Zm7YIqho9T9-qoUqgL2MpUVm/pub?gid=0&single=true&output=csv";
     
-    let db = [];
+    let mistryDatabase = [];
 
-    // डेटा लोड करना
-    async function init() {
+    // डेटा सिंक (Google Sheet से)
+    async function syncData() {
         try {
-            const res = await fetch(sheetURL);
-            const data = await res.text();
-            const rows = data.split('\n').slice(1);
-            db = rows.map(r => {
+            const response = await fetch(sheetURL);
+            const text = await response.text();
+            const rows = text.split('\n').slice(1);
+            
+            mistryDatabase = rows.map(r => {
                 const c = r.split(',');
                 return { name: c[0], pin: c[1], bags: parseInt(c[2]), city: c[3], hist: c[4] };
             });
-            console.log("System Ready");
-        } catch(e) { alert("इंटरनेट या लिंक की समस्या!"); }
+            console.log("Aarish Tiles System Online!");
+        } catch (e) { console.log("Connection Pending..."); }
     }
-    init();
+    syncData();
 
-    function calculate() {
-        let l = document.getElementById('ft_l').value;
-        let w = document.getElementById('ft_w').value;
+    // सटीक कैलकुलेटर ($2x2=16, 2x4=16, 12x18=8.5)
+    function calculatePeti() {
+        const l = document.getElementById('roomL').value;
+        const w = document.getElementById('roomW').value;
+        const perPeti = document.getElementById('sizeType').value;
+        const resDiv = document.getElementById('calcResult');
+
         if(l && w) {
             let area = l * w;
-            let boxes = Math.ceil((area * 1.1) / 4);
-            document.getElementById('res').innerHTML = `कुल एरिया: ${area} Sq.Ft <br> जरूरी माल: ${boxes} पेटी (लगभग)`;
-        }
+            let peti = Math.ceil(area / perPeti);
+            resDiv.innerHTML = `क्षेत्रफल: ${area} Sq.Ft <br> कुल माल: ${peti} पेटी (लगभग)`;
+        } else { alert("कृपया लंबाई और चौड़ाई भरें!"); }
     }
 
-    function login() {
-        let p = document.getElementById('userPin').value;
-        let user = db.find(u => u.pin.trim() === p.trim());
+    // लॉगिन और जैकपॉट ट्रैकर
+    function mistryLogin() {
+        const pinInput = document.getElementById('mPin').value.trim();
+        const user = mistryDatabase.find(u => u.pin.trim() === pinInput);
 
         if(user) {
-            document.getElementById('loginBox').style.display = 'none';
-            document.getElementById('dashboard').style.display = 'block';
-            document.getElementById('uName').innerText = user.name;
-            document.getElementById('uCity').innerText = "क्षेत्र: " + user.city;
-            document.getElementById('uBags').innerText = user.bags;
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('dashSection').style.display = 'block';
             
-            let per = (user.bags / 1000) * 100;
-            document.getElementById('uBar').style.width = (per > 100 ? 100 : per) + "%";
+            document.getElementById('mName').innerText = "स्वागत है, " + user.name;
+            document.getElementById('mLoc').innerText = "क्षेत्र: " + user.city;
+            document.getElementById('mBags').innerText = user.bags;
+            
+            let percent = (user.bags / 1000) * 100;
+            document.getElementById('mBar').style.width = (percent > 100 ? 100 : percent) + "%";
 
-            let bMsg = "";
-            if(user.bags < 50) bMsg = "50 कट्टे पर ₹5,000 बोनस!";
-            else if(user.bags < 100) bMsg = "100 कट्टे पर ₹12,000 बोनस!";
-            else if(user.bags < 1000) bMsg = "जैकपॉट: 1000 कट्टे पर ₹1,50,000!";
-            else bMsg = "बधाई! आपने ₹1.5 लाख जीत लिए!";
-            document.getElementById('uBonus').innerText = bMsg;
-
-            document.getElementById('uHistory').innerHTML = user.hist ? user.hist.replace(/\|/g, '<br>• ') : "कोई रिकॉर्ड नहीं";
+            let bonusText = "";
+            let b = user.bags;
+            if(b < 50) bonusText = "अगला इनाम: 50 कट्टे पर ₹5,000";
+            else if(b < 100) bonusText = "अगला इनाम: 100 कट्टे पर ₹12,000";
+            else if(b < 500) bonusText = "अगला इनाम: 500 कट्टे पर ₹62,500";
+            else if(b < 1000) bonusText = "🔥 जैकपॉट: 1000 कट्टे पर ₹1,50,000!";
+            else bonusText = "👑 बधाई! ₹1.5 लाख का जैकपॉट आपका हुआ!";
+            
+            document.getElementById('mJackpot').innerText = bonusText;
+            document.getElementById('mHistory').innerHTML = user.hist ? user.hist.replace(/\|/g, '<br>• ') : "कोई रिकॉर्ड नहीं";
         } else {
-            alert("पिन गलत है! शीट चेक करें।");
+            alert("पिन गलत है! कृपया सही पिन डालें या आरिश भाई से संपर्क करें।");
         }
     }
 </script>
+
+<footer style="margin: 40px 0; opacity: 0.5; font-size: 0.8rem;">
+    <p>📍 पहासू, बुलंदशहर (U.P.)</p>
+    <p>© 2026 आरिश टाइल्स नेटवर्क</p>
+</footer>
+
 </body>
 </html>
