@@ -1,106 +1,168 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>आरिश एडमिन | कंट्रोल रूम</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, doc, setDoc, updateDoc, increment, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+<title>Admin Panel - Aarish Tiles</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-        // 🔥 आपका दिया हुआ Firebase Config
-        const firebaseConfig = {
-            apiKey: "AIzaSyB-_sy4cKvvDjz0R4CNj84kejcjqsyBVsM",
-            authDomain: "aarish-tiles-network.firebaseapp.com",
-            projectId: "aarish-tiles-network",
-            storageBucket: "aarish-tiles-network.firebasestorage.app",
-            messagingSenderId: "1097113885546",
-            appId: "1:1097113885546:web:1b6bcdf8f3cfe20d9e2313",
-            measurementId: "G-G2N8FYWV63"
-        };
+<style>
 
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+body{
+font-family:Arial;
+background:#f2f2f2;
+padding:20px;
+}
 
-        // --- एडमिन फंक्शन्स ---
+h1{
+text-align:center;
+}
 
-        // 1. नया मिस्त्री जोड़ना
-        window.addMistry = async () => {
-            const name = document.getElementById('mName').value;
-            const phone = document.getElementById('mPhone').value;
-            const village = document.getElementById('mVillage').value;
-            const pin = document.getElementById('mPin').value;
+.card{
+background:white;
+padding:20px;
+margin:15px 0;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
 
-            if(!name || !phone || !pin) return alert("पूरी जानकारी भरें!");
+input,button{
+width:100%;
+padding:10px;
+margin-top:10px;
+}
 
-            try {
-                await setDoc(doc(db, "masons", phone), {
-                    name: name,
-                    phone: phone,
-                    village: village,
-                    pin: pin,
-                    totalBags: 0,
-                    history: []
-                });
-                alert(`${name} भाई को नेटवर्क में जोड़ दिया गया है!`);
-            } catch(e) { alert("Error: " + e.message); }
-        };
+button{
+background:#0a7cff;
+color:white;
+border:none;
+border-radius:5px;
+}
 
-        // 2. कट्टे (Bags) अपडेट करना
-        window.updateBags = async () => {
-            const phone = document.getElementById('upPhone').value;
-            const bags = parseInt(document.getElementById('upBags').value);
-            const site = document.getElementById('upSite').value;
-
-            if(!phone || !bags) return alert("नंबर और कट्टे सही डालें!");
-
-            const mistryRef = doc(db, "masons", phone);
-            try {
-                await updateDoc(mistryRef, {
-                    totalBags: increment(bags),
-                    history: [{date: new Date().toLocaleDateString(), bags: bags, site: site}]
-                });
-                alert("हिसाब अपडेट हो गया! ✅");
-            } catch(e) { alert("मिस्त्री नहीं मिला!"); }
-        };
-    </script>
-    <style>
-        :root { --gold: #d4af37; --dark: #1e2b3a; }
-        body { background: var(--dark); color: white; font-family: sans-serif; padding: 20px; }
-        .card { background: white; color: #333; padding: 20px; border-radius: 15px; margin-bottom: 20px; border-left: 5px solid var(--gold); }
-        h1 { color: var(--gold); text-align: center; margin-bottom: 30px; }
-        input, select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; }
-        .btn { background: var(--gold); color: var(--dark); border: none; padding: 15px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; }
-        .nav { display: flex; justify-content: space-around; margin-bottom: 20px; }
-    </style>
+</style>
 </head>
+
 <body>
 
-    <h1>👑 आरिश कंट्रोल पैनल</h1>
+<h1>Owner Admin Panel</h1>
 
-    <div class="card">
-        <h2><i class="fas fa-user-plus"></i> नया मिस्त्री जोड़ें</h2>
-        <input type="text" id="mName" placeholder="मिस्त्री का नाम">
-        <input type="tel" id="mPhone" placeholder="मोबाइल नंबर (Login ID)">
-        <input type="text" id="mVillage" placeholder="गाँव (पहासू/खैर/चांदपुर)">
-        <input type="password" id="mPin" placeholder="4 अंकों का पिन सेट करें">
-        <button class="btn" onclick="addMistry()">नेटवर्क में शामिल करें</button>
-    </div>
+<div class="card">
 
-    <div class="card">
-        <h2><i class="fas fa-plus-circle"></i> कट्टे (Bags) अपडेट करें</h2>
-        <input type="tel" id="upPhone" placeholder="मिस्त्री का मोबाइल नंबर">
-        <input type="number" id="upBags" placeholder="कितने कट्टे लगाए?">
-        <input type="text" id="upSite" placeholder="साइट का नाम (optional)">
-        <button class="btn" onclick="updateBags()">हिसाब जोड़ें</button>
-    </div>
+<h3>Add Mason</h3>
 
-    <div class="card">
-        <h2><i class="fas fa-rupee-sign"></i> केमिकल रेट अपडेट</h2>
-        <p>अभी रेट: <b>₹120 - ₹150</b></p>
-        <button class="btn" style="background: #eee;">रेट बदलें (Coming Soon)</button>
-    </div>
+<input id="name" placeholder="Mason Name">
+<input id="phone" placeholder="Phone">
+<input id="village" placeholder="Village">
+<input id="experience" placeholder="Experience">
+
+<button onclick="addMason()">Add Mason</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>All Masons</h3>
+
+<div id="masonList"></div>
+
+</div>
+
+
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyB-_sy4cKvvDjz0R4CNj84kejcjqsyBVsM",
+authDomain: "aarish-tiles-network.firebaseapp.com",
+projectId: "aarish-tiles-network",
+storageBucket: "aarish-tiles-network.firebasestorage.app",
+messagingSenderId: "1097113885546",
+appId: "1:1097113885546:web:1b6bcdf8f3cfe20d9e2313",
+measurementId: "G-G2N8FYWV63"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+
+
+async function addMason(){
+
+let name=document.getElementById("name").value;
+let phone=document.getElementById("phone").value;
+let village=document.getElementById("village").value;
+let experience=document.getElementById("experience").value;
+
+await addDoc(collection(db,"masons"),{
+
+name:name,
+phone:phone,
+village:village,
+experience:experience
+
+});
+
+alert("Mason Added");
+
+loadMasons();
+
+}
+
+
+
+async function loadMasons(){
+
+let list=document.getElementById("masonList");
+
+list.innerHTML="";
+
+const querySnapshot = await getDocs(collection(db,"masons"));
+
+querySnapshot.forEach((docData)=>{
+
+let data=docData.data();
+
+let div=document.createElement("div");
+
+div.innerHTML=`
+
+<p><b>${data.name}</b></p>
+<p>${data.village}</p>
+<p>${data.phone}</p>
+
+<button onclick="deleteMason('${docData.id}')">Delete</button>
+
+<hr>
+
+`;
+
+list.appendChild(div);
+
+});
+
+}
+
+
+
+window.deleteMason=async function(id){
+
+await deleteDoc(doc(db,"masons",id));
+
+alert("Deleted");
+
+loadMasons();
+
+}
+
+
+
+loadMasons();
+
+</script>
 
 </body>
 </html>
