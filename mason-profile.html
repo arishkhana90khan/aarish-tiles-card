@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>मिस्त्री प्रोफाइल - आरिश टाइल्स</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: #050505; color: white; padding: 15px; }
+        
+        .profile-card {
+            background: #1a1a1a;
+            border-radius: 30px;
+            padding: 30px;
+            max-width: 600px;
+            margin: 20px auto;
+            border: 2px solid #D4AF37;
+        }
+        
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #D4AF37;
+            margin-bottom: 15px;
+        }
+        
+        .profile-name {
+            font-size: 28px;
+            color: #D4AF37;
+            font-weight: 900;
+        }
+        
+        .profile-village {
+            color: #888;
+            margin: 5px 0;
+        }
+        
+        .rating {
+            color: #D4AF37;
+            font-size: 20px;
+            margin: 10px 0;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .info-item {
+            background: #222;
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid #333;
+        }
+        
+        .info-label {
+            color: #888;
+            font-size: 14px;
+        }
+        
+        .info-value {
+            color: #D4AF37;
+            font-size: 22px;
+            font-weight: 900;
+        }
+        
+        .contact-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .contact-btn {
+            padding: 15px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-weight: 700;
+        }
+        
+        .call-btn { background: #333; color: white; border: 1px solid #555; }
+        .whatsapp-btn { background: #25d366; color: white; }
+        
+        .rating-section {
+            background: #222;
+            padding: 20px;
+            border-radius: 20px;
+            margin: 20px 0;
+        }
+        
+        .star {
+            color: #D4AF37;
+            cursor: pointer;
+            font-size: 30px;
+            margin: 0 5px;
+        }
+        
+        .comment-box {
+            width: 100%;
+            padding: 15px;
+            background: black;
+            border: 1px solid #333;
+            border-radius: 15px;
+            color: white;
+            margin: 15px 0;
+        }
+        
+        .submit-rating {
+            background: #D4AF37;
+            color: black;
+            padding: 12px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        
+        .reviews-section {
+            margin-top: 30px;
+        }
+        
+        .review-item {
+            background: #222;
+            padding: 15px;
+            border-radius: 15px;
+            margin: 10px 0;
+            border-left: 5px solid #D4AF37;
+        }
+        
+        .back-link {
+            display: block;
+            text-align: center;
+            color: #D4AF37;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="profileContent"></div>
+
+<!-- Firebase Modules -->
+<script type="module">
+    import { db, collection, getDoc, doc, addDoc, query, where, getDocs } from './firebase-config.js';
+
+    async function loadProfile() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const masonId = urlParams.get('id');
+        
+        if (!masonId) {
+            document.getElementById('profileContent').innerHTML = '<div class="profile-card"><p style="color: red; text-align: center;">❌ मिस्त्री ID नहीं मिली</p></div>';
+            return;
+        }
+        
+        try {
+            const masonDoc = await getDoc(doc(db, "masons", masonId));
+            
+            if (!masonDoc.exists()) {
+                document.getElementById('profileContent').innerHTML = '<div class="profile-card"><p style="color: red; text-align: center;">❌ मिस्त्री नहीं मिला</p></div>';
+                return;
+            }
+            
+            const m = masonDoc.data();
+            
+            // रेटिंग्स लोड करें
+            const ratingsQuery = query(collection(db, "ratings"), where("masonId", "==", masonId));
+            const ratingsSnap = await getDocs(ratingsQuery);
+            
+            let totalRating = 0;
+            let reviews = '';
+            ratingsSnap.forEach(doc => {
+                const r = doc.data();
+                totalRating += r.stars;
+                reviews += `
+                    <div class="review-item">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>⭐ ${r.stars}</span>
+                            <span style="color: #888;">${r.date}</span>
+                        </div>
+                        <p style="margin-top: 10px;">${r.comment}</p>
+                    </div>
+                `;
+            });
+            const avgRating = ratingsSnap.size > 0 ? (totalRating / ratingsSnap.size).toFixed(1) : m.rating || 4.0;
+            
+            // प्रोफाइल दिखाएं
+            const html = `
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <img src="${m.photo || 'https://via.placeholder.com/150'}" class="profile-photo" onerror="this.src='https://via.placeholder.com/150'">
+                        <h1 class="profile-name">${m.name}</h1>
+                        <p class="profile-village"><i class="fas fa-map-marker-alt"></i> ${m.village}</p>
+                        <div class="rating">⭐ ${avgRating} (${ratingsSnap.size} रिव्यू)</div>
+                    </div>
+                    
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">अनुभव</div>
+                            <div class="info-value">${m.experience} साल</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">कट्टे</div>
+                            <div class="info-value">${m.bags || 0}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">माहिर</div>
+                            <div class="info-value">${m.specialty || 'सभी'}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">जुड़े</div>
+                            <div class="info-value">${m.registeredAt || '2026'}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="bio" style="background: #222; padding: 15px; border-radius: 15px; margin: 20px 0;">
+                        <p>${m.bio || 'कोई जानकारी नहीं'}</p>
+                    </div>
+                    
+                    <div class="contact-buttons">
+                        <a href="tel:${m.phone}" class="contact-btn call-btn"><i class="fas fa-phone"></i> कॉल करें</a>
+                        <a href="https://wa.me/91${m.phone}" class="contact-btn whatsapp-btn" target="_blank"><i class="fab fa-whatsapp"></i> व्हाट्सएप</a>
+                    </div>
+                    
+                    <div class="rating-section">
+                        <h3 style="margin-bottom: 15px;">⭐ रेटिंग दें</h3>
+                        <div id="starRating">
+                            ${[1,2,3,4,5].map(i => `<span class="star" onclick="setRating(${i})">★</span>`).join('')}
+                        </div>
+                        <input type="number" id="ratingValue" hidden value="5">
+                        <textarea id="ratingComment" class="comment-box" placeholder="अपना कमेंट लिखें..."></textarea>
+                        <button class="submit-rating" onclick="submitRating('${masonId}')">रेटिंग सबमिट करें</button>
+                    </div>
+                    
+                    <div class="reviews-section">
+                        <h3 style="margin-bottom: 15px;">📝 ग्राहक समीक्षा</h3>
+                        ${reviews || '<p style="color: #888;">अभी तक कोई रिव्यू नहीं</p>'}
+                    </div>
+                    
+                    <a href="index.html" class="back-link">← होम पेज पर वापस</a>
+                </div>
+            `;
+            
+            document.getElementById('profileContent').innerHTML = html;
+            
+        } catch (error) {
+            console.error("Error loading profile:", error);
+            document.getElementById('profileContent').innerHTML = '<div class="profile-card"><p style="color: red; text-align: center;">प्रोफाइल लोड करने में समस्या</p></div>';
+        }
+    }
+
+    window.setRating = function(stars) {
+        document.getElementById('ratingValue').value = stars;
+        const stars_ = document.querySelectorAll('.star');
+        stars_.forEach((s, i) => {
+            s.style.color = i < stars ? '#D4AF37' : '#666';
+        });
+    };
+
+    window.submitRating = async function(masonId) {
+        const stars = parseInt(document.getElementById('ratingValue').value);
+        const comment = document.getElementById('ratingComment').value.trim();
+        
+        if (!comment) {
+            alert("कृपया कमेंट लिखें!");
+            return;
+        }
+        
+        try {
+            await addDoc(collection(db, "ratings"), {
+                masonId: masonId,
+                stars: stars,
+                comment: comment,
+                date: new Date().toLocaleDateString('hi-IN')
+            });
+            
+            alert("धन्यवाद! आपकी रेटिंग सेव हो गई।");
+            location.reload();
+            
+        } catch (error) {
+            console.error("Rating error:", error);
+            alert("रेटिंग सेव करने में समस्या हुई");
+        }
+    };
+
+    loadProfile();
+</script>
+</body>
+</html>
