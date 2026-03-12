@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>एडमिन पैनल - आरिश टाइल्स</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: #050505; color: white; padding: 15px; }
+        
+        .login-box {
+            background: #1a1a1a;
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 40px;
+            border-radius: 30px;
+            border: 2px solid #D4AF37;
+        }
+        
+        .login-box h2 { color: #D4AF37; margin-bottom: 20px; text-align: center; }
+        .login-box input { width: 100%; padding: 15px; margin: 10px 0; background: black; border: 1px solid #333; border-radius: 15px; color: white; }
+        .login-btn { width: 100%; padding: 15px; background: #D4AF37; color: black; border: none; border-radius: 50px; font-weight: 900; cursor: pointer; }
+        
+        .admin-header {
+            background: #D4AF37;
+            color: black;
+            padding: 30px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .tab-nav {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .tab-btn {
+            background: #1a1a1a;
+            color: white;
+            padding: 12px 20px;
+            border: 1px solid #333;
+            border-radius: 50px;
+            cursor: pointer;
+        }
+        
+        .tab-btn.active {
+            background: #D4AF37;
+            color: black;
+            font-weight: 700;
+        }
+        
+        .tab-content {
+            display: none;
+            background: #1a1a1a;
+            padding: 25px;
+            border-radius: 25px;
+            margin: 20px 0;
+        }
+        
+        .tab-content.active { display: block; }
+        
+        .mason-card {
+            background: #222;
+            padding: 15px;
+            border-radius: 15px;
+            margin: 10px 0;
+            border: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .approve-btn { background: #4CAF50; color: white; padding: 8px 15px; border: none; border-radius: 25px; cursor: pointer; }
+        .reject-btn { background: #f44336; color: white; padding: 8px 15px; border: none; border-radius: 25px; cursor: pointer; }
+        
+        .input-group { margin: 15px 0; }
+        .input-group label { display: block; margin-bottom: 5px; color: #ccc; }
+        .input-group input, .input-group select, .input-group textarea { width: 100%; padding: 12px; background: black; border: 1px solid #333; border-radius: 10px; color: white; }
+        
+        .save-btn { background: #D4AF37; color: black; padding: 12px 20px; border: none; border-radius: 50px; font-weight: 700; cursor: pointer; }
+        .logout-btn { background: #f44336; color: white; padding: 10px 20px; border: none; border-radius: 50px; cursor: pointer; }
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0; }
+        .stat-box { background: #222; padding: 20px; border-radius: 15px; text-align: center; }
+        .stat-number { font-size: 28px; color: #D4AF37; font-weight: 900; }
+    </style>
+</head>
+<body>
+
+<div id="loginSection">
+    <div class="login-box">
+        <h2>👑 एडमिन लॉगिन</h2>
+        <p style="color: #888; margin-bottom: 20px;">arishkhana90@gmail.com</p>
+        <input type="email" id="email" placeholder="Email" value="arishkhana90@gmail.com">
+        <input type="password" id="password" placeholder="Password" value="aarish786">
+        <button class="login-btn" onclick="adminLogin()">लॉगिन करें</button>
+    </div>
+</div>
+
+<div id="adminPanel" style="display: none;">
+    <div class="admin-header">
+        <h1>👑 आरिश एडमिन पैनल</h1>
+        <button class="logout-btn" onclick="logout()">लॉगआउट</button>
+    </div>
+    
+    <div class="stats-grid" id="adminStats">
+        <div class="stat-box">
+            <div class="stat-number" id="totalMasons">0</div>
+            <div>कुल मिस्त्री</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number" id="pendingMasons">0</div>
+            <div>पेंडिंग</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number" id="totalBags">0</div>
+            <div>कुल कट्टे</div>
+        </div>
+    </div>
+    
+    <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('pending')">⏳ पेंडिंग मिस्त्री</button>
+        <button class="tab-btn" onclick="switchTab('cutta')">📦 कट्टा एंट्री</button>
+        <button class="tab-btn" onclick="switchTab('tiles')">🧱 टाइल अपडेट</button>
+        <button class="tab-btn" onclick="switchTab('rates')">💰 केमिकल रेट</button>
+        <button class="tab-btn" onclick="switchTab('pdf')">📄 PDF अपलोड</button>
+    </div>
+    
+    <!-- पेंडिंग टैब -->
+    <div id="pending-tab" class="tab-content active"></div>
+    
+    <!-- कट्टा एंट्री टैब -->
+    <div id="cutta-tab" class="tab-content"></div>
+    
+    <!-- टाइल अपडेट टैब -->
+    <div id="tiles-tab" class="tab-content"></div>
+    
+    <!-- केमिकल रेट टैब -->
+    <div id="rates-tab" class="tab-content"></div>
+    
+    <!-- PDF अपलोड टैब -->
+    <div id="pdf-tab" class="tab-content"></div>
+</div>
+
+<!-- Firebase Modules -->
+<script type="module">
+    import { db, auth, collection, getDocs, query, where, doc, updateDoc, deleteDoc, addDoc, getDoc, signInWithEmailAndPassword, signOut } from './firebase-config.js';
+
+    // ============================================
+    // एडमिन लॉगिन
+    // ============================================
+    window.adminLogin = async function() {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            
+            // सिर्फ आपका email ही access कर सकता है
+            if (email !== "arishkhana90@gmail.com") {
+                alert("आपके पास एडमिन एक्सेस नहीं है!");
+                await signOut(auth);
+                return;
+            }
+            
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('adminPanel').style.display = 'block';
+            loadPendingMasons();
+            loadCuttaTab();
+            loadTilesTab();
+            loadRatesTab();
+            loadPDFTab();
+            loadAdminStats();
+        } catch (error) {
+            alert("लॉगिन फेल: " + error.message);
+        }
+    };
+
+    // ============================================
+    // टैब स्विच
+    // ============================================
+    window.switchTab = function(tabName) {
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(tabName + '-tab').classList.add('active');
+        event.target.classList.add('active');
+    };
+
+    // ============================================
+    // एडमिन स्टैट्स
+    // ============================================
+    async function loadAdminStats() {
+        const masonsSnap = await getDocs(collection(db, "masons"));
+        const pendingSnap = await getDocs(query(collection(db, "masons"), where("approved", "==", false)));
+        
+        let totalBags = 0;
+        masonsSnap.forEach(doc => {
+            totalBags += doc.data().bags || 0;
+        });
+        
+        document.getElementById('totalMasons').innerText = masonsSnap.size;
+        document.getElementById('pendingMasons').innerText = pendingSnap.size;
+        document.getElementById('totalBags').innerText = totalBags;
+    }
+
+    // ============================================
+    // पेंडिंग मिस्त्री
+    // ============================================
+    async function loadPendingMasons() {
+        const q = query(collection(db, "masons"), where("approved", "==", false));
+        const snap = await getDocs(q);
+        
+        let html = '<h2 style="margin-bottom: 20px;">⏳ पेंडिंग मिस्त्री</h2>';
+        
+        if (snap.empty) {
+            html += '<p style="color: #888;">कोई पेंडिंग मिस्त्री नहीं</p>';
+        } else {
+            snap.forEach(doc => {
+                const m = doc.data();
+                html += `
+                    <div class="mason-card">
+                        <div>
+                            <h3>${m.name}</h3>
+                            <p>📞 ${m.phone} | 📍 ${m.village}</p>
+                            <p>⏳ ${m.experience} साल | ${m.specialty}</p>
+                        </div>
+                        <div>
+                            <button class="approve-btn" onclick="approveMason('${doc.id}')">✅ Approve</button>
+                            <button class="reject-btn" onclick="rejectMason('${doc.id}')">❌ Reject</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+        
+        document.getElementById('pending-tab').innerHTML = html;
+    }
+
+    window.approveMason = async function(id) {
+        await updateDoc(doc(db, "masons", id), { approved: true });
+        loadPendingMasons();
+        loadAdminStats();
+    };
+
+    window.rejectMason = async function(id) {
+        await deleteDoc(doc(db, "masons", id));
+        loadPendingMasons();
+        loadAdminStats();
+    };
+
+    // ============================================
+    // कट्टा एंट्री टैब
+    // ============================================
+    async function loadCuttaTab() {
+        // मिस्त्री लिस्ट लोड करें
+        const masonsSnap = await getDocs(query(collection(db, "masons"), where("approved", "==", true)));
+        
+        let options = '';
+        masonsSnap.forEach(doc => {
+            const m = doc.data();
+            options += `<option value="${doc.id}">${m.name} - ${m.village} (${m.bags || 0} कट्टे)</option>`;
+        });
+        
+        const html = `
+            <h2 style="margin-bottom: 20px;">📦 नया कट्टा एंट्री</h2>
+            <div class="input-group">
+                <label>मिस्त्री चुनें</label>
+                <select id="masonSelect">${options}</select>
+            </div>
+            <div class="input-group">
+                <label>कट्टे की संख्या</label>
+                <input type="number" id="bags" min="1" max="1000">
+            </div>
+            <div class="input-group">
+                <label>नोट (कहाँ लगा)</label>
+                <input type="text" id="note" placeholder="जैसे: खैर में 10 कट्टे">
+            </div>
+            <button class="save-btn" onclick="addCutta()">कट्टा एंट्री करें</button>
+        `;
+        
+        document.getElementById('cutta-tab').innerHTML = html;
+    }
+
+    window.addCutta = async function() {
+        const masonId = document.getElementById('masonSelect').value;
+        const bags = parseInt(document.getElementById('bags').value);
+        const note = document.getElementById('note').value;
+        
+        if (!bags || bags <= 0) {
+            alert("कट्टे की संख्या सही डालें!");
+            return;
+        }
+        
+        try {
+            // हिस्ट्री में डालें
+            await addDoc(collection(db, "cutta_history"), {
+                masonId: masonId,
+                bags: bags,
+                note: note,
+                date: new Date().toLocaleDateString('hi-IN'),
+                timestamp: new Date()
+            });
+            
+            // मिस्त्री का कट्टा अपडेट करें
+            const masonRef = doc(db, "masons", masonId);
+            const masonDoc = await getDoc(masonRef);
+            const currentBags = masonDoc.data().bags || 0;
+            await updateDoc(masonRef, { bags: currentBags + bags });
+            
+            alert("कट्टा एंट्री हो गई!");
+            document.getElementById('bags').value = '';
+            document.getElementById('note').value = '';
+            loadAdminStats();
+            
+        } catch (error) {
+            alert("Error: " + error.message);
+        }
+    };
+
+    // ============================================
+    // टाइल अपडेट टैब
+    // ============================================
+    async function loadTilesTab() {
+        const tilesSnap = await getDocs(collection(db, "tiles"));
+        
+        let tilesHtml = '';
+        tilesSnap.forEach(doc => {
+            const t = doc.data();
+            tilesHtml += `
+                <div class="mason-card">
+                    <div>
+                        <h3>${t.name}</h3>
+                        <p>📏 ${t.size} | 💰 ₹${t.price}</p>
+                    </div>
+                    <button class="reject-btn" onclick="deleteTile('${doc.id}')">Delete</button>
+                </div>
+            `;
+        });
+        
+        const html = `
+            <h2 style="margin-bottom: 20px;">🧱 टाइल कैटलॉग</h2>
+            ${tilesHtml}
+            
+            <h3 style="margin: 30px 0 20px;">नई टाइल डालें</h3>
+            <div class="input-group">
+                <label>टाइल का नाम</label>
+                <input type="text" id="tileName" placeholder="जैसे: प्रीमियम व्हाइट मार्बल">
+            </div>
+            <div class="input-group">
+                <label>साइज</label>
+                <select id="tileSize">
+                    <option>2x2 फीट</option>
+                    <option>2x4 फीट</option>
+                    <option>12x18 इंच</option>
+                    <option>12x12 इंच</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>कीमत (₹ प्रति पेटी)</label>
+                <input type="number" id="tilePrice" min="1">
+            </div>
+            <button class="save-btn" onclick="addTile()">टाइल डालें</button>
+        `;
+        
+        document.getElementById('tiles-tab').innerHTML = html;
+    }
+
+    window.addTile = async function() {
+        const name = document.getElementById('tileName').value;
+        const size = document.getElementById('tileSize').value;
+        const price = parseInt(document.getElementById('tilePrice').value);
+        
+        if (!name || !price) {
+            alert("सभी जानकारी भरें!");
+            return;
+        }
+        
+        await addDoc(collection(db, "tiles"), { name, size, price });
+        loadTilesTab();
+    };
+
+    window.deleteTile = async function(id) {
+        await deleteDoc(doc(db, "tiles", id));
+        loadTilesTab();
+    };
+
+    // ============================================
+    // केमिकल रेट टैब
+    // ============================================
+    async function loadRatesTab() {
+        const rateDoc = await getDoc(doc(db, "settings", "chemicalRates"));
+        let rates = [
+            { min: 0, max: 100, rate: 120 },
+            { min: 101, max: 300, rate: 125 },
+            { min: 301, max: 700, rate: 135 },
+            { min: 701, max: 1000, rate: 140 },
+            { min: 1001, max: 1500, rate: 150 }
+        ];
+        
+        if (rateDoc.exists()) {
+            rates = rateDoc.data().rates;
+        }
+        
+        let html = '<h2 style="margin-bottom: 20px;">💰 केमिकल कट्टा रेट</h2>';
+        
+        rates.forEach((rate, index) => {
+            html += `
+                <div class="input-group">
+                    <label>${rate.min}-${rate.max} कट्टे</label>
+                    <input type="number" id="rate_${index}" value="${rate.rate}">
+                </div>
+            `;
+        });
+        
+        html += '<button class="save-btn" onclick="updateRates()">रेट अपडेट करें</button>';
+        
+        document.getElementById('rates-tab').innerHTML = html;
+    }
+
+    window.updateRates = async function() {
+        const rates = [];
+        for (let i = 0; i < 5; i++) {
+            rates.push({ rate: parseInt(document.getElementById(`rate_${i}`).value) });
+        }
+        
+        await updateDoc(doc(db, "settings", "chemicalRates"), { rates });
+        alert("रेट अपडेट हो गए!");
+    };
+
+    // ============================================
+    // PDF अपलोड टैब
+    // ============================================
+    async function loadPDFTab() {
+        const pdfSnap = await getDocs(collection(db, "pdfs"));
+        
+        let pdfHtml = '';
+        pdfSnap.forEach(doc => {
+            const p = doc.data();
+            pdfHtml += `
+                <div class="mason-card">
+                    <div>
+                        <h3>${p.name}</h3>
+                        <p>📅 ${p.date}</p>
+                    </div>
+                    <div>
+                        <a href="${p.link}" target="_blank" style="color: #D4AF37; margin-right: 10px;">खोलें</a>
+                        <button class="reject-btn" onclick="deletePDF('${doc.id}')">Delete</button>
+                    </div>
+                </div>
+            `;
+        });
+        
+        const html = `
+            <h2 style="margin-bottom: 20px;">📄 PDF कैटलॉग</h2>
+            ${pdfHtml}
+            
+            <h3 style="margin: 30px 0 20px;">नया PDF अपलोड</h3>
+            <div class="input-group">
+                <label>PDF का नाम</label>
+                <input type="text" id="pdfName">
+            </div>
+            <div class="input-group">
+                <label>PDF लिंक</label>
+                <input type="url" id="pdfLink">
+            </div>
+            <button class="save-btn" onclick="addPDF()">PDF अपलोड करें</button>
+        `;
+        
+        document.getElementById('pdf-tab').innerHTML = html;
+    }
+
+    window.addPDF = async function() {
+        const name = document.getElementById('pdfName').value;
+        const link = document.getElementById('pdfLink').value;
+        
+        if (!name || !link) {
+            alert("नाम और लिंक डालें!");
+            return;
+        }
+        
+        await addDoc(collection(db, "pdfs"), {
+            name: name,
+            link: link,
+            date: new Date().toLocaleDateString('hi-IN')
+        });
+        
+        loadPDFTab();
+    };
+
+    window.deletePDF = async function(id) {
+        await deleteDoc(doc(db, "pdfs", id));
+        loadPDFTab();
+    };
+
+    // ============================================
+    // लॉगआउट
+    // ============================================
+    window.logout = async function() {
+        await signOut(auth);
+        location.reload();
+    };
+</script>
+</body>
+</html>
