@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aarish Tiles - Tiles Catalog</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">Aarish <span>Tiles</span></a>
+            <div class="hamburger">☰</div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="find-mason.html">Find Mason</a></li>
+                <li><a href="tiles-catalog.html">Tiles Catalog</a></li>
+                <li><a href="mason-register.html">Mason Register</a></li>
+                <li><a href="admin-login.html">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="text-center mt-3">🧱 हमारे टाइल्स कैटलॉग</h1>
+        <p class="text-center mb-3">बेहतरीन क्वालिटी, किफायती दाम। सीधे WhatsApp से ऑर्डर करें।</p>
+
+        <!-- Tiles Grid -->
+        <div class="card-grid">
+            <!-- Tile 1 -->
+            <div class="card">
+                <div class="tile-image">🏢 2x2 फुट टाइल</div>
+                <div class="card-content">
+                    <h3>प्रीमियम फ्लोर टाइल</h3>
+                    <p class="tile-size">साइज़: 2ft x 2ft (60x60 cm)</p>
+                    <p class="tile-price">₹65 / वर्ग फुट</p>
+                    
+                    <!-- Review Section -->
+                    <div class="review-section">
+                        <div class="rating">★★★★☆ <span>(4.2) 23 रिव्यू</span></div>
+                        
+                        <!-- Sample Reviews -->
+                        <div class="review-item">
+                            <strong>राहुल:</strong> <span class="review-text">बहुत अच्छी क्वालिटी है।</span>
+                            <div class="rating">★★★★★</div>
+                        </div>
+                        
+                        <!-- Add Review -->
+                        <input type="text" class="review-input" id="comment-tile1" placeholder="अपनी राय लिखें...">
+                        <button class="btn btn-outline" style="width: 100%;" onclick="addReview('tile1')">📝 रिव्यू दें</button>
+                    </div>
+                    
+                    <!-- WhatsApp Button -->
+                    <button class="whatsapp-btn" style="width: 100%; margin-top: 1rem;" onclick="orderOnWhatsapp('प्रीमियम फ्लोर टाइल', '65')">
+                        📱 WhatsApp से ऑर्डर करें
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tile 2 -->
+            <div class="card">
+                <div class="tile-image">🛁 बाथरूम टाइल</div>
+                <div class="card-content">
+                    <h3>वाटरप्रूफ बाथ टाइल</h3>
+                    <p class="tile-size">साइज़: 1ft x 1ft (30x30 cm)</p>
+                    <p class="tile-price">₹45 / वर्ग फुट</p>
+                    
+                    <div class="review-section">
+                        <div class="rating">★★★★☆ <span>(4.5) 15 रिव्यू</span></div>
+                        
+                        <div class="review-item">
+                            <strong>सुरेश:</strong> <span class="review-text">बाथरूम के लिए बेस्ट है।</span>
+                            <div class="rating">★★★★★</div>
+                        </div>
+                        
+                        <input type="text" class="review-input" id="comment-tile2" placeholder="अपनी राय लिखें...">
+                        <button class="btn btn-outline" style="width: 100%;" onclick="addReview('tile2')">📝 रिव्यू दें</button>
+                    </div>
+                    
+                    <button class="whatsapp-btn" style="width: 100%; margin-top: 1rem;" onclick="orderOnWhatsapp('वाटरप्रूफ बाथ टाइल', '45')">
+                        📱 WhatsApp ऑर्डर
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tile 3 -->
+            <div class="card">
+                <div class="tile-image">🍳 किचन टाइल</div>
+                <div class="card-content">
+                    <h3>ऑयल-प्रूफ किचन टाइल</h3>
+                    <p class="tile-size">साइज़: 1ft x 2ft (30x60 cm)</p>
+                    <p class="tile-price">₹55 / वर्ग फुट</p>
+                    
+                    <div class="review-section">
+                        <div class="rating">★★★★★ <span>(5.0) 32 रिव्यू</span></div>
+                        
+                        <div class="review-item">
+                            <strong>प्रिया:</strong> <span class="review-text">बहुत अच्छा है, सफाई आसान।</span>
+                            <div class="rating">★★★★★</div>
+                        </div>
+                        
+                        <input type="text" class="review-input" id="comment-tile3" placeholder="अपनी राय लिखें...">
+                        <button class="btn btn-outline" style="width: 100%;" onclick="addReview('tile3')">📝 रिव्यू दें</button>
+                    </div>
+                    
+                    <button class="whatsapp-btn" style="width: 100%; margin-top: 1rem;" onclick="orderOnWhatsapp('ऑयल-प्रूफ किचन टाइल', '55')">
+                        📱 WhatsApp ऑर्डर
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- More Tiles -->
+        <div class="text-center mt-3 mb-3">
+            <button class="btn btn-primary">और टाइल्स दिखाएँ</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Aarish Tiles Network</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
