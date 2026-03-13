@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aarish Tiles - Mason Register</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">Aarish <span>Tiles</span></a>
+            <div class="hamburger">☰</div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="find-mason.html">Find Mason</a></li>
+                <li><a href="tiles-catalog.html">Tiles Catalog</a></li>
+                <li><a href="mason-register.html">Mason Register</a></li>
+                <li><a href="admin-login.html">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div style="max-width: 600px; margin: 2rem auto;">
+            <h1 class="text-center">👷 मिस्त्री पंजीकरण फॉर्म</h1>
+            <p class="text-center mb-3" style="color: var(--gray);">हमारे नेटवर्क से जुड़ें और नए ग्राहक पाएँ</p>
+
+            <!-- Registration Form -->
+            <div class="card" style="padding: 2rem;">
+                <form id="mason-reg-form" onsubmit="submitRegistration(event)">
+                    <div class="form-group">
+                        <label class="form-label">पूरा नाम *</label>
+                        <input type="text" class="form-control" placeholder="जैसे: राम कुमार" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">मोबाइल नंबर *</label>
+                        <input type="tel" class="form-control" placeholder="10 अंकों का नंबर" pattern="[0-9]{10}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">गाँव / शहर *</label>
+                        <input type="text" class="form-control" placeholder="जैसे: औरंगाबाद, बिहार" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">अनुभव (वर्षों में) *</label>
+                        <select class="form-control" required>
+                            <option value="">-- चुनें --</option>
+                            <option value="1">1-3 वर्ष</option>
+                            <option value="2">4-7 वर्ष</option>
+                            <option value="3">8-12 वर्ष</option>
+                            <option value="4">12+ वर्ष</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">अपना काम की फोटो अपलोड करें *</label>
+                        <input type="file" class="form-control" accept="image/*" required>
+                        <small style="color: var(--gray);">अपने बेहतरीन काम की 1-2 फोटो डालें</small>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">✅ पंजीकरण करें</button>
+                </form>
+            </div>
+
+            <div class="card mt-3" style="background: var(--light);">
+                <div class="card-content">
+                    <h3>📌 ध्यान दें:</h3>
+                    <ul style="margin-left: 1.5rem;">
+                        <li>आपका पंजीकरण एडमिन द्वारा स्वीकृत होने के बाद ही लिस्ट में दिखेगा।</li>
+                        <li>सही जानकारी दें ताकि ग्राहक आपसे संपर्क कर सकें।</li>
+                        <li>यह सेवा पूरी तरह मुफ्त है।</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Aarish Tiles Network</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
