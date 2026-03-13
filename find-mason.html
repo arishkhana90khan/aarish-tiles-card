@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aarish Tiles - Find Mason</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">Aarish <span>Tiles</span></a>
+            <div class="hamburger">☰</div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="find-mason.html">Find Mason</a></li>
+                <li><a href="tiles-catalog.html">Tiles Catalog</a></li>
+                <li><a href="mason-register.html">Mason Register</a></li>
+                <li><a href="admin-login.html">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="text-center mt-3">🔨 अपने शहर में मिस्त्री खोजें</h1>
+        
+        <!-- Search Box -->
+        <div class="search-box">
+            <div class="search-input-group">
+                <input type="text" class="search-input" placeholder="गाँव या शहर का नाम दर्ज करें...">
+                <button class="btn btn-primary" onclick="searchMason()">खोजें</button>
+            </div>
+        </div>
+
+        <!-- Mason Cards -->
+        <h2 class="mb-2">उपलब्ध मिस्त्री (5+ अनुभवी)</h2>
+        <div class="card-grid">
+            <!-- Card 1 -->
+            <div class="card mason-card">
+                <div class="card-content">
+                    <h3 class="mason-name">रामप्रसाद यादव</h3>
+                    <p class="mason-experience">⭐ 15 वर्ष का अनुभव</p>
+                    <div class="rating">★★★★★ <span style="color: var(--gray);">(5.0)</span></div>
+                    <p>📍 गाँव: औरंगाबाद, बिहार</p>
+                    <p>🛠️ विशेषता: फ्लोरिंग, वॉल टाइल्स</p>
+                    <button class="btn btn-outline" style="width: 100%; margin-top: 0.5rem;">कॉन्टैक्ट करें</button>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="card mason-card">
+                <div class="card-content">
+                    <h3 class="mason-name">सुरेश कुमार</h3>
+                    <p class="mason-experience">⭐ 10 वर्ष का अनुभव</p>
+                    <div class="rating">★★★★☆ <span style="color: var(--gray);">(4.5)</span></div>
+                    <p>📍 गाँव: पटना सिटी</p>
+                    <p>🛠️ विशेषता: बाथरूम टाइल्स, मार्बल</p>
+                    <button class="btn btn-outline" style="width: 100%; margin-top: 0.5rem;">कॉन्टैक्ट करें</button>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="card mason-card">
+                <div class="card-content">
+                    <h3 class="mason-name">मोहन शर्मा</h3>
+                    <p class="mason-experience">⭐ 8 वर्ष का अनुभव</p>
+                    <div class="rating">★★★★☆ <span style="color: var(--gray);">(4.3)</span></div>
+                    <p>📍 गाँव: गया, बिहार</p>
+                    <p>🛠️ विशेषता: आउटडोर टाइल्स, रेनोवेशन</p>
+                    <button class="btn btn-outline" style="width: 100%; margin-top: 0.5rem;">कॉन्टैक्ट करें</button>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="card mason-card">
+                <div class="card-content">
+                    <h3 class="mason-name">दिनेश साह</h3>
+                    <p class="mason-experience">⭐ 12 वर्ष का अनुभव</p>
+                    <div class="rating">★★★★★ <span style="color: var(--gray);">(4.9)</span></div>
+                    <p>📍 गाँव: मुजफ्फरपुर</p>
+                    <p>🛠️ विशेषता: किचन टाइल्स, मोज़ेक</p>
+                    <button class="btn btn-outline" style="width: 100%; margin-top: 0.5rem;">कॉन्टैक्ट करें</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Load More Button -->
+        <div class="text-center mt-3 mb-3">
+            <button class="btn btn-primary" onclick="loadMoreMasons()">और देखें +</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Aarish Tiles Network. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
