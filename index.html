@@ -2,228 +2,83 @@
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>आरिश टाइल्स एंड स्टोन्स | पहासू का नंबर 1 टाइल नेटवर्क</title>
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="पहासू, बुलंदशहर में टाइल्स की सबसे बड़ी दुकान। 500+ खुश ग्राहक, 47 मिस्त्री, सबसे सस्ते दाम।">
-    <meta name="keywords" content="टाइल्स, पहासू, बुलंदशहर, मिस्त्री, टाइल कैलकुलेटर, आरिश टाइल्स">
-    <meta name="author" content="आरिश टाइल्स">
-    <meta name="email" content="arishkhana90@gmail.com">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700;900&display=swap" rel="stylesheet">
-    
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background: #050505; color: white; padding: 15px; }
-        
-        /* Header */
-        .header { background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace'); background-size: cover; padding: 40px 20px; border-radius: 30px; text-align: center; border: 2px solid #D4AF37; margin-bottom: 20px; }
-        .logo { color: #D4AF37; font-size: 28px; font-weight: 900; }
-        .tagline { opacity: 0.8; margin: 10px 0; }
-        
-        /* Contact Grid */
-        .contact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 20px 0; }
-        .contact-btn { padding: 15px; border-radius: 50px; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; background: #1a1a1a; color: white; border: 1px solid #333; }
-        .instagram-btn { grid-column: span 2; background: linear-gradient(45deg, #f09433, #bc1888); }
-        
-        /* Stats */
-        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0; }
-        .stat-card { background: #1a1a1a; padding: 20px; border-radius: 20px; text-align: center; border: 1px solid #333; }
-        .stat-number { font-size: 32px; font-weight: 900; color: #D4AF37; }
-        
-        /* Search */
-        .search-box { background: #1a1a1a; padding: 25px; border-radius: 25px; margin: 20px 0; border: 1px solid #333; }
-        .search-box input { width: 100%; padding: 15px; background: black; border: 1px solid #333; border-radius: 15px; color: white; margin-bottom: 10px; }
-        .search-btn { width: 100%; padding: 15px; background: #D4AF37; color: black; border: none; border-radius: 50px; font-weight: 900; cursor: pointer; }
-        
-        /* Cards */
-        .card { background: #1a1a1a; padding: 25px; border-radius: 25px; margin: 20px 0; border: 1px solid #333; }
-        .section-title { color: #D4AF37; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; border-left: 5px solid #D4AF37; padding-left: 15px; }
-        
-        /* Mason Cards */
-        .mason-card { display: flex; align-items: center; gap: 15px; background: #222; padding: 15px; border-radius: 15px; margin: 10px 0; border: 1px solid #333; }
-        .mason-photo { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid #D4AF37; }
-        .mason-details h4 { color: #D4AF37; }
-        .view-btn { background: #333; color: white; padding: 8px 15px; border-radius: 25px; text-decoration: none; font-size: 13px; }
-        
-        /* Register Button */
-        .register-btn { display: block; background: #D4AF37; color: black; text-align: center; padding: 18px; border-radius: 50px; text-decoration: none; font-weight: 900; margin: 20px 0; border: 2px solid transparent; transition: 0.3s; }
-        .register-btn:hover { border-color: white; transform: scale(1.02); }
-        
-        /* Tile Catalog */
-        .tile-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #333; }
-        .tile-price { color: #D4AF37; font-weight: 700; }
-        
-        /* WhatsApp Float */
-        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; text-decoration: none; z-index: 1000; box-shadow: 0 5px 20px rgba(37,211,102,0.3); animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Aarish Tiles Network - Home</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">Aarish <span>Tiles</span></a>
+            <div class="hamburger">☰</div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="find-mason.html">Find Mason</a></li>
+                <li><a href="tiles-catalog.html">Tiles Catalog</a></li>
+                <li><a href="mason-register.html">Mason Register</a></li>
+                <li><a href="admin-login.html">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
 
-<div class="header">
-    <div class="logo">🏠 आरिश टाइल्स एंड स्टोन्स</div>
-    <p class="tagline">पहासू का सबसे भरोसेमंद टाइल नेटवर्क</p>
-    
-    <div class="contact-grid">
-        <a href="tel:8755687268" class="contact-btn"><i class="fas fa-phone-alt"></i> 8755-687-268</a>
-        <a href="tel:9528340961" class="contact-btn"><i class="fas fa-phone-alt"></i> 9528-340-961</a>
-        <a href="https://www.instagram.com/arishkhan3992__" target="_blank" class="contact-btn instagram-btn"><i class="fab fa-instagram"></i> @arishkhan3992__</a>
-    </div>
-</div>
-
-<div class="stats-grid" id="stats">
-    <div class="stat-card">
-        <div class="stat-number" id="totalMasons">0</div>
-        <div>मिस्त्री</div>
-    </div>
-    <div class="stat-card">
-        <div class="stat-number" id="totalVillages">0</div>
-        <div>गांव</div>
-    </div>
-    <div class="stat-card">
-        <div class="stat-number" id="totalTiles">0</div>
-        <div>टाइल्स</div>
-    </div>
-</div>
-
-<div class="search-box">
-    <h3 style="color: #D4AF37; margin-bottom: 15px;">🔍 गांव के हिसाब से मिस्त्री खोजें</h3>
-    <input type="text" id="searchInput" placeholder="गांव का नाम डालें (जैसे: पहासू, खैर, चांदपुर)">
-    <button class="search-btn" onclick="searchMasons()">खोजें</button>
-    <div id="searchResults"></div>
-</div>
-
-<div class="card">
-    <h3 class="section-title"><i class="fas fa-star"></i> मिस्त्री बनें</h3>
-    <p style="margin-bottom: 15px;">अगर आप मिस्त्री हैं और हमारे नेटवर्क से जुड़ना चाहते हैं:</p>
-    <a href="register.html" class="register-btn"><i class="fas fa-user-plus"></i> अभी रजिस्टर करें</a>
-</div>
-
-<div class="card">
-    <h3 class="section-title"><i class="fas fa-tiles"></i> लोकप्रिय टाइल्स</h3>
-    <div id="tileCatalog"></div>
-</div>
-
-<div class="card">
-    <h3 class="section-title"><i class="fas fa-trophy"></i> टॉप मिस्त्री</h3>
-    <div id="topMasons"></div>
-</div>
-
-<a href="https://wa.me/918755687268" class="whatsapp-float" target="_blank">
-    <i class="fab fa-whatsapp"></i>
-</a>
-
-<!-- Firebase Modules -->
-<script type="module">
-    import { db, collection, getDocs, query, where, orderBy, limit } from './firebase-config.js';
-
-    // ============================================
-    // डेटा लोड करें
-    // ============================================
-    async function loadData() {
-        try {
-            // कुल मिस्त्री
-            const masonsSnap = await getDocs(collection(db, "masons"));
-            document.getElementById('totalMasons').innerText = masonsSnap.size;
+    <!-- Hero Section -->
+    <section class="hero" style="background: linear-gradient(135deg, var(--primary-light), var(--white)); padding: 3rem 0;">
+        <div class="container text-center">
+            <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Aarish Tiles Network</h1>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem; color: var(--gray);">
+                आपका विश्वसनीय टाइल्स और मिस्त्री नेटवर्क। गाँव से शहर तक, हर जगह।
+            </p>
             
-            // गांव की संख्या
-            const villages = new Set();
-            masonsSnap.forEach(doc => {
-                const data = doc.data();
-                if (data.village && data.approved === true) villages.add(data.village);
-            });
-            document.getElementById('totalVillages').innerText = villages.size;
-            
-            // टाइल कैटलॉग
-            const tilesSnap = await getDocs(collection(db, "tiles"));
-            document.getElementById('totalTiles').innerText = tilesSnap.size;
-            
-            let tileHtml = '';
-            tilesSnap.forEach(doc => {
-                const tile = doc.data();
-                tileHtml += `
-                    <div class="tile-item">
-                        <span>${tile.name} (${tile.size})</span>
-                        <span class="tile-price">₹${tile.price}</span>
+            <!-- Three Buttons -->
+            <div class="hero-buttons" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="find-mason.html" class="btn btn-primary">🔨 Find Mason</a>
+                <a href="tiles-catalog.html" class="btn btn-secondary">🧱 View Tiles</a>
+                <a href="mason-register.html" class="btn btn-outline">👷 Become a Mason</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" style="padding: 4rem 0;">
+        <div class="container">
+            <h2 class="text-center mb-3">हमारी सेवाएँ</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-content text-center">
+                        <div style="font-size: 3rem;">🔍</div>
+                        <h3>खोजें मिस्त्री</h3>
+                        <p>अपने गाँव या शहर में अनुभवी मिस्त्री खोजें। रेटिंग और समीक्षा देखें।</p>
                     </div>
-                `;
-            });
-            document.getElementById('tileCatalog').innerHTML = tileHtml || '<p>कोई टाइल नहीं</p>';
-            
-            // टॉप मिस्त्री
-            const topQuery = query(collection(db, "masons"), where("approved", "==", true), orderBy("rating", "desc"), limit(5));
-            const topSnap = await getDocs(topQuery);
-            
-            let topHtml = '';
-            topSnap.forEach(doc => {
-                const m = doc.data();
-                topHtml += `
-                    <div class="mason-card">
-                        <img src="${m.photo || 'https://via.placeholder.com/50'}" class="mason-photo" onerror="this.src='https://via.placeholder.com/50'">
-                        <div class="mason-details">
-                            <h4>${m.name}</h4>
-                            <p>⭐ ${m.rating || 4.0} • ${m.village} • ${m.experience} साल</p>
-                            <a href="mason-profile.html?id=${doc.id}" class="view-btn">प्रोफाइल देखें →</a>
-                        </div>
+                </div>
+                <div class="card">
+                    <div class="card-content text-center">
+                        <div style="font-size: 3rem;">🧱</div>
+                        <h3>टाइल्स कैटलॉग</h3>
+                        <p>विभिन्न साइज़ और कीमतों में टाइल्स देखें और सीधे WhatsApp से ऑर्डर करें।</p>
                     </div>
-                `;
-            });
-            document.getElementById('topMasons').innerHTML = topHtml;
-            
-        } catch (error) {
-            console.error("Error loading data:", error);
-        }
-    }
-
-    // ============================================
-    // मिस्त्री खोजें
-    // ============================================
-    window.searchMasons = async function() {
-        const village = document.getElementById('searchInput').value.trim();
-        
-        if (!village) {
-            alert("गांव का नाम डालें!");
-            return;
-        }
-        
-        try {
-            const q = query(collection(db, "masons"), where("village", "==", village), where("approved", "==", true));
-            const snap = await getDocs(q);
-            
-            if (snap.empty) {
-                document.getElementById('searchResults').innerHTML = '<p style="color: #888; text-align: center; padding: 20px;">❌ इस गांव में कोई मिस्त्री नहीं मिला</p>';
-                return;
-            }
-            
-            let html = '<h4 style="margin: 15px 0; color: #D4AF37;">मिले मिस्त्री:</h4>';
-            snap.forEach(doc => {
-                const m = doc.data();
-                html += `
-                    <div class="mason-card">
-                        <img src="${m.photo || 'https://via.placeholder.com/50'}" class="mason-photo" onerror="this.src='https://via.placeholder.com/50'">
-                        <div class="mason-details">
-                            <h4>${m.name}</h4>
-                            <p>⭐ ${m.rating || 4.0} • ${m.experience} साल</p>
-                            <p>📞 ${m.phone}</p>
-                            <a href="mason-profile.html?id=${doc.id}" class="view-btn">प्रोफाइल देखें</a>
-                        </div>
+                </div>
+                <div class="card">
+                    <div class="card-content text-center">
+                        <div style="font-size: 3rem;">👷</div>
+                        <h3>मिस्त्री बनें</h3>
+                        <p>अपनी सेवाएँ दें, नए ग्राहक पाएँ, और अपना कारोबार बढ़ाएँ।</p>
                     </div>
-                `;
-            });
-            
-            document.getElementById('searchResults').innerHTML = html;
-            
-        } catch (error) {
-            console.error("Search error:", error);
-            alert("सर्च करने में समस्या हुई");
-        }
-    };
+                </div>
+            </div>
+        </div>
+    </section>
 
-    // पेज लोड होने पर
-    window.onload = loadData;
-</script>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Aarish Tiles Network. All rights reserved.</p>
+            <p style="margin-top: 0.5rem; color: var(--light-gray); font-size: 0.9rem;">
+                मोबाइल फ्रेंडली | तेज़ लोडिंग | सुरक्षित
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
 </body>
 </html>
