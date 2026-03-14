@@ -1,7 +1,15 @@
 // ==================== Aarish Tiles Network - Firebase Configuration ====================
-// यह file हर HTML page में include होगी
+// Owner Contact Information
+const OWNER_INFO = {
+    name: "Arish Khan",
+    phone1: "8755687268",
+    phone2: "9528340961",
+    email: "arishkhana90@gmail.com",
+    instagram: "arishkhan3992__",
+    instagramUrl: "https://instagram.com/arishkhan3992__"
+};
 
-// Firebase Configuration (आपकी दी हुई)
+// Firebase Configuration
 const firebaseConfig = {
     apiKey: "AIzaSyB-_sy4cKvvDjz0R4CNj84kejcjqsyBVsM",
     authDomain: "aarish-tiles-network.firebaseapp.com",
@@ -16,20 +24,17 @@ const firebaseConfig = {
 let app, db, auth;
 
 try {
-    // Check if Firebase is loaded
     if (typeof firebase !== 'undefined') {
-        // Initialize Firebase
         app = firebase.initializeApp(firebaseConfig);
         db = firebase.firestore();
         auth = firebase.auth();
         
-        // Enable offline persistence for mobile
         db.enablePersistence()
             .then(() => console.log('✅ Offline mode enabled'))
             .catch(err => console.warn('⚠️ Offline mode error:', err));
         
         console.log('✅ Firebase Connected Successfully!');
-        console.log('📁 Project:', firebaseConfig.projectId);
+        console.log('👤 Owner:', OWNER_INFO.name);
     } else {
         console.error('❌ Firebase SDK not loaded!');
     }
@@ -40,6 +45,25 @@ try {
 // Export for global use
 window.db = db;
 window.auth = auth;
+window.OWNER_INFO = OWNER_INFO;
+
+// Contact Functions
+window.callOwner = function(phoneNumber) {
+    window.location.href = `tel:${phoneNumber}`;
+};
+
+window.emailOwner = function() {
+    window.location.href = `mailto:${OWNER_INFO.email}`;
+};
+
+window.openInstagram = function() {
+    window.open(OWNER_INFO.instagramUrl, '_blank');
+};
+
+window.whatsappOwner = function(message = '') {
+    const defaultMsg = encodeURIComponent('नमस्ते, Aarish Tiles Network के बारे में पूछताछ करनी है।');
+    window.open(`https://wa.me/${OWNER_INFO.phone1}?text=${defaultMsg}`, '_blank');
+};
 
 // Test Function
 window.testFirebaseConnection = async function() {
@@ -48,7 +72,8 @@ window.testFirebaseConnection = async function() {
         
         const testRef = await db.collection('connection_tests').add({
             message: 'Connection Test',
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            owner: OWNER_INFO.name
         });
         
         await testRef.delete();
