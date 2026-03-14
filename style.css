@@ -1,0 +1,484 @@
+/* ==================== Aarish Tiles Network - Complete CSS ==================== */
+/* Mobile First Design - फिर Tablet और Desktop के लिए */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --primary: #2A9D8F;
+    --primary-dark: #1e7b6f;
+    --primary-light: #6abfad;
+    --secondary: #E76F51;
+    --secondary-dark: #d45d3f;
+    --dark: #264653;
+    --gray-dark: #6c757d;
+    --gray: #adb5bd;
+    --gray-light: #e9ecef;
+    --light: #f8f9fa;
+    --white: #ffffff;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.15);
+    --border-radius: 12px;
+    --border-radius-sm: 8px;
+}
+
+body {
+    background-color: var(--light);
+    color: var(--dark);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* ==================== Navigation Bar ==================== */
+.navbar {
+    background: var(--white);
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 0.8rem 0;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.logo {
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--dark);
+}
+
+.logo span {
+    color: var(--primary);
+    font-weight: 800;
+}
+
+.hamburger {
+    display: block;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--dark);
+    transition: color 0.3s;
+}
+
+.hamburger:hover {
+    color: var(--primary);
+}
+
+.nav-menu {
+    display: none;
+    width: 100%;
+    list-style: none;
+    margin-top: 1rem;
+    border-top: 1px solid var(--gray-light);
+    padding-top: 1rem;
+}
+
+.nav-menu.active {
+    display: block;
+}
+
+.nav-menu li {
+    margin: 0.8rem 0;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--dark);
+    font-weight: 500;
+    font-size: 1.1rem;
+    display: block;
+    padding: 0.5rem;
+    border-radius: var(--border-radius-sm);
+    transition: all 0.3s;
+}
+
+.nav-menu a:hover {
+    background: var(--primary-light);
+    color: var(--white);
+    padding-left: 1rem;
+}
+
+/* Desktop Navigation */
+@media (min-width: 768px) {
+    .hamburger {
+        display: none;
+    }
+    
+    .nav-menu {
+        display: flex !important;
+        width: auto;
+        margin-top: 0;
+        border-top: none;
+        padding-top: 0;
+    }
+    
+    .nav-menu li {
+        margin: 0 0 0 1.5rem;
+    }
+    
+    .nav-menu a {
+        display: inline;
+        padding: 0.3rem 0;
+        font-size: 1rem;
+    }
+    
+    .nav-menu a:hover {
+        background: none;
+        color: var(--primary);
+        padding-left: 0;
+    }
+}
+
+/* ==================== Buttons ==================== */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    text-align: center;
+    width: 100%;
+    margin: 0.3rem 0;
+}
+
+@media (min-width: 480px) {
+    .btn {
+        width: auto;
+        margin: 0 0.3rem;
+    }
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.btn-secondary {
+    background: var(--secondary);
+    color: var(--white);
+}
+
+.btn-secondary:hover {
+    background: var(--secondary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+}
+
+.btn-outline:hover {
+    background: var(--primary);
+    color: var(--white);
+}
+
+/* ==================== Cards ==================== */
+.card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+@media (min-width: 640px) {
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .card-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.card-content {
+    padding: 1.5rem;
+}
+
+/* ==================== Hero Section ==================== */
+.hero {
+    background: linear-gradient(135deg, var(--primary-light), var(--white));
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--dark);
+}
+
+.hero p {
+    font-size: 1.1rem;
+    color: var(--gray-dark);
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero p {
+        font-size: 1.2rem;
+    }
+}
+
+/* ==================== Forms ==================== */
+.form-container {
+    max-width: 500px;
+    margin: 2rem auto;
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--gray-light);
+    border-radius: var(--border-radius-sm);
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+/* ==================== Search Box ==================== */
+.search-box {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    margin: 2rem 0;
+}
+
+.search-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+@media (min-width: 640px) {
+    .search-input-group {
+        flex-direction: row;
+    }
+}
+
+.search-input {
+    flex: 1;
+    padding: 15px;
+    border: 2px solid var(--gray-light);
+    border-radius: var(--border-radius-sm);
+    font-size: 1rem;
+}
+
+/* ==================== Rating Stars ==================== */
+.rating {
+    color: #ffc107;
+    margin: 0.5rem 0;
+}
+
+/* ==================== Mason Card ==================== */
+.mason-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.mason-experience {
+    color: var(--gray-dark);
+    margin: 0.3rem 0;
+}
+
+/* ==================== Tile Card ==================== */
+.tile-image {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, var(--gray-light), var(--gray));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray-dark);
+    font-size: 3rem;
+}
+
+.tile-price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0.5rem 0;
+}
+
+.whatsapp-btn {
+    background: #25D366;
+    color: var(--white);
+    padding: 10px 15px;
+    border-radius: 50px;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.whatsapp-btn:hover {
+    background: #128C7E;
+}
+
+/* ==================== Review Section ==================== */
+.review-section {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--gray-light);
+}
+
+.review-item {
+    background: var(--light);
+    padding: 0.8rem;
+    border-radius: var(--border-radius-sm);
+    margin-bottom: 0.5rem;
+}
+
+.review-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--gray-light);
+    border-radius: var(--border-radius-sm);
+    margin: 0.5rem 0;
+}
+
+/* ==================== Admin Panel ==================== */
+.admin-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+@media (min-width: 768px) {
+    .admin-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1200px) {
+    .admin-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.admin-card {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.admin-card h3 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--gray-light);
+    padding-bottom: 0.5rem;
+}
+
+/* ==================== Progress Bar ==================== */
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background: var(--gray-light);
+    border-radius: 10px;
+    margin: 1rem 0;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 10px;
+}
+
+/* ==================== Footer ==================== */
+footer {
+    background: var(--dark);
+    color: var(--white);
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: auto;
+}
+
+/* ==================== Utilities ==================== */
+.text-center { text-align: center; }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 2rem; }
+.mt-4 { margin-top: 3rem; }
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 2rem; }
+.mb-4 { margin-bottom: 3rem; }
+.p-1 { padding: 0.5rem; }
+.p-2 { padding: 1rem; }
+.p-3 { padding: 2rem; }
