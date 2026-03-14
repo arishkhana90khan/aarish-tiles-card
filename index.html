@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="hi">
 <head>
@@ -6,18 +7,33 @@
     <meta name="description" content="Aarish Tiles Network - अपने शहर में मिस्त्री खोजें, टाइल्स खरीदें, या मिस्त्री बनें">
     <title>Aarish Tiles Network - Home</title>
     
-    <!-- Firebase SDK (पहले ये लोड करें) -->
+    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     
-    <!-- Firebase Config (फिर ये लोड करें) -->
+    <!-- Firebase Config -->
     <script src="firebase.js"></script>
     
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Contact Bar - Owner Information -->
+    <div class="contact-bar">
+        <div class="container">
+            <div class="contact-item">
+                📞 <a href="tel:8755687268">8755687268</a> | <a href="tel:9528340961">9528340961</a>
+            </div>
+            <div class="contact-item">
+                📧 <a href="mailto:arishkhana90@gmail.com">arishkhana90@gmail.com</a>
+            </div>
+            <div class="contact-item">
+                📷 <a href="https://instagram.com/arishkhan3992__" target="_blank">@arishkhan3992__</a>
+            </div>
+        </div>
+    </div>
+
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="container">
@@ -38,10 +54,14 @@
         <div class="container">
             <h1>Aarish Tiles Network</h1>
             <p>आपका विश्वसनीय टाइल्स और मिस्त्री नेटवर्क। गाँव से शहर तक, हर जगह।</p>
-            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;">
+            <p><strong>संचालक: अरिश खान</strong></p>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 1rem;">
                 <a href="find-mason.html" class="btn btn-primary">🔨 Find Mason</a>
                 <a href="mason-register.html" class="btn btn-secondary">👷 Register as Mason</a>
                 <a href="tiles-catalog.html" class="btn btn-outline">🧱 View Tiles</a>
+            </div>
+            <div style="margin-top: 1.5rem;">
+                <button onclick="whatsappOwner()" class="btn btn-outline" style="background: #25D366; color: white; border: none;">📱 WhatsApp</button>
             </div>
         </div>
     </section>
@@ -133,10 +153,35 @@
         </div>
     </section>
 
+    <!-- Contact Owner Section -->
+    <section class="container mt-4 mb-4">
+        <div class="card" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white;">
+            <div class="card-content text-center">
+                <h2 style="color: white;">📞 संपर्क करें</h2>
+                <p style="margin: 1rem 0;">किसी भी समस्या या जानकारी के लिए सीधे संपर्क करें:</p>
+                <div style="display: flex; flex-direction: column; gap: 0.8rem; align-items: center;">
+                    <button onclick="callOwner('8755687268')" class="btn" style="background: white; color: var(--primary); width: 200px;">📞 8755687268</button>
+                    <button onclick="callOwner('9528340961')" class="btn" style="background: white; color: var(--primary); width: 200px;">📞 9528340961</button>
+                    <button onclick="emailOwner()" class="btn" style="background: white; color: var(--primary); width: 200px;">📧 Email</button>
+                    <button onclick="openInstagram()" class="btn" style="background: white; color: var(--primary); width: 200px;">📷 Instagram</button>
+                    <button onclick="whatsappOwner()" class="btn" style="background: #25D366; color: white; width: 200px;">📱 WhatsApp</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2024 Aarish Tiles Network. All rights reserved.</p>
+            <p>&copy; 2024 Aarish Tiles Network</p>
+            <p><strong>अरिश खान</strong> - संचालक</p>
+            <div class="social-links">
+                <a href="tel:8755687268">📞</a>
+                <a href="tel:9528340961">📞</a>
+                <a href="mailto:arishkhana90@gmail.com">📧</a>
+                <a href="https://instagram.com/arishkhan3992__" target="_blank">📷</a>
+                <a href="#" onclick="whatsappOwner()">📱</a>
+            </div>
             <p style="margin-top: 1rem; font-size: 0.9rem;">
                 📍 गाँव से शहर तक, हर जगह<br>
                 मोबाइल फ्रेंडली | तेज़ लोडिंग | सुरक्षित
@@ -151,7 +196,6 @@
             menu.classList.toggle('active');
         }
 
-        // Close menu when clicking outside
         document.addEventListener('click', function(event) {
             const menu = document.getElementById('navMenu');
             const hamburger = document.querySelector('.hamburger');
@@ -161,7 +205,7 @@
             }
         });
 
-        // Firebase Connection Test on Home Page
+        // Firebase Connection Test
         window.addEventListener('load', function() {
             if (window.testFirebaseConnection) {
                 testFirebaseConnection().then(result => {
