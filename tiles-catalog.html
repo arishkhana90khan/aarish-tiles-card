@@ -4,115 +4,132 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aarish Tiles - Tiles Catalog</title>
-    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="firebase.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav class="navbar">
         <div class="container">
             <a href="index.html" class="logo">Aarish <span>Tiles</span></a>
-            <div class="hamburger">☰</div>
-            <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="find-mason.html">Find Mason</a></li>
-                <li><a href="tiles-catalog.html">Tiles Catalog</a></li>
-                <li><a href="mason-register.html">Mason Register</a></li>
-                <li><a href="admin-login.html">Admin</a></li>
+            <div class="hamburger" onclick="toggleMenu()">☰</div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">🏠 Home</a></li>
+                <li><a href="find-mason.html">🔨 Find Mason</a></li>
+                <li><a href="mason-register.html">👷 Mason Register</a></li>
+                <li><a href="tiles-catalog.html">🧱 Tiles Catalog</a></li>
+                <li><a href="admin-login.html">⚙️ Admin</a></li>
             </ul>
         </div>
     </nav>
 
     <div class="container">
-        <h1 class="text-center mt-3">🧱 हमारे टाइल्स कैटलॉग</h1>
+        <h1 class="text-center mt-3">🧱 हमारे टाइल्स</h1>
         <p class="text-center mb-3">बेहतरीन क्वालिटी, किफायती दाम। सीधे WhatsApp से ऑर्डर करें।</p>
 
         <!-- Tiles Grid -->
         <div class="card-grid">
             <!-- Tile 1 -->
             <div class="card">
-                <div class="tile-image">🏢 2x2 फुट टाइल</div>
+                <div class="tile-image">🏢</div>
                 <div class="card-content">
                     <h3>प्रीमियम फ्लोर टाइल</h3>
-                    <p class="tile-size">साइज़: 2ft x 2ft (60x60 cm)</p>
+                    <p class="tile-size">साइज़: 2x2 फुट (60x60 cm)</p>
                     <p class="tile-price">₹65 / वर्ग फुट</p>
                     
                     <!-- Review Section -->
                     <div class="review-section">
-                        <div class="rating">★★★★☆ <span>(4.2) 23 रिव्यू</span></div>
+                        <div class="rating">★★★★☆ (4.2) - 23 रिव्यू</div>
                         
-                        <!-- Sample Reviews -->
                         <div class="review-item">
-                            <strong>राहुल:</strong> <span class="review-text">बहुत अच्छी क्वालिटी है।</span>
+                            <strong>राहुल:</strong> बहुत अच्छी क्वालिटी है।
                             <div class="rating">★★★★★</div>
                         </div>
                         
-                        <!-- Add Review -->
-                        <input type="text" class="review-input" id="comment-tile1" placeholder="अपनी राय लिखें...">
-                        <button class="btn btn-outline" style="width: 100%;" onclick="addReview('tile1')">📝 रिव्यू दें</button>
+                        <div class="review-item">
+                            <strong>सीमा:</strong> घर के लिए बेस्ट है।
+                            <div class="rating">★★★★☆</div>
+                        </div>
+                        
+                        <input type="text" class="review-input" placeholder="अपनी राय लिखें...">
+                        <button class="btn btn-outline" style="width: 100%; margin-top: 0.5rem;">📝 रिव्यू दें</button>
                     </div>
                     
-                    <!-- WhatsApp Button -->
-                    <button class="whatsapp-btn" style="width: 100%; margin-top: 1rem;" onclick="orderOnWhatsapp('प्रीमियम फ्लोर टाइल', '65')">
-                        📱 WhatsApp से ऑर्डर करें
-                    </button>
+                    <button class="whatsapp-btn" style="margin-top: 1rem;">📱 WhatsApp ऑर्डर</button>
                 </div>
             </div>
 
             <!-- Tile 2 -->
             <div class="card">
-                <div class="tile-image">🛁 बाथरूम टाइल</div>
+                <div class="tile-image">🚿</div>
                 <div class="card-content">
                     <h3>वाटरप्रूफ बाथ टाइल</h3>
-                    <p class="tile-size">साइज़: 1ft x 1ft (30x30 cm)</p>
+                    <p class="tile-size">साइज़: 1x1 फुट (30x30 cm)</p>
                     <p class="tile-price">₹45 / वर्ग फुट</p>
                     
                     <div class="review-section">
-                        <div class="rating">★★★★☆ <span>(4.5) 15 रिव्यू</span></div>
+                        <div class="rating">★★★★☆ (4.5) - 15 रिव्यू</div>
                         
                         <div class="review-item">
-                            <strong>सुरेश:</strong> <span class="review-text">बाथरूम के लिए बेस्ट है।</span>
+                            <strong>सुरेश:</strong> बाथरूम के लिए बेस्ट।
                             <div class="rating">★★★★★</div>
                         </div>
                         
-                        <input type="text" class="review-input" id="comment-tile2" placeholder="अपनी राय लिखें...">
-                        <button class="btn btn-outline" style="width: 100%;" onclick="addReview('tile2')">📝 रिव्यू दें</button>
+                        <input type="text" class="review-input" placeholder="अपनी राय लिखें...">
+                        <button class="btn btn-outline" style="width: 100%; margin-top: 0.5rem;">📝 रिव्यू दें</button>
                     </div>
                     
-                    <button class="whatsapp-btn" style="width: 100%; margin-top: 1rem;" onclick="orderOnWhatsapp('वाटरप्रूफ बाथ टाइल', '45')">
-                        📱 WhatsApp ऑर्डर
-                    </button>
+                    <button class="whatsapp-btn" style="margin-top: 1rem;">📱 WhatsApp ऑर्डर</button>
                 </div>
             </div>
 
             <!-- Tile 3 -->
             <div class="card">
-                <div class="tile-image">🍳 किचन टाइल</div>
+                <div class="tile-image">🍳</div>
                 <div class="card-content">
                     <h3>ऑयल-प्रूफ किचन टाइल</h3>
-                    <p class="tile-size">साइज़: 1ft x 2ft (30x60 cm)</p>
+                    <p class="tile-size">साइज़: 1x2 फुट (30x60 cm)</p>
                     <p class="tile-price">₹55 / वर्ग फुट</p>
                     
                     <div class="review-section">
-                        <div class="rating">★★★★★ <span>(5.0) 32 रिव्यू</span></div>
+                        <div class="rating">★★★★★ (5.0) - 32 रिव्यू</div>
                         
                         <div class="review-item">
-                            <strong>प्रिया:</strong> <span class="review-text">बहुत अच्छा है, सफाई आसान।</span>
+                            <strong>प्रिया:</strong> सफाई बहुत आसान है।
                             <div class="rating">★★★★★</div>
                         </div>
                         
-                        <input type="text" class="review-input" id="comment-tile3" placeholder="अपनी राय लिखें...">
-                        <button class="btn btn-outline" style="width: 100%;" onclick="addReview('tile3')">📝 रिव्यू दें</button>
+                        <input type="text" class="review-input" placeholder="अपनी राय लिखें...">
+                        <button class="btn btn-outline" style="width: 100%; margin-top: 0.5rem;">📝 रिव्यू दें</button>
                     </div>
                     
-                    <button class="whatsapp-btn" style="width: 100%; margin-top: 1rem;" onclick="orderOnWhatsapp('ऑयल-प्रूफ किचन टाइल', '55')">
-                        📱 WhatsApp ऑर्डर
-                    </button>
+                    <button class="whatsapp-btn" style="margin-top: 1rem;">📱 WhatsApp ऑर्डर</button>
                 </div>
             </div>
-        </div>
 
-        <!-- More Tiles -->
-        <div class="text-center mt-3 mb-3">
-            <button class="btn btn-primary">और टाइल्स दिखाएँ</button>
+            <!-- Tile 4 -->
+            <div class="card">
+                <div class="tile-image">✨</div>
+                <div class="card-content">
+                    <h3>मार्बल फिनिश टाइल</h3>
+                    <p class="tile-size">साइज़: 2x3 फुट (60x90 cm)</p>
+                    <p class="tile-price">₹85 / वर्ग फुट</p>
+                    
+                    <div class="review-section">
+                        <div class="rating">★★★★☆ (4.8) - 8 रिव्यू</div>
+                        
+                        <input type="text" class="review-input" placeholder="अपनी राय लिखें...">
+                        <button class="btn btn-outline" style="width: 100%; margin-top: 0.5rem;">📝 रिव्यू दें</button>
+                    </div>
+                    
+                    <button class="whatsapp-btn" style="margin-top: 1rem;">📱 WhatsApp ऑर्डर</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -122,6 +139,10 @@
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script>
+        function toggleMenu() {
+            document.getElementById('navMenu').classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
