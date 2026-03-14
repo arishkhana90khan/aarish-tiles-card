@@ -14,6 +14,21 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Contact Bar - Owner Information -->
+    <div class="contact-bar">
+        <div class="container">
+            <div class="contact-item">
+                📞 <a href="tel:8755687268">8755687268</a> | <a href="tel:9528340961">9528340961</a>
+            </div>
+            <div class="contact-item">
+                📧 <a href="mailto:arishkhana90@gmail.com">arishkhana90@gmail.com</a>
+            </div>
+            <div class="contact-item">
+                📷 <a href="https://instagram.com/arishkhan3992__" target="_blank">@arishkhan3992__</a>
+            </div>
+        </div>
+    </div>
+
     <nav class="navbar">
         <div class="container">
             <a href="index.html" class="logo">Aarish <span>Tiles</span></a>
@@ -31,6 +46,7 @@
     <div class="container">
         <h1 class="mt-3">⚙️ एडमिन पैनल</h1>
         <p>स्वागत है, एडमिन! यहाँ से सब कुछ मैनेज करें।</p>
+        <p style="color: var(--primary);">संचालक: अरिश खान (8755687268) | arishkhana90@gmail.com</p>
 
         <div class="admin-grid">
             <!-- Approve Mason Section -->
@@ -115,12 +131,33 @@
                 </div>
                 <button class="btn btn-outline" style="width: 100%; margin-top: 1rem;">सभी देखें</button>
             </div>
+
+            <!-- Owner Info Card -->
+            <div class="admin-card" style="grid-column: span 2;">
+                <h3>👤 संचालक जानकारी</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div>
+                        <p><strong>नाम:</strong> अरिश खान</p>
+                        <p><strong>फोन 1:</strong> 8755687268</p>
+                        <p><strong>फोन 2:</strong> 9528340961</p>
+                    </div>
+                    <div>
+                        <p><strong>Email:</strong> arishkhana90@gmail.com</p>
+                        <p><strong>Instagram:</strong> @arishkhan3992__</p>
+                        <button class="btn btn-outline" onclick="openInstagram()">Instagram खोलें</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <footer>
         <div class="container">
             <p>&copy; 2024 Aarish Tiles Network</p>
+            <p><strong>अरिश खान</strong> - 8755687268 | arishkhana90@gmail.com</p>
+            <div class="social-links">
+                <a href="https://instagram.com/arishkhan3992__" target="_blank">📷 Instagram</a>
+            </div>
         </div>
     </footer>
 
