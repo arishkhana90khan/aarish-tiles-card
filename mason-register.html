@@ -14,6 +14,21 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Contact Bar - Owner Information -->
+    <div class="contact-bar">
+        <div class="container">
+            <div class="contact-item">
+                📞 <a href="tel:8755687268">8755687268</a> | <a href="tel:9528340961">9528340961</a>
+            </div>
+            <div class="contact-item">
+                📧 <a href="mailto:arishkhana90@gmail.com">arishkhana90@gmail.com</a>
+            </div>
+            <div class="contact-item">
+                📷 <a href="https://instagram.com/arishkhan3992__" target="_blank">@arishkhan3992__</a>
+            </div>
+        </div>
+    </div>
+
     <nav class="navbar">
         <div class="container">
             <a href="index.html" class="logo">Aarish <span>Tiles</span></a>
@@ -32,6 +47,7 @@
         <div class="form-container">
             <h1 class="text-center">👷 मिस्त्री पंजीकरण</h1>
             <p class="text-center mb-3">हमारे नेटवर्क से जुड़ें और नए ग्राहक पाएँ</p>
+            <p class="text-center" style="color: var(--primary);">संचालक: अरिश खान (8755687268)</p>
 
             <form id="masonRegForm" onsubmit="submitRegistration(event)">
                 <div class="form-group">
@@ -74,6 +90,7 @@
                     <li>आपका पंजीकरण एडमिन द्वारा स्वीकृत होने के बाद ही लिस्ट में दिखेगा।</li>
                     <li>सही जानकारी दें ताकि ग्राहक आपसे संपर्क कर सकें।</li>
                     <li>यह सेवा पूरी तरह मुफ्त है।</li>
+                    <li>समस्या होने पर संपर्क करें: 8755687268</li>
                 </ul>
             </div>
         </div>
@@ -82,6 +99,7 @@
     <footer>
         <div class="container">
             <p>&copy; 2024 Aarish Tiles Network</p>
+            <p><strong>अरिश खान</strong> - 8755687268</p>
         </div>
     </footer>
 
@@ -93,15 +111,10 @@
         function submitRegistration(event) {
             event.preventDefault();
             
-            // Get form values
             const name = document.getElementById('fullName').value;
-            const phone = document.getElementById('phone').value;
-            const city = document.getElementById('city').value;
-            const experience = document.getElementById('experience').value;
             
-            alert(`धन्यवाद ${name}! आपका पंजीकरण भेज दिया गया है।`);
+            alert(`धन्यवाद ${name}! आपका पंजीकरण भेज दिया गया है।\nकिसी भी समस्या के लिए संपर्क करें: 8755687268`);
             
-            // Reset form
             document.getElementById('masonRegForm').reset();
         }
     </script>
