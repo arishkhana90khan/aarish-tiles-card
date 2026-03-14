@@ -3,69 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="description" content="Aarish Tiles Network - अपने शहर में मिस्त्री खोजें, टाइल्स खरीदें, या मिस्त्री बनें">
     <title>Aarish Tiles Network - Home</title>
-    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Firebase SDK (पहले ये लोड करें) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    
+    <!-- Firebase Config (फिर ये लोड करें) -->
+    <script src="firebase.js"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="container">
             <a href="index.html" class="logo">Aarish <span>Tiles</span></a>
-            <div class="hamburger">☰</div>
-            <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="find-mason.html">Find Mason</a></li>
-                <li><a href="tiles-catalog.html">Tiles Catalog</a></li>
-                <li><a href="mason-register.html">Mason Register</a></li>
-                <li><a href="admin-login.html">Admin</a></li>
+            <div class="hamburger" onclick="toggleMenu()">☰</div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">🏠 Home</a></li>
+                <li><a href="find-mason.html">🔨 Find Mason</a></li>
+                <li><a href="mason-register.html">👷 Mason Register</a></li>
+                <li><a href="tiles-catalog.html">🧱 Tiles Catalog</a></li>
+                <li><a href="admin-login.html">⚙️ Admin</a></li>
             </ul>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero" style="background: linear-gradient(135deg, var(--primary-light), var(--white)); padding: 3rem 0;">
-        <div class="container text-center">
-            <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Aarish Tiles Network</h1>
-            <p style="font-size: 1.2rem; margin-bottom: 2rem; color: var(--gray);">
-                आपका विश्वसनीय टाइल्स और मिस्त्री नेटवर्क। गाँव से शहर तक, हर जगह।
-            </p>
-            
-            <!-- Three Buttons -->
-            <div class="hero-buttons" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+    <section class="hero">
+        <div class="container">
+            <h1>Aarish Tiles Network</h1>
+            <p>आपका विश्वसनीय टाइल्स और मिस्त्री नेटवर्क। गाँव से शहर तक, हर जगह।</p>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;">
                 <a href="find-mason.html" class="btn btn-primary">🔨 Find Mason</a>
-                <a href="tiles-catalog.html" class="btn btn-secondary">🧱 View Tiles</a>
-                <a href="mason-register.html" class="btn btn-outline">👷 Become a Mason</a>
+                <a href="mason-register.html" class="btn btn-secondary">👷 Register as Mason</a>
+                <a href="tiles-catalog.html" class="btn btn-outline">🧱 View Tiles</a>
             </div>
         </div>
     </section>
 
+    <!-- About Section -->
+    <section class="container mt-4 mb-4">
+        <h2 class="text-center">हमारे बारे में</h2>
+        <p class="text-center" style="max-width: 800px; margin: 1rem auto;">
+            Aarish Tiles Network एक ऐसा प्लेटफॉर्म है जो गाँव और शहर के मिस्त्रियों को 
+            ग्राहकों से जोड़ता है। हम उच्च गुणवत्ता वाली टाइल्स भी उपलब्ध कराते हैं 
+            जिन्हें आप सीधे WhatsApp से ऑर्डर कर सकते हैं।
+        </p>
+    </section>
+
     <!-- Features Section -->
-    <section class="features" style="padding: 4rem 0;">
-        <div class="container">
-            <h2 class="text-center mb-3">हमारी सेवाएँ</h2>
-            <div class="card-grid">
-                <div class="card">
-                    <div class="card-content text-center">
-                        <div style="font-size: 3rem;">🔍</div>
-                        <h3>खोजें मिस्त्री</h3>
-                        <p>अपने गाँव या शहर में अनुभवी मिस्त्री खोजें। रेटिंग और समीक्षा देखें।</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-content text-center">
-                        <div style="font-size: 3rem;">🧱</div>
-                        <h3>टाइल्स कैटलॉग</h3>
-                        <p>विभिन्न साइज़ और कीमतों में टाइल्स देखें और सीधे WhatsApp से ऑर्डर करें।</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-content text-center">
-                        <div style="font-size: 3rem;">👷</div>
-                        <h3>मिस्त्री बनें</h3>
-                        <p>अपनी सेवाएँ दें, नए ग्राहक पाएँ, और अपना कारोबार बढ़ाएँ।</p>
-                    </div>
+    <section class="container mt-4 mb-4">
+        <div class="card-grid">
+            <!-- Find Mason Card -->
+            <div class="card">
+                <div class="card-content text-center">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🔍</div>
+                    <h3>खोजें मिस्त्री</h3>
+                    <p>अपने गाँव या शहर में अनुभवी मिस्त्री खोजें। रेटिंग और समीक्षा देखें।</p>
+                    <a href="find-mason.html" class="btn btn-primary" style="margin-top: 1rem;">खोजें</a>
                 </div>
             </div>
+
+            <!-- Mason Register Card -->
+            <div class="card">
+                <div class="card-content text-center">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">👷</div>
+                    <h3>मिस्त्री बनें</h3>
+                    <p>अपनी सेवाएँ दें, नए ग्राहक पाएँ, और अपना कारोबार बढ़ाएँ।</p>
+                    <a href="mason-register.html" class="btn btn-secondary" style="margin-top: 1rem;">रजिस्टर करें</a>
+                </div>
+            </div>
+
+            <!-- Tiles Catalog Card -->
+            <div class="card">
+                <div class="card-content text-center">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🧱</div>
+                    <h3>टाइल्स कैटलॉग</h3>
+                    <p>विभिन्न साइज़ और कीमतों में टाइल्स देखें। WhatsApp से ऑर्डर करें।</p>
+                    <a href="tiles-catalog.html" class="btn btn-outline" style="margin-top: 1rem;">देखें</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tiles Catalog Preview -->
+    <section class="container mt-4 mb-4">
+        <h2 class="text-center mb-3">लोकप्रिय टाइल्स</h2>
+        <div class="card-grid">
+            <!-- Tile 1 Preview -->
+            <div class="card">
+                <div class="tile-image">🏢</div>
+                <div class="card-content">
+                    <h3>प्रीमियम फ्लोर टाइल</h3>
+                    <p class="tile-size">साइज़: 2x2 फुट (60x60 cm)</p>
+                    <p class="tile-price">₹65 / वर्ग फुट</p>
+                    <a href="tiles-catalog.html" class="btn btn-outline">देखें</a>
+                </div>
+            </div>
+
+            <!-- Tile 2 Preview -->
+            <div class="card">
+                <div class="tile-image">🚿</div>
+                <div class="card-content">
+                    <h3>वाटरप्रूफ बाथ टाइल</h3>
+                    <p class="tile-size">साइज़: 1x1 फुट (30x30 cm)</p>
+                    <p class="tile-price">₹45 / वर्ग फुट</p>
+                    <a href="tiles-catalog.html" class="btn btn-outline">देखें</a>
+                </div>
+            </div>
+
+            <!-- Tile 3 Preview -->
+            <div class="card">
+                <div class="tile-image">🍳</div>
+                <div class="card-content">
+                    <h3>ऑयल-प्रूफ किचन टाइल</h3>
+                    <p class="tile-size">साइज़: 1x2 फुट (30x60 cm)</p>
+                    <p class="tile-price">₹55 / वर्ग फुट</p>
+                    <a href="tiles-catalog.html" class="btn btn-outline">देखें</a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-3">
+            <a href="tiles-catalog.html" class="btn btn-primary">सभी टाइल्स देखें</a>
         </div>
     </section>
 
@@ -73,12 +137,38 @@
     <footer>
         <div class="container">
             <p>&copy; 2024 Aarish Tiles Network. All rights reserved.</p>
-            <p style="margin-top: 0.5rem; color: var(--light-gray); font-size: 0.9rem;">
+            <p style="margin-top: 1rem; font-size: 0.9rem;">
+                📍 गाँव से शहर तक, हर जगह<br>
                 मोबाइल फ्रेंडली | तेज़ लोडिंग | सुरक्षित
             </p>
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <!-- Mobile Menu Toggle Script -->
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('navMenu');
+            const hamburger = document.querySelector('.hamburger');
+            
+            if (!event.target.closest('.navbar') && menu.classList.contains('active')) {
+                menu.classList.remove('active');
+            }
+        });
+
+        // Firebase Connection Test on Home Page
+        window.addEventListener('load', function() {
+            if (window.testFirebaseConnection) {
+                testFirebaseConnection().then(result => {
+                    console.log(result.message);
+                });
+            }
+        });
+    </script>
 </body>
 </html>
