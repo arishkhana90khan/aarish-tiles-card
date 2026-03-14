@@ -1,4 +1,4 @@
-// ==================== Aarish Tiles Network - Firebase Configuration ====================
+// ==================== Aarish Tiles Network - Complete Firebase Setup ====================
 // Owner Contact Information
 const OWNER_INFO = {
     name: "Arish Khan",
@@ -20,32 +20,108 @@ const firebaseConfig = {
     measurementId: "G-G2N8FYWV63"
 };
 
-// Firebase Initialize
-let app, db, auth;
+// ==================== Firebase Initialization ====================
+let app, db, auth, storage;
 
 try {
+    // Check if Firebase SDK is loaded
     if (typeof firebase !== 'undefined') {
+        console.log('✅ Firebase SDK loaded');
+        
+        // Initialize Firebase App
         app = firebase.initializeApp(firebaseConfig);
+        console.log('✅ Firebase App initialized');
+        
+        // Initialize Firestore
         db = firebase.firestore();
+        console.log('✅ Firestore initialized');
+        
+        // Initialize Auth (for future use)
         auth = firebase.auth();
+        console.log('✅ Firebase Auth initialized');
         
-        db.enablePersistence()
-            .then(() => console.log('✅ Offline mode enabled'))
-            .catch(err => console.warn('⚠️ Offline mode error:', err));
+        // Initialize Storage (for future use)
+        storage = firebase.storage();
+        console.log('✅ Firebase Storage initialized');
         
-        console.log('✅ Firebase Connected Successfully!');
+        // Enable offline persistence for mobile
+        db.enablePersistence({
+            synchronizeTabs: true
+        })
+        .then(() => {
+            console.log('✅ Offline persistence enabled');
+        })
+        .catch((err) => {
+            if (err.code === 'failed-precondition') {
+                console.warn('⚠️ Multiple tabs open - offline in one tab only');
+            } else if (err.code === 'unimplemented') {
+                console.warn('⚠️ Browser doesn\'t support offline');
+            }
+        });
+        
+        console.log('🚀 Firebase Ready!');
         console.log('👤 Owner:', OWNER_INFO.name);
+        
     } else {
         console.error('❌ Firebase SDK not loaded!');
     }
 } catch (error) {
-    console.error('❌ Firebase Initialization Error:', error);
+    console.error('❌ Firebase initialization error:', error);
 }
 
-// Export for global use
+// ==================== Export for Global Use ====================
 window.db = db;
 window.auth = auth;
+window.storage = storage;
 window.OWNER_INFO = OWNER_INFO;
+
+// ==================== Utility Functions ====================
+
+// Test Firebase Connection
+window.testFirebaseConnection = async function() {
+    try {
+        if (!db) {
+            throw new Error('Firestore not initialized');
+        }
+        
+        // Try to write a test document
+        const testRef = await db.collection('_connection_tests').add({
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            message: 'Connection test',
+            userAgent: navigator.userAgent
+        });
+        
+        // Read it back
+        const testDoc = await testRef.get();
+        
+        if (testDoc.exists) {
+            console.log('✅ Test document written and read successfully');
+            
+            // Delete test document (cleanup)
+            await testRef.delete();
+            console.log('✅ Test document cleaned up');
+            
+            return {
+                success: true,
+                message: '✅ Firebase is working perfectly!'
+            };
+        } else {
+            throw new Error('Test document not found');
+        }
+        
+    } catch (error) {
+        console.error('❌ Firebase connection test failed:', error);
+        return {
+            success: false,
+            message: '❌ Firebase error: ' + error.message
+        };
+    }
+};
+
+// Get Server Timestamp
+window.getServerTimestamp = function() {
+    return firebase.firestore.FieldValue.serverTimestamp();
+};
 
 // Contact Functions
 window.callOwner = function(phoneNumber) {
@@ -62,23 +138,37 @@ window.openInstagram = function() {
 
 window.whatsappOwner = function(message = '') {
     const defaultMsg = encodeURIComponent('नमस्ते, Aarish Tiles Network के बारे में पूछताछ करनी है।');
-    window.open(`https://wa.me/${OWNER_INFO.phone1}?text=${defaultMsg}`, '_blank');
+    const msg = message ? encodeURIComponent(message) : defaultMsg;
+    window.open(`https://wa.me/${OWNER_INFO.phone1}?text=${msg}`, '_blank');
 };
 
-// Test Function
-window.testFirebaseConnection = async function() {
-    try {
-        if (!db) throw new Error('Firestore not initialized');
-        
-        const testRef = await db.collection('connection_tests').add({
-            message: 'Connection Test',
-            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            owner: OWNER_INFO.name
-        });
-        
-        await testRef.delete();
-        return { success: true, message: '✅ Firebase is working!' };
-    } catch (error) {
-        return { success: false, message: '❌ Firebase Error: ' + error.message };
-    }
+// ==================== Firestore References ====================
+// Collections
+window.COLLECTIONS = {
+    MASONS: 'masons',
+    TILES: 'tiles',
+    REVIEWS: 'reviews',
+    ORDERS: 'orders',
+    USERS: 'users',
+    SETTINGS: 'settings'
 };
+
+// Helper function to get collection reference
+window.getCollection = function(collectionName) {
+    if (!db) {
+        console.error('Firestore not initialized');
+        return null;
+    }
+    return db.collection(collectionName);
+};
+
+// Helper function to get document reference
+window.getDocument = function(collectionName, docId) {
+    if (!db) {
+        console.error('Firestore not initialized');
+        return null;
+    }
+    return db.collection(collectionName).doc(docId);
+};
+
+console.log('📦 Firebase module loaded with all utilities');
