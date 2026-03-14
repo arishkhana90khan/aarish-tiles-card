@@ -4,19 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aarish Tiles - Admin Panel</title>
-    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="firebase.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav class="navbar">
         <div class="container">
             <a href="index.html" class="logo">Aarish <span>Tiles</span></a>
-            <div class="hamburger">☰</div>
-            <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="find-mason.html">Find Mason</a></li>
-                <li><a href="tiles-catalog.html">Tiles Catalog</a></li>
-                <li><a href="mason-register.html">Mason Register</a></li>
-                <li><a href="admin-login.html">Admin</a></li>
+            <div class="hamburger" onclick="toggleMenu()">☰</div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">🏠 Home</a></li>
+                <li><a href="find-mason.html">🔨 Find Mason</a></li>
+                <li><a href="mason-register.html">👷 Mason Register</a></li>
+                <li><a href="tiles-catalog.html">🧱 Tiles Catalog</a></li>
+                <li><a href="admin-login.html">⚙️ Admin</a></li>
             </ul>
         </div>
     </nav>
@@ -25,26 +32,25 @@
         <h1 class="mt-3">⚙️ एडमिन पैनल</h1>
         <p>स्वागत है, एडमिन! यहाँ से सब कुछ मैनेज करें।</p>
 
-        <!-- Admin Grid -->
         <div class="admin-grid">
             <!-- Approve Mason Section -->
             <div class="admin-card">
                 <h3>✅ मिस्त्री स्वीकृति (2 पेंडिंग)</h3>
-                <div class="mason-card">
+                <div style="margin: 1rem 0;">
                     <p><strong>रमेश कुमार</strong> - 8 वर्ष, औरंगाबाद</p>
                     <div style="display: flex; gap: 0.5rem;">
                         <button class="btn btn-primary" style="flex: 1;">✅ स्वीकारें</button>
                         <button class="btn btn-secondary" style="flex: 1;">❌ अस्वीकारें</button>
                     </div>
                 </div>
-                <div class="mason-card mt-1">
+                <div style="margin: 1rem 0;">
                     <p><strong>सुरेश यादव</strong> - 5 वर्ष, पटना</p>
                     <div style="display: flex; gap: 0.5rem;">
                         <button class="btn btn-primary" style="flex: 1;">✅ स्वीकारें</button>
                         <button class="btn btn-secondary" style="flex: 1;">❌ अस्वीकारें</button>
                     </div>
                 </div>
-                <button class="btn btn-outline" style="width: 100%; margin-top: 1rem;">सभी पेंडिंग देखें</button>
+                <button class="btn btn-outline" style="width: 100%;">सभी पेंडिंग देखें</button>
             </div>
 
             <!-- Add Tiles Section -->
@@ -83,7 +89,7 @@
             <!-- Bonus Progress Section -->
             <div class="admin-card">
                 <h3>💰 बोनस प्रोग्रेस</h3>
-                <p>इस महीने के टार्गेट: 500 टाइल्स</p>
+                <p>इस महीने का टार्गेट: 500 टाइल्स</p>
                 <div class="progress-bar">
                     <div class="progress-fill" style="width: 65%;"></div>
                 </div>
@@ -97,6 +103,18 @@
                 <p style="margin-top: 1rem;">अर्जित बोनस: ₹4,500</p>
                 <button class="btn btn-primary" style="width: 100%;">बोनस क्लेम करें</button>
             </div>
+
+            <!-- All Masons Section -->
+            <div class="admin-card">
+                <h3>👷 सभी मिस्त्री</h3>
+                <div style="max-height: 200px; overflow-y: auto;">
+                    <p>राम कुमार - औरंगाबाद (स्वीकृत)</p>
+                    <p>सुरेश यादव - पटना (पेंडिंग)</p>
+                    <p>मोहन शर्मा - गया (स्वीकृत)</p>
+                    <p>दिनेश साह - मुजफ्फरपुर (स्वीकृत)</p>
+                </div>
+                <button class="btn btn-outline" style="width: 100%; margin-top: 1rem;">सभी देखें</button>
+            </div>
         </div>
     </div>
 
@@ -106,6 +124,10 @@
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script>
+        function toggleMenu() {
+            document.getElementById('navMenu').classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
