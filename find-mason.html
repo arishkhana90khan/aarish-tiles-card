@@ -4,98 +4,114 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aarish Tiles - Find Mason</title>
-    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="firebase.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav class="navbar">
         <div class="container">
             <a href="index.html" class="logo">Aarish <span>Tiles</span></a>
-            <div class="hamburger">☰</div>
-            <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="find-mason.html">Find Mason</a></li>
-                <li><a href="tiles-catalog.html">Tiles Catalog</a></li>
-                <li><a href="mason-register.html">Mason Register</a></li>
-                <li><a href="admin-login.html">Admin</a></li>
+            <div class="hamburger" onclick="toggleMenu()">☰</div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">🏠 Home</a></li>
+                <li><a href="find-mason.html">🔨 Find Mason</a></li>
+                <li><a href="mason-register.html">👷 Mason Register</a></li>
+                <li><a href="tiles-catalog.html">🧱 Tiles Catalog</a></li>
+                <li><a href="admin-login.html">⚙️ Admin</a></li>
             </ul>
         </div>
     </nav>
 
     <div class="container">
-        <h1 class="text-center mt-3">🔨 अपने शहर में मिस्त्री खोजें</h1>
-        
+        <h1 class="text-center mt-3">🔨 मिस्त्री खोजें</h1>
+        <p class="text-center">अपने गाँव या शहर में अनुभवी मिस्त्री खोजें</p>
+
         <!-- Search Box -->
         <div class="search-box">
             <div class="search-input-group">
-                <input type="text" class="search-input" placeholder="गाँव या शहर का नाम दर्ज करें...">
-                <button class="btn btn-primary" onclick="searchMason()">खोजें</button>
+                <input type="text" class="search-input" id="searchCity" placeholder="गाँव या शहर का नाम दर्ज करें...">
+                <button class="btn btn-primary" onclick="searchMasons()">खोजें</button>
             </div>
         </div>
 
-        <!-- Mason Cards -->
-        <h2 class="mb-2">उपलब्ध मिस्त्री (5+ अनुभवी)</h2>
-        <div class="card-grid">
-            <!-- Card 1 -->
+        <!-- Mason Cards Grid -->
+        <h2 class="mb-2">उपलब्ध मिस्त्री</h2>
+        <div class="card-grid" id="masonGrid">
+            <!-- Mason Card 1 -->
             <div class="card mason-card">
                 <div class="card-content">
                     <h3 class="mason-name">रामप्रसाद यादव</h3>
                     <p class="mason-experience">⭐ 15 वर्ष का अनुभव</p>
-                    <div class="rating">★★★★★ <span style="color: var(--gray);">(5.0)</span></div>
+                    <div class="rating">★★★★★ (5.0)</div>
                     <p>📍 गाँव: औरंगाबाद, बिहार</p>
                     <p>🛠️ विशेषता: फ्लोरिंग, वॉल टाइल्स</p>
-                    <button class="btn btn-outline" style="width: 100%; margin-top: 0.5rem;">कॉन्टैक्ट करें</button>
+                    <button class="btn btn-outline" style="width: 100%; margin-top: 1rem;">📞 कॉन्टैक्ट करें</button>
                 </div>
             </div>
 
-            <!-- Card 2 -->
+            <!-- Mason Card 2 -->
             <div class="card mason-card">
                 <div class="card-content">
                     <h3 class="mason-name">सुरेश कुमार</h3>
                     <p class="mason-experience">⭐ 10 वर्ष का अनुभव</p>
-                    <div class="rating">★★★★☆ <span style="color: var(--gray);">(4.5)</span></div>
-                    <p>📍 गाँव: पटना सिटी</p>
+                    <div class="rating">★★★★☆ (4.5)</div>
+                    <p>📍 गाँव: पटना सिटी, बिहार</p>
                     <p>🛠️ विशेषता: बाथरूम टाइल्स, मार्बल</p>
-                    <button class="btn btn-outline" style="width: 100%; margin-top: 0.5rem;">कॉन्टैक्ट करें</button>
+                    <button class="btn btn-outline" style="width: 100%; margin-top: 1rem;">📞 कॉन्टैक्ट करें</button>
                 </div>
             </div>
 
-            <!-- Card 3 -->
+            <!-- Mason Card 3 -->
             <div class="card mason-card">
                 <div class="card-content">
                     <h3 class="mason-name">मोहन शर्मा</h3>
                     <p class="mason-experience">⭐ 8 वर्ष का अनुभव</p>
-                    <div class="rating">★★★★☆ <span style="color: var(--gray);">(4.3)</span></div>
+                    <div class="rating">★★★★☆ (4.3)</div>
                     <p>📍 गाँव: गया, बिहार</p>
-                    <p>🛠️ विशेषता: आउटडोर टाइल्स, रेनोवेशन</p>
-                    <button class="btn btn-outline" style="width: 100%; margin-top: 0.5rem;">कॉन्टैक्ट करें</button>
+                    <p>🛠️ विशेषता: आउटडोर टाइल्स</p>
+                    <button class="btn btn-outline" style="width: 100%; margin-top: 1rem;">📞 कॉन्टैक्ट करें</button>
                 </div>
             </div>
 
-            <!-- Card 4 -->
+            <!-- Mason Card 4 -->
             <div class="card mason-card">
                 <div class="card-content">
                     <h3 class="mason-name">दिनेश साह</h3>
                     <p class="mason-experience">⭐ 12 वर्ष का अनुभव</p>
-                    <div class="rating">★★★★★ <span style="color: var(--gray);">(4.9)</span></div>
-                    <p>📍 गाँव: मुजफ्फरपुर</p>
-                    <p>🛠️ विशेषता: किचन टाइल्स, मोज़ेक</p>
-                    <button class="btn btn-outline" style="width: 100%; margin-top: 0.5rem;">कॉन्टैक्ट करें</button>
+                    <div class="rating">★★★★★ (4.9)</div>
+                    <p>📍 गाँव: मुजफ्फरपुर, बिहार</p>
+                    <p>🛠️ विशेषता: किचन टाइल्स</p>
+                    <button class="btn btn-outline" style="width: 100%; margin-top: 1rem;">📞 कॉन्टैक्ट करें</button>
                 </div>
             </div>
-        </div>
-
-        <!-- Load More Button -->
-        <div class="text-center mt-3 mb-3">
-            <button class="btn btn-primary" onclick="loadMoreMasons()">और देखें +</button>
         </div>
     </div>
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 Aarish Tiles Network. All rights reserved.</p>
+            <p>&copy; 2024 Aarish Tiles Network</p>
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script>
+        function toggleMenu() {
+            document.getElementById('navMenu').classList.toggle('active');
+        }
+
+        function searchMasons() {
+            const city = document.getElementById('searchCity').value;
+            if (city) {
+                alert(`'${city}' में मिस्त्री खोज रहे हैं... (डेटाबेस कनेक्ट होने पर काम करेगा)`);
+            } else {
+                alert('कृपया गाँव या शहर का नाम दर्ज करें');
+            }
+        }
+    </script>
 </body>
 </html>
