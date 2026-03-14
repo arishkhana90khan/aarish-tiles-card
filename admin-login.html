@@ -4,47 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aarish Tiles - Admin Login</title>
-    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="firebase.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav class="navbar">
         <div class="container">
             <a href="index.html" class="logo">Aarish <span>Tiles</span></a>
-            <div class="hamburger">☰</div>
-            <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="find-mason.html">Find Mason</a></li>
-                <li><a href="tiles-catalog.html">Tiles Catalog</a></li>
-                <li><a href="mason-register.html">Mason Register</a></li>
-                <li><a href="admin-login.html">Admin</a></li>
+            <div class="hamburger" onclick="toggleMenu()">☰</div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">🏠 Home</a></li>
+                <li><a href="find-mason.html">🔨 Find Mason</a></li>
+                <li><a href="mason-register.html">👷 Mason Register</a></li>
+                <li><a href="tiles-catalog.html">🧱 Tiles Catalog</a></li>
+                <li><a href="admin-login.html">⚙️ Admin</a></li>
             </ul>
         </div>
     </nav>
 
     <div class="container">
-        <div style="max-width: 400px; margin: 3rem auto;">
-            <div class="card" style="padding: 2rem;">
-                <h2 class="text-center mb-2">🔐 एडमिन लॉगिन</h2>
-                <p class="text-center mb-3" style="color: var(--gray);">केवल अधिकृत कर्मचारी</p>
-                
-                <form onsubmit="adminLogin(event)">
-                    <div class="form-group">
-                        <label class="form-label">यूज़रनेम</label>
-                        <input type="text" class="form-control" id="username" placeholder="admin" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">पासवर्ड</label>
-                        <input type="password" class="form-control" id="password" placeholder="••••••••" required>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">लॉगिन करें</button>
-                </form>
-                
-                <p class="text-center mt-2" style="font-size: 0.9rem;">
-                    ⚠️ डेमो के लिए: कोई भी यूज़रनेम/पासवर्ड डालें
-                </p>
-            </div>
+        <div class="form-container">
+            <h1 class="text-center">🔐 एडमिन लॉगिन</h1>
+            <p class="text-center mb-3">केवल अधिकृत कर्मचारी</p>
+
+            <form onsubmit="adminLogin(event)">
+                <div class="form-group">
+                    <label class="form-label">यूज़रनेम</label>
+                    <input type="text" class="form-control" id="username" placeholder="admin" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">पासवर्ड</label>
+                    <input type="password" class="form-control" id="password" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">लॉगिन करें</button>
+            </form>
+
+            <p class="text-center mt-2" style="font-size: 0.9rem; color: var(--gray-dark);">
+                डेमो के लिए: admin / admin123
+            </p>
         </div>
     </div>
 
@@ -54,6 +59,23 @@
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script>
+        function toggleMenu() {
+            document.getElementById('navMenu').classList.toggle('active');
+        }
+
+        function adminLogin(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (username === 'admin' && password === 'admin123') {
+                window.location.href = 'admin-panel.html';
+            } else {
+                alert('❌ गलत यूज़रनेम या पासवर्ड! (डेमो: admin/admin123)');
+            }
+        }
+    </script>
 </body>
 </html>
