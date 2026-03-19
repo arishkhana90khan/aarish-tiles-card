@@ -5,30 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aarish Tiles - Mason Register</title>
     
-    <!-- Firebase SDK (v9 Compat) -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
-    
-    <!-- Firebase Config -->
     <script src="firebase.js"></script>
-    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Contact Bar - Owner Information -->
     <div class="contact-bar">
         <div class="container">
-            <div class="contact-item">
-                📞 <a href="tel:8755687268">8755687268</a> | <a href="tel:9528340961">9528340961</a>
-            </div>
-            <div class="contact-item">
-                📧 <a href="mailto:arishkhana90@gmail.com">arishkhana90@gmail.com</a>
-            </div>
-            <div class="contact-item">
-                📷 <a href="https://instagram.com/arishkhan3992__" target="_blank">@arishkhan3992__</a>
-            </div>
+            <div class="contact-item">📞 <a href="tel:8755687268">8755687268</a> | <a href="tel:9528340961">9528340961</a></div>
+            <div class="contact-item">📧 <a href="mailto:arishkhana90@gmail.com">arishkhana90@gmail.com</a></div>
+            <div class="contact-item">📷 <a href="https://instagram.com/arishkhan3992__" target="_blank">@arishkhan3992__</a></div>
         </div>
     </div>
 
@@ -41,6 +30,7 @@
                 <li><a href="find-mason.html">🔨 Find Mason</a></li>
                 <li><a href="mason-register.html">👷 Mason Register</a></li>
                 <li><a href="tiles-catalog.html">🧱 Tiles Catalog</a></li>
+                <li><a href="tile-calculator.html">🧮 Calculator</a></li>
                 <li><a href="admin-login.html">⚙️ Admin</a></li>
             </ul>
         </div>
@@ -50,26 +40,26 @@
         <div class="form-container">
             <h1 class="text-center">👷 मिस्त्री पंजीकरण</h1>
             <p class="text-center mb-3">हमारे नेटवर्क से जुड़ें और नए ग्राहक पाएँ</p>
-            <p class="text-center" style="color: var(--primary);">संचालक: अरिश खान (8755687268)</p>
+            <p class="text-center" style="color: var(--primary);">संचालक: अरिश खान (ARK001) - 8755687268</p>
 
             <form id="masonRegForm" onsubmit="submitRegistration(event)">
                 <div class="form-group">
                     <label class="form-label">पूरा नाम *</label>
-                    <input type="text" class="form-control" id="fullName" placeholder="जैसे: राम कुमार" required>
+                    <input type="text" class="form-control" id="fullName" required>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">मोबाइल नंबर *</label>
-                    <input type="tel" class="form-control" id="phone" placeholder="10 अंकों का नंबर" pattern="[0-9]{10}" required>
+                    <input type="tel" class="form-control" id="phone" pattern="[0-9]{10}" required>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">गाँव / शहर *</label>
-                    <input type="text" class="form-control" id="city" placeholder="जैसे: औरंगाबाद, बिहार" required>
+                    <input type="text" class="form-control" id="city" required>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">अनुभव (वर्षों में) *</label>
+                    <label class="form-label">अनुभव *</label>
                     <select class="form-control" id="experience" required>
                         <option value="">-- चुनें --</option>
                         <option value="1-3">1-3 वर्ष</option>
@@ -80,8 +70,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">अपना काम की फोटो अपलोड करें *</label>
-                    <input type="file" class="form-control" id="workPhoto" accept="image/*" required>
+                    <label class="form-label">काम की फोटो *</label>
+                    <input type="file" class="form-control" accept="image/*" required>
                 </div>
 
                 <button type="submit" class="btn btn-primary" style="width: 100%;">✅ पंजीकरण करें</button>
@@ -90,16 +80,14 @@
             <div class="mt-3" style="background: var(--light); padding: 1rem; border-radius: var(--border-radius);">
                 <h3>📌 ध्यान दें:</h3>
                 <ul style="margin-left: 1.5rem;">
-                    <li>आपका पंजीकरण एडमिन द्वारा स्वीकृत होने के बाद ही लिस्ट में दिखेगा।</li>
-                    <li>सही जानकारी दें ताकि ग्राहक आपसे संपर्क कर सकें।</li>
-                    <li>यह सेवा पूरी तरह मुफ्त है।</li>
-                    <li>समस्या होने पर संपर्क करें: 8755687268</li>
+                    <li>आपका पंजीकरण एडमिन द्वारा स्वीकृत होगा</li>
+                    <li>सही जानकारी दें</li>
+                    <li>समस्या होने पर: 8755687268</li>
                 </ul>
             </div>
         </div>
     </div>
 
-    <!-- Test Connection Button (अभी के लिए) -->
     <div style="position: fixed; bottom: 10px; right: 10px; z-index: 9999;">
         <button onclick="testFirebaseConnection().then(result => alert(result.message))" 
                 style="background: var(--primary); color: white; border: none; padding: 10px 15px; border-radius: 50px; font-size: 14px; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.2);">
@@ -110,7 +98,7 @@
     <footer>
         <div class="container">
             <p>&copy; 2024 Aarish Tiles Network</p>
-            <p><strong>अरिश खान</strong> - 8755687268</p>
+            <p><strong>अरिश खान (ARK001)</strong> - 8755687268</p>
         </div>
     </footer>
 
@@ -121,11 +109,8 @@
 
         function submitRegistration(event) {
             event.preventDefault();
-            
             const name = document.getElementById('fullName').value;
-            
-            alert(`धन्यवाद ${name}! आपका पंजीकरण भेज दिया गया है।\nकिसी भी समस्या के लिए संपर्क करें: 8755687268`);
-            
+            alert(`धन्यवाद ${name}! आपका पंजीकरण भेज दिया गया है।`);
             document.getElementById('masonRegForm').reset();
         }
     </script>
