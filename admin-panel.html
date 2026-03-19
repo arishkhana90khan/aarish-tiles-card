@@ -5,30 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aarish Tiles - Admin Panel</title>
     
-    <!-- Firebase SDK (v9 Compat) -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
-    
-    <!-- Firebase Config -->
     <script src="firebase.js"></script>
-    
     <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .warning-badge {
+            background: #dc3545;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            margin-left: 5px;
+        }
+    </style>
 </head>
 <body>
-    <!-- Contact Bar - Owner Information -->
     <div class="contact-bar">
         <div class="container">
-            <div class="contact-item">
-                📞 <a href="tel:8755687268">8755687268</a> | <a href="tel:9528340961">9528340961</a>
-            </div>
-            <div class="contact-item">
-                📧 <a href="mailto:arishkhana90@gmail.com">arishkhana90@gmail.com</a>
-            </div>
-            <div class="contact-item">
-                📷 <a href="https://instagram.com/arishkhan3992__" target="_blank">@arishkhan3992__</a>
-            </div>
+            <div class="contact-item">📞 <a href="tel:8755687268">8755687268</a> | <a href="tel:9528340961">9528340961</a></div>
+            <div class="contact-item">📧 <a href="mailto:arishkhana90@gmail.com">arishkhana90@gmail.com</a></div>
+            <div class="contact-item">📷 <a href="https://instagram.com/arishkhan3992__" target="_blank">@arishkhan3992__</a></div>
         </div>
     </div>
 
@@ -41,6 +41,7 @@
                 <li><a href="find-mason.html">🔨 Find Mason</a></li>
                 <li><a href="mason-register.html">👷 Mason Register</a></li>
                 <li><a href="tiles-catalog.html">🧱 Tiles Catalog</a></li>
+                <li><a href="tile-calculator.html">🧮 Calculator</a></li>
                 <li><a href="admin-login.html">⚙️ Admin</a></li>
             </ul>
         </div>
@@ -48,13 +49,23 @@
 
     <div class="container">
         <h1 class="mt-3">⚙️ एडमिन पैनल</h1>
-        <p>स्वागत है, एडमिन! यहाँ से सब कुछ मैनेज करें।</p>
-        <p style="color: var(--primary);">संचालक: अरिश खान (8755687268) | arishkhana90@gmail.com</p>
+        <p>स्वागत है, <strong>अरिश खान (ARK001)</strong>!</p>
+
+        <!-- Security Check -->
+        <script>
+            if (!isAdminLoggedIn()) {
+                window.location.href = 'admin-login.html';
+            }
+        </script>
+
+        <div style="background: #d4edda; color: #155724; padding: 1rem; border-radius: var(--border-radius); margin-bottom: 1rem;">
+            <strong>✅ आप लॉगिन हैं!</strong> आपका Owner ID: ARK001 सत्यापित हुआ।
+        </div>
 
         <div class="admin-grid">
             <!-- Approve Mason Section -->
             <div class="admin-card">
-                <h3>✅ मिस्त्री स्वीकृति (2 पेंडिंग)</h3>
+                <h3>✅ मिस्त्री स्वीकृति <span class="warning-badge">2 नए</span></h3>
                 <div style="margin: 1rem 0;">
                     <p><strong>रमेश कुमार</strong> - 8 वर्ष, औरंगाबाद</p>
                     <div style="display: flex; gap: 0.5rem;">
@@ -69,7 +80,7 @@
                         <button class="btn btn-secondary" style="flex: 1;">❌ अस्वीकारें</button>
                     </div>
                 </div>
-                <button class="btn btn-outline" style="width: 100%;">सभी पेंडिंग देखें</button>
+                <button class="btn btn-outline" style="width: 100%;">सभी देखें</button>
             </div>
 
             <!-- Add Tiles Section -->
@@ -79,7 +90,7 @@
                     <input type="text" class="form-control" placeholder="टाइल का नाम">
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="साइज़ (जैसे: 2x2 फुट)">
+                    <input type="text" class="form-control" placeholder="साइज़ (जैसे: 2x2)">
                 </div>
                 <div class="form-group">
                     <input type="number" class="form-control" placeholder="कीमत प्रति वर्ग फुट">
@@ -90,49 +101,31 @@
                 <button class="btn btn-primary" style="width: 100%;">टाइल जोड़ें</button>
             </div>
 
-            <!-- View Reviews Section -->
+            <!-- Reviews Section -->
             <div class="admin-card">
                 <h3>📝 हाल की समीक्षाएँ</h3>
                 <div class="review-item">
-                    <strong>राहुल:</strong> प्रीमियम टाइल - "बहुत अच्छी क्वालिटी" ⭐⭐⭐⭐⭐
+                    <strong>राहुल:</strong> प्रीमियम टाइल - "बहुत अच्छी" ⭐⭐⭐⭐⭐
                 </div>
                 <div class="review-item">
-                    <strong>सीमा:</strong> बाथ टाइल - "वाटरप्रूफ बढ़िया है" ⭐⭐⭐⭐
+                    <strong>सीमा:</strong> बाथ टाइल - "वाटरप्रूफ बढ़िया" ⭐⭐⭐⭐
                 </div>
                 <div class="review-item">
-                    <strong>अमित:</strong> किचन टाइल - "ऑयल प्रूफ सही काम करता है" ⭐⭐⭐⭐⭐
-                </div>
-                <button class="btn btn-outline" style="width: 100%; margin-top: 1rem;">सभी रिव्यू देखें</button>
-            </div>
-
-            <!-- Bonus Progress Section -->
-            <div class="admin-card">
-                <h3>💰 बोनस प्रोग्रेस</h3>
-                <p>इस महीने का टार्गेट: 500 टाइल्स</p>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 65%;"></div>
-                </div>
-                <p>बेचे गए: 325 टाइल्स (65%)</p>
-                
-                <p style="margin-top: 1rem;">नए मिस्त्री जॉइन: 12/20</p>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 60%;"></div>
-                </div>
-                
-                <p style="margin-top: 1rem;">अर्जित बोनस: ₹4,500</p>
-                <button class="btn btn-primary" style="width: 100%;">बोनस क्लेम करें</button>
-            </div>
-
-            <!-- All Masons Section -->
-            <div class="admin-card">
-                <h3>👷 सभी मिस्त्री</h3>
-                <div style="max-height: 200px; overflow-y: auto;">
-                    <p>राम कुमार - औरंगाबाद (स्वीकृत)</p>
-                    <p>सुरेश यादव - पटना (पेंडिंग)</p>
-                    <p>मोहन शर्मा - गया (स्वीकृत)</p>
-                    <p>दिनेश साह - मुजफ्फरपुर (स्वीकृत)</p>
+                    <strong>अमित:</strong> किचन टाइल - "ऑयल प्रूफ सही" ⭐⭐⭐⭐⭐
                 </div>
                 <button class="btn btn-outline" style="width: 100%; margin-top: 1rem;">सभी देखें</button>
+            </div>
+
+            <!-- Bonus Progress -->
+            <div class="admin-card">
+                <h3>💰 बोनस प्रोग्रेस</h3>
+                <p>मासिक टार्गेट: 500 टाइल्स</p>
+                <div class="progress-bar"><div class="progress-fill" style="width: 65%;"></div></div>
+                <p>बिक्री: 325 टाइल्स (65%)</p>
+                <p>नए मिस्त्री: 12/20</p>
+                <div class="progress-bar"><div class="progress-fill" style="width: 60%;"></div></div>
+                <p>बोनस: ₹4,500</p>
+                <button class="btn btn-primary" style="width: 100%;">बोनस क्लेम करें</button>
             </div>
 
             <!-- Owner Info Card -->
@@ -141,34 +134,28 @@
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                     <div>
                         <p><strong>नाम:</strong> अरिश खान</p>
-                        <p><strong>फोन 1:</strong> 8755687268</p>
-                        <p><strong>फोन 2:</strong> 9528340961</p>
+                        <p><strong>Owner ID:</strong> ARK001</p>
+                        <p><strong>फोन:</strong> 8755687268, 9528340961</p>
                     </div>
                     <div>
                         <p><strong>Email:</strong> arishkhana90@gmail.com</p>
                         <p><strong>Instagram:</strong> @arishkhan3992__</p>
+                        <p><strong>Owner Key:</strong> arish@tiles#2024</p>
                         <button class="btn btn-outline" onclick="openInstagram()">Instagram खोलें</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Test Connection Button (अभी के लिए) -->
-    <div style="position: fixed; bottom: 10px; right: 10px; z-index: 9999;">
-        <button onclick="testFirebaseConnection().then(result => alert(result.message))" 
-                style="background: var(--primary); color: white; border: none; padding: 10px 15px; border-radius: 50px; font-size: 14px; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.2);">
-            🔌 Test Firebase
-        </button>
+        <div style="text-align: center; margin: 2rem 0;">
+            <button class="btn btn-secondary" onclick="adminLogout()">🚪 लॉगआउट</button>
+        </div>
     </div>
 
     <footer>
         <div class="container">
             <p>&copy; 2024 Aarish Tiles Network</p>
-            <p><strong>अरिश खान</strong> - 8755687268 | arishkhana90@gmail.com</p>
-            <div class="social-links">
-                <a href="https://instagram.com/arishkhan3992__" target="_blank">📷 Instagram</a>
-            </div>
+            <p><strong>अरिश खान (ARK001)</strong> - 8755687268</p>
         </div>
     </footer>
 
