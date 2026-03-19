@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <li><a href="tile-calculator.html">🧮 Calculator</a></li>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <meta name="description" content="Aarish Tiles Network - अपने शहर में मिस्त्री खोजें, टाइल्स खरीदें, या मिस्त्री बनें">
     <title>Aarish Tiles Network - Home</title>
     
-    <!-- Firebase SDK (v9 Compat) -->
+    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
@@ -45,6 +44,7 @@
                 <li><a href="find-mason.html">🔨 Find Mason</a></li>
                 <li><a href="mason-register.html">👷 Mason Register</a></li>
                 <li><a href="tiles-catalog.html">🧱 Tiles Catalog</a></li>
+                <li><a href="tile-calculator.html">🧮 Calculator</a></li>
                 <li><a href="admin-login.html">⚙️ Admin</a></li>
             </ul>
         </div>
@@ -55,11 +55,12 @@
         <div class="container">
             <h1>Aarish Tiles Network</h1>
             <p>आपका विश्वसनीय टाइल्स और मिस्त्री नेटवर्क। गाँव से शहर तक, हर जगह।</p>
-            <p><strong>संचालक: अरिश खान</strong></p>
+            <p><strong>संचालक: अरिश खान (Owner ID: ARK001)</strong></p>
             <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 1rem;">
                 <a href="find-mason.html" class="btn btn-primary">🔨 Find Mason</a>
                 <a href="mason-register.html" class="btn btn-secondary">👷 Register as Mason</a>
                 <a href="tiles-catalog.html" class="btn btn-outline">🧱 View Tiles</a>
+                <a href="tile-calculator.html" class="btn btn-outline">🧮 Calculator</a>
             </div>
             <div style="margin-top: 1.5rem;">
                 <button onclick="whatsappOwner()" class="btn btn-outline" style="background: #25D366; color: white; border: none;">📱 WhatsApp</button>
@@ -80,7 +81,6 @@
     <!-- Features Section -->
     <section class="container mt-4 mb-4">
         <div class="card-grid">
-            <!-- Find Mason Card -->
             <div class="card">
                 <div class="card-content text-center">
                     <div style="font-size: 3rem; margin-bottom: 1rem;">🔍</div>
@@ -90,7 +90,6 @@
                 </div>
             </div>
 
-            <!-- Mason Register Card -->
             <div class="card">
                 <div class="card-content text-center">
                     <div style="font-size: 3rem; margin-bottom: 1rem;">👷</div>
@@ -100,13 +99,21 @@
                 </div>
             </div>
 
-            <!-- Tiles Catalog Card -->
             <div class="card">
                 <div class="card-content text-center">
                     <div style="font-size: 3rem; margin-bottom: 1rem;">🧱</div>
                     <h3>टाइल्स कैटलॉग</h3>
                     <p>विभिन्न साइज़ और कीमतों में टाइल्स देखें। WhatsApp से ऑर्डर करें।</p>
                     <a href="tiles-catalog.html" class="btn btn-outline" style="margin-top: 1rem;">देखें</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-content text-center">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🧮</div>
+                    <h3>टाइल कैलकुलेटर</h3>
+                    <p>अपनी जरूरत के अनुसार टाइल्स की गणना करें। पेटी और वर्ग फुट निकालें।</p>
+                    <a href="tile-calculator.html" class="btn btn-outline" style="margin-top: 1rem;">कैलकुलेट करें</a>
                 </div>
             </div>
         </div>
@@ -116,41 +123,35 @@
     <section class="container mt-4 mb-4">
         <h2 class="text-center mb-3">लोकप्रिय टाइल्स</h2>
         <div class="card-grid">
-            <!-- Tile 1 Preview -->
             <div class="card">
                 <div class="tile-image">🏢</div>
                 <div class="card-content">
                     <h3>प्रीमियम फ्लोर टाइल</h3>
-                    <p class="tile-size">साइज़: 2x2 फुट (60x60 cm)</p>
+                    <p class="tile-size">साइज़: 2x2 फुट</p>
                     <p class="tile-price">₹65 / वर्ग फुट</p>
                     <a href="tiles-catalog.html" class="btn btn-outline">देखें</a>
                 </div>
             </div>
 
-            <!-- Tile 2 Preview -->
             <div class="card">
                 <div class="tile-image">🚿</div>
                 <div class="card-content">
                     <h3>वाटरप्रूफ बाथ टाइल</h3>
-                    <p class="tile-size">साइज़: 1x1 फुट (30x30 cm)</p>
+                    <p class="tile-size">साइज़: 1x1 फुट</p>
                     <p class="tile-price">₹45 / वर्ग फुट</p>
                     <a href="tiles-catalog.html" class="btn btn-outline">देखें</a>
                 </div>
             </div>
 
-            <!-- Tile 3 Preview -->
             <div class="card">
                 <div class="tile-image">🍳</div>
                 <div class="card-content">
                     <h3>ऑयल-प्रूफ किचन टाइल</h3>
-                    <p class="tile-size">साइज़: 1x2 फुट (30x60 cm)</p>
+                    <p class="tile-size">साइज़: 12x18 इंच</p>
                     <p class="tile-price">₹55 / वर्ग फुट</p>
                     <a href="tiles-catalog.html" class="btn btn-outline">देखें</a>
                 </div>
             </div>
-        </div>
-        <div class="text-center mt-3">
-            <a href="tiles-catalog.html" class="btn btn-primary">सभी टाइल्स देखें</a>
         </div>
     </section>
 
@@ -171,7 +172,7 @@
         </div>
     </section>
 
-    <!-- Test Connection Button (अभी के लिए) -->
+    <!-- Test Connection Button -->
     <div style="position: fixed; bottom: 10px; right: 10px; z-index: 9999;">
         <button onclick="testFirebaseConnection().then(result => alert(result.message))" 
                 style="background: var(--primary); color: white; border: none; padding: 10px 15px; border-radius: 50px; font-size: 14px; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.2);">
@@ -179,11 +180,10 @@
         </button>
     </div>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <p>&copy; 2024 Aarish Tiles Network</p>
-            <p><strong>अरिश खान</strong> - संचालक</p>
+            <p><strong>अरिश खान (ARK001)</strong> - संचालक</p>
             <div class="social-links">
                 <a href="tel:8755687268">📞</a>
                 <a href="tel:9528340961">📞</a>
@@ -191,14 +191,9 @@
                 <a href="https://instagram.com/arishkhan3992__" target="_blank">📷</a>
                 <a href="#" onclick="whatsappOwner()">📱</a>
             </div>
-            <p style="margin-top: 1rem; font-size: 0.9rem;">
-                📍 गाँव से शहर तक, हर जगह<br>
-                मोबाइल फ्रेंडली | तेज़ लोडिंग | सुरक्षित
-            </p>
         </div>
     </footer>
 
-    <!-- Mobile Menu Toggle Script -->
     <script>
         function toggleMenu() {
             const menu = document.getElementById('navMenu');
@@ -207,12 +202,10 @@
 
         document.addEventListener('click', function(event) {
             const menu = document.getElementById('navMenu');
-            const hamburger = document.querySelector('.hamburger');
-            
             if (!event.target.closest('.navbar') && menu.classList.contains('active')) {
                 menu.classList.remove('active');
             }
         });
     </script>
 </body>
-                                                                                                                                                          </html>
+</html>                                                                                                                            
