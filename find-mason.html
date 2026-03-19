@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aarish Tiles - Find Mason</title>
     
-    <!-- Firebase SDK (v9 Compat) -->
+    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Contact Bar - Owner Information -->
     <div class="contact-bar">
         <div class="container">
             <div class="contact-item">
@@ -41,6 +40,7 @@
                 <li><a href="find-mason.html">🔨 Find Mason</a></li>
                 <li><a href="mason-register.html">👷 Mason Register</a></li>
                 <li><a href="tiles-catalog.html">🧱 Tiles Catalog</a></li>
+                <li><a href="tile-calculator.html">🧮 Calculator</a></li>
                 <li><a href="admin-login.html">⚙️ Admin</a></li>
             </ul>
         </div>
@@ -49,9 +49,8 @@
     <div class="container">
         <h1 class="text-center mt-3">🔨 मिस्त्री खोजें</h1>
         <p class="text-center">अपने गाँव या शहर में अनुभवी मिस्त्री खोजें</p>
-        <p class="text-center" style="color: var(--primary);">संचालक: अरिश खान (8755687268)</p>
+        <p class="text-center" style="color: var(--primary);">संचालक: अरिश खान (ARK001) - 8755687268</p>
 
-        <!-- Search Box -->
         <div class="search-box">
             <div class="search-input-group">
                 <input type="text" class="search-input" id="searchCity" placeholder="गाँव या शहर का नाम दर्ज करें...">
@@ -59,10 +58,8 @@
             </div>
         </div>
 
-        <!-- Mason Cards Grid -->
         <h2 class="mb-2">उपलब्ध मिस्त्री</h2>
         <div class="card-grid" id="masonGrid">
-            <!-- Mason Card 1 -->
             <div class="card mason-card">
                 <div class="card-content">
                     <h3 class="mason-name">रामप्रसाद यादव</h3>
@@ -74,7 +71,6 @@
                 </div>
             </div>
 
-            <!-- Mason Card 2 -->
             <div class="card mason-card">
                 <div class="card-content">
                     <h3 class="mason-name">सुरेश कुमार</h3>
@@ -86,7 +82,6 @@
                 </div>
             </div>
 
-            <!-- Mason Card 3 -->
             <div class="card mason-card">
                 <div class="card-content">
                     <h3 class="mason-name">मोहन शर्मा</h3>
@@ -97,22 +92,9 @@
                     <button class="btn btn-outline" style="width: 100%; margin-top: 1rem;" onclick="whatsappOwner('मोहन शर्मा से संपर्क करना है')">📞 कॉन्टैक्ट करें</button>
                 </div>
             </div>
-
-            <!-- Mason Card 4 -->
-            <div class="card mason-card">
-                <div class="card-content">
-                    <h3 class="mason-name">दिनेश साह</h3>
-                    <p class="mason-experience">⭐ 12 वर्ष का अनुभव</p>
-                    <div class="rating">★★★★★ (4.9)</div>
-                    <p>📍 गाँव: मुजफ्फरपुर, बिहार</p>
-                    <p>🛠️ विशेषता: किचन टाइल्स</p>
-                    <button class="btn btn-outline" style="width: 100%; margin-top: 1rem;" onclick="whatsappOwner('दिनेश साह से संपर्क करना है')">📞 कॉन्टैक्ट करें</button>
-                </div>
-            </div>
         </div>
     </div>
 
-    <!-- Test Connection Button (अभी के लिए) -->
     <div style="position: fixed; bottom: 10px; right: 10px; z-index: 9999;">
         <button onclick="testFirebaseConnection().then(result => alert(result.message))" 
                 style="background: var(--primary); color: white; border: none; padding: 10px 15px; border-radius: 50px; font-size: 14px; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.2);">
@@ -123,7 +105,7 @@
     <footer>
         <div class="container">
             <p>&copy; 2024 Aarish Tiles Network</p>
-            <p><strong>अरिश खान</strong> - 8755687268</p>
+            <p><strong>अरिश खान (ARK001)</strong> - 8755687268</p>
         </div>
     </footer>
 
@@ -135,7 +117,7 @@
         function searchMasons() {
             const city = document.getElementById('searchCity').value;
             if (city) {
-                alert(`'${city}' में मिस्त्री खोज रहे हैं... (डेटाबेस कनेक्ट होने पर काम करेगा)`);
+                alert(`'${city}' में मिस्त्री खोज रहे हैं...`);
             } else {
                 alert('कृपया गाँव या शहर का नाम दर्ज करें');
             }
