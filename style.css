@@ -1,6 +1,4 @@
 /* ==================== Aarish Tiles Network - Complete CSS ==================== */
-/* Mobile First Design - फिर Tablet और Desktop के लिए */
-
 * {
     margin: 0;
     padding: 0;
@@ -117,7 +115,6 @@ body {
     padding-left: 1rem;
 }
 
-/* Desktop Navigation */
 @media (min-width: 768px) {
     .hamburger {
         display: none;
