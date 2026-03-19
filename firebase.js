@@ -9,6 +9,14 @@ const OWNER_INFO = {
     instagramUrl: "https://instagram.com/arishkhan3992__"
 };
 
+// Admin Login Credentials (यही आपका लॉक है)
+const ADMIN_CREDENTIALS = {
+    username: "arishadmin",
+    password: "aarish@123",
+    ownerId: "ARK001",
+    ownerKey: "arish@tiles#2024"
+};
+
 // Firebase Configuration
 const firebaseConfig = {
     apiKey: "AIzaSyB-_sy4cKvvDjz0R4CNj84kejcjqsyBVsM",
@@ -24,42 +32,21 @@ const firebaseConfig = {
 let app, db, auth, storage;
 
 try {
-    // Check if Firebase SDK is loaded
     if (typeof firebase !== 'undefined') {
         console.log('✅ Firebase SDK loaded');
         
-        // Initialize Firebase App
         app = firebase.initializeApp(firebaseConfig);
-        console.log('✅ Firebase App initialized');
-        
-        // Initialize Firestore
         db = firebase.firestore();
-        console.log('✅ Firestore initialized');
-        
-        // Initialize Auth (for future use)
         auth = firebase.auth();
-        console.log('✅ Firebase Auth initialized');
-        
-        // Initialize Storage (for future use)
         storage = firebase.storage();
-        console.log('✅ Firebase Storage initialized');
         
-        // Enable offline persistence for mobile
         db.enablePersistence({
             synchronizeTabs: true
         })
-        .then(() => {
-            console.log('✅ Offline persistence enabled');
-        })
-        .catch((err) => {
-            if (err.code === 'failed-precondition') {
-                console.warn('⚠️ Multiple tabs open - offline in one tab only');
-            } else if (err.code === 'unimplemented') {
-                console.warn('⚠️ Browser doesn\'t support offline');
-            }
-        });
+        .then(() => console.log('✅ Offline mode enabled'))
+        .catch(err => console.warn('⚠️ Offline mode error:', err));
         
-        console.log('🚀 Firebase Ready!');
+        console.log('✅ Firebase Ready!');
         console.log('👤 Owner:', OWNER_INFO.name);
         
     } else {
@@ -74,53 +61,26 @@ window.db = db;
 window.auth = auth;
 window.storage = storage;
 window.OWNER_INFO = OWNER_INFO;
+window.ADMIN_CREDENTIALS = ADMIN_CREDENTIALS;
 
 // ==================== Utility Functions ====================
 
 // Test Firebase Connection
 window.testFirebaseConnection = async function() {
     try {
-        if (!db) {
-            throw new Error('Firestore not initialized');
-        }
+        if (!db) throw new Error('Firestore not initialized');
         
-        // Try to write a test document
         const testRef = await db.collection('_connection_tests').add({
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             message: 'Connection test',
             userAgent: navigator.userAgent
         });
         
-        // Read it back
-        const testDoc = await testRef.get();
-        
-        if (testDoc.exists) {
-            console.log('✅ Test document written and read successfully');
-            
-            // Delete test document (cleanup)
-            await testRef.delete();
-            console.log('✅ Test document cleaned up');
-            
-            return {
-                success: true,
-                message: '✅ Firebase is working perfectly!'
-            };
-        } else {
-            throw new Error('Test document not found');
-        }
-        
+        await testRef.delete();
+        return { success: true, message: '✅ Firebase is working perfectly!' };
     } catch (error) {
-        console.error('❌ Firebase connection test failed:', error);
-        return {
-            success: false,
-            message: '❌ Firebase error: ' + error.message
-        };
+        return { success: false, message: '❌ Firebase error: ' + error.message };
     }
-};
-
-// Get Server Timestamp
-window.getServerTimestamp = function() {
-    return firebase.firestore.FieldValue.serverTimestamp();
 };
 
 // Contact Functions
@@ -142,8 +102,34 @@ window.whatsappOwner = function(message = '') {
     window.open(`https://wa.me/${OWNER_INFO.phone1}?text=${msg}`, '_blank');
 };
 
+// Admin Login Function
+window.adminLogin = function(username, password, ownerId, ownerKey) {
+    if (username === ADMIN_CREDENTIALS.username && 
+        password === ADMIN_CREDENTIALS.password &&
+        ownerId === ADMIN_CREDENTIALS.ownerId &&
+        ownerKey === ADMIN_CREDENTIALS.ownerKey) {
+        
+        sessionStorage.setItem('adminLoggedIn', 'true');
+        sessionStorage.setItem('adminName', 'Arish Khan');
+        return { success: true, message: 'लॉगिन सफल!' };
+    } else {
+        return { success: false, message: '❌ गलत क्रेडेंशियल्स!' };
+    }
+};
+
+// Check if admin is logged in
+window.isAdminLoggedIn = function() {
+    return sessionStorage.getItem('adminLoggedIn') === 'true';
+};
+
+// Admin Logout
+window.adminLogout = function() {
+    sessionStorage.removeItem('adminLoggedIn');
+    sessionStorage.removeItem('adminName');
+    window.location.href = 'admin-login.html';
+};
+
 // ==================== Firestore References ====================
-// Collections
 window.COLLECTIONS = {
     MASONS: 'masons',
     TILES: 'tiles',
@@ -153,22 +139,5 @@ window.COLLECTIONS = {
     SETTINGS: 'settings'
 };
 
-// Helper function to get collection reference
-window.getCollection = function(collectionName) {
-    if (!db) {
-        console.error('Firestore not initialized');
-        return null;
-    }
-    return db.collection(collectionName);
-};
-
-// Helper function to get document reference
-window.getDocument = function(collectionName, docId) {
-    if (!db) {
-        console.error('Firestore not initialized');
-        return null;
-    }
-    return db.collection(collectionName).doc(docId);
-};
-
 console.log('📦 Firebase module loaded with all utilities');
+console.log('🔐 Admin Lock Credentials are set');
