@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aarish Tiles - Tiles Catalog</title>
-    
+    <title>Aarish Tiles – Catalog</title>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
@@ -13,150 +12,66 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="contact-bar">
-        <div class="container">
-            <div class="contact-item">📞 <a href="tel:8755687268">8755687268</a> | <a href="tel:9528340961">9528340961</a></div>
-            <div class="contact-item">📧 <a href="mailto:arishkhana90@gmail.com">arishkhana90@gmail.com</a></div>
-            <div class="contact-item">📷 <a href="https://instagram.com/arishkhan3992__" target="_blank">@arishkhan3992__</a></div>
-        </div>
-    </div>
-
-    <nav class="navbar">
-        <div class="container">
-            <a href="index.html" class="logo">Aarish <span>Tiles</span></a>
-            <div class="hamburger" onclick="toggleMenu()">☰</div>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html">🏠 Home</a></li>
-                <li><a href="find-mason.html">🔨 Find Mason</a></li>
-                <li><a href="mason-register.html">👷 Mason Register</a></li>
-                <li><a href="tiles-catalog.html">🧱 Tiles Catalog</a></li>
-                <li><a href="tile-calculator.html">🧮 Calculator</a></li>
-                <li><a href="admin-login.html">⚙️ Admin</a></li>
-            </ul>
-        </div>
-    </nav>
-
+    <div class="contact-bar"><div class="container">
+        <div class="contact-item">📞 <a href="tel:8755687268">8755687268</a> | <a href="tel:9528340961">9528340961</a></div>
+        <div class="contact-item">📧 <a href="mailto:arishkhana90@gmail.com">arishkhana90@gmail.com</a></div>
+        <div class="contact-item">📷 <a href="https://www.instagram.com/arishkhan3992__" target="_blank">@arishkhan3992__</a></div>
+    </div></div>
+    <nav class="navbar"><div class="container">
+        <a href="index.html" class="logo">Aarish <span>Tiles</span></a>
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="index.html">🏠 Home</a></li>
+            <li><a href="find-mason.html">🔨 Find Mason</a></li>
+            <li><a href="mason-register.html">👷 Mason Register</a></li>
+            <li><a href="tiles-catalog.html">🧱 Tiles Catalog</a></li>
+            <li><a href="tile-calculator.html">🧮 Calculator</a></li>
+            <li><a href="admin-login.html">⚙️ Admin</a></li>
+        </ul>
+    </div></nav>
     <div class="container">
         <h1 class="text-center mt-3">🧱 हमारे टाइल्स</h1>
-        <p class="text-center mb-3">बेहतरीन क्वालिटी, किफायती दाम</p>
-        <p class="text-center" style="color: var(--primary);">संचालक: अरिश खान (ARK001) - 8755687268</p>
-
-        <div class="card-grid">
-            <!-- Tile 1 -->
-            <div class="card">
-                <div class="tile-image">🏢</div>
-                <div class="card-content">
-                    <h3>प्रीमियम फ्लोर टाइल</h3>
-                    <p class="tile-size">साइज़: 2x2 फुट</p>
-                    <p class="tile-price">₹65 / वर्ग फुट</p>
-                    <p class="tile-size">📦 1 पेटी = 16 वर्ग फुट (4 टाइल्स)</p>
-                    
-                    <div class="review-section">
-                        <div class="rating">★★★★☆ (4.2) - 23 रिव्यू</div>
-                        <input type="text" class="review-input" placeholder="रिव्यू लिखें...">
-                        <button class="btn btn-outline" style="width: 100%; margin-top: 0.5rem;">📝 रिव्यू दें</button>
-                    </div>
-                    
-                    <button class="whatsapp-btn" style="margin-top: 1rem;" onclick="whatsappOwner('प्रीमियम फ्लोर टाइल ऑर्डर करना है')">📱 WhatsApp ऑर्डर</button>
-                </div>
-            </div>
-
-            <!-- Tile 2 -->
-            <div class="card">
-                <div class="tile-image">🚿</div>
-                <div class="card-content">
-                    <h3>वाटरप्रूफ बाथ टाइल</h3>
-                    <p class="tile-size">साइज़: 1x1 फुट</p>
-                    <p class="tile-price">₹45 / वर्ग फुट</p>
-                    <p class="tile-size">📦 1 पेटी = 12 वर्ग फुट (12 टाइल्स)</p>
-                    
-                    <div class="review-section">
-                        <div class="rating">★★★★☆ (4.5) - 15 रिव्यू</div>
-                        <input type="text" class="review-input" placeholder="रिव्यू लिखें...">
-                        <button class="btn btn-outline" style="width: 100%; margin-top: 0.5rem;">📝 रिव्यू दें</button>
-                    </div>
-                    
-                    <button class="whatsapp-btn" style="margin-top: 1rem;" onclick="whatsappOwner('वाटरप्रूफ बाथ टाइल ऑर्डर करना है')">📱 WhatsApp ऑर्डर</button>
-                </div>
-            </div>
-
-            <!-- Tile 3 -->
-            <div class="card">
-                <div class="tile-image">🍳</div>
-                <div class="card-content">
-                    <h3>किचन टाइल</h3>
-                    <p class="tile-size">साइज़: 12x18 इंच</p>
-                    <p class="tile-price">₹55 / वर्ग फुट</p>
-                    <p class="tile-size">📦 1 पेटी = 8.5 वर्ग फुट (6 टाइल्स)</p>
-                    
-                    <div class="review-section">
-                        <div class="rating">★★★★★ (5.0) - 32 रिव्यू</div>
-                        <input type="text" class="review-input" placeholder="रिव्यू लिखें...">
-                        <button class="btn btn-outline" style="width: 100%; margin-top: 0.5rem;">📝 रिव्यू दें</button>
-                    </div>
-                    
-                    <button class="whatsapp-btn" style="margin-top: 1rem;" onclick="whatsappOwner('किचन टाइल ऑर्डर करना है')">📱 WhatsApp ऑर्डर</button>
-                </div>
-            </div>
-
-            <!-- Tile 4 -->
-            <div class="card">
-                <div class="tile-image">📏</div>
-                <div class="card-content">
-                    <h3>लार्ज फॉर्मेट टाइल</h3>
-                    <p class="tile-size">साइज़: 2x4 फुट</p>
-                    <p class="tile-price">₹80 / वर्ग फुट</p>
-                    <p class="tile-size">📦 1 पेटी = 16 वर्ग फुट (2 टाइल्स)</p>
-                    
-                    <div class="review-section">
-                        <div class="rating">★★★★☆ (4.8) - 8 रिव्यू</div>
-                        <input type="text" class="review-input" placeholder="रिव्यू लिखें...">
-                        <button class="btn btn-outline" style="width: 100%; margin-top: 0.5rem;">📝 रिव्यू दें</button>
-                    </div>
-                    
-                    <button class="whatsapp-btn" style="margin-top: 1rem;" onclick="whatsappOwner('लार्ज फॉर्मेट टाइल ऑर्डर करना है')">📱 WhatsApp ऑर्डर</button>
-                </div>
-            </div>
-
-            <!-- Tile 5 -->
-            <div class="card">
-                <div class="tile-image">🏛️</div>
-                <div class="card-content">
-                    <h3>मार्बल फिनिश टाइल</h3>
-                    <p class="tile-size">साइज़: 2.5x5 फुट</p>
-                    <p class="tile-price">₹95 / वर्ग फुट</p>
-                    <p class="tile-size">📦 1 पेटी = 28 वर्ग फुट (2 टाइल्स)</p>
-                    
-                    <div class="review-section">
-                        <div class="rating">★★★★★ (4.9) - 12 रिव्यू</div>
-                        <input type="text" class="review-input" placeholder="रिव्यू लिखें...">
-                        <button class="btn btn-outline" style="width: 100%; margin-top: 0.5rem;">📝 रिव्यू दें</button>
-                    </div>
-                    
-                    <button class="whatsapp-btn" style="margin-top: 1rem;" onclick="whatsappOwner('मार्बल फिनिश टाइल ऑर्डर करना है')">📱 WhatsApp ऑर्डर</button>
-                </div>
-            </div>
-        </div>
+        <p class="text-center">बेहतरीन क्वालिटी, किफायती दाम।</p>
+        <div id="tilesGrid" class="card-grid"></div>
     </div>
-
-    <div style="position: fixed; bottom: 10px; right: 10px; z-index: 9999;">
-        <button onclick="testFirebaseConnection().then(result => alert(result.message))" 
-                style="background: var(--primary); color: white; border: none; padding: 10px 15px; border-radius: 50px; font-size: 14px; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.2);">
-            🔌 Test Firebase
-        </button>
-    </div>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Aarish Tiles Network</p>
-            <p><strong>अरिश खान (ARK001)</strong> - 8755687268</p>
-        </div>
-    </footer>
-
+    <div style="position:fixed; bottom:10px; right:10px;"><button onclick="testFirebaseConnection().then(r=>alert(r.message))" style="background:var(--primary); color:white; border:none; padding:10px 15px; border-radius:50px;">🔌 Test</button></div>
+    <footer><div class="container"><p>&copy; 2024 Aarish Tiles Network</p><p><strong>अरिश खान</strong> - 8755687268</p></div></footer>
     <script>
-        function toggleMenu() {
-            document.getElementById('navMenu').classList.toggle('active');
+        function toggleMenu(){document.getElementById('navMenu').classList.toggle('active');}
+        async function loadTiles(){
+            const container = document.getElementById('tilesGrid');
+            container.innerHTML = '<div class="text-center">⏳ लोड हो रहा...</div>';
+            try{
+                const snap = await db.collection('tiles').orderBy('createdAt','desc').get();
+                if(snap.empty){ container.innerHTML = '<div class="text-center">❌ अभी कोई टाइल नहीं है।</div>'; return; }
+                let html = '';
+                snap.forEach(doc=>{
+                    const t = doc.data();
+                    html += `<div class="card"><div class="tile-image">${t.imageIcon || '🧱'}</div><div class="card-content">
+                    <h3>${t.name}</h3><p class="tile-size">साइज़: ${t.size}</p><p class="tile-price">₹${t.price}/वर्ग फुट</p>
+                    <div class="review-section"><div class="rating">★★★★☆ (${t.reviewCount||0} रिव्यू)</div>
+                    <input type="text" class="review-input" id="rev_${doc.id}" placeholder="अपनी राय लिखें...">
+                    <button class="btn btn-outline" style="width:100%; margin-top:0.5rem;" onclick="addReview('${doc.id}','${t.name}')">📝 रिव्यू दें</button></div>
+                    <button class="whatsapp-btn" style="margin-top:1rem;" onclick="whatsappOwner('${t.name} ऑर्डर करना है')">📱 WhatsApp ऑर्डर</button>
+                    </div></div>`;
+                });
+                container.innerHTML = html;
+            }catch(e){ container.innerHTML = '<div class="text-center">❌ त्रुटि: '+e.message+'</div>'; }
         }
+        window.addReview = async (tileId, tileName)=>{
+            const comment = document.getElementById(`rev_${tileId}`).value.trim();
+            if(!comment){ alert('कृपया रिव्यू लिखें'); return; }
+            try{
+                await db.collection('reviews').add({
+                    tileId, tileName, comment,
+                    rating: 4,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                alert('धन्यवाद! रिव्यू भेज दिया गया।');
+                document.getElementById(`rev_${tileId}`).value = '';
+            }catch(e){ alert('त्रुटि: '+e.message); }
+        };
+        window.addEventListener('load', loadTiles);
     </script>
 </body>
 </html>
