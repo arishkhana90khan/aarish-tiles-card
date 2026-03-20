@@ -3,125 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aarish Tiles - Find Mason</title>
-    
-    <!-- Firebase SDK -->
+    <title>Aarish Tiles – Find Mason</title>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
-    
-    <!-- Firebase Config -->
     <script src="firebase.js"></script>
-    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="contact-bar">
-        <div class="container">
-            <div class="contact-item">
-                📞 <a href="tel:8755687268">8755687268</a> | <a href="tel:9528340961">9528340961</a>
-            </div>
-            <div class="contact-item">
-                📧 <a href="mailto:arishkhana90@gmail.com">arishkhana90@gmail.com</a>
-            </div>
-            <div class="contact-item">
-                📷 <a href="https://instagram.com/arishkhan3992__" target="_blank">@arishkhan3992__</a>
-            </div>
-        </div>
-    </div>
+    <div class="contact-bar"><div class="container">
+        <div class="contact-item">📞 <a href="tel:8755687268">8755687268</a> | <a href="tel:9528340961">9528340961</a></div>
+        <div class="contact-item">📧 <a href="mailto:arishkhana90@gmail.com">arishkhana90@gmail.com</a></div>
+        <div class="contact-item">📷 <a href="https://www.instagram.com/arishkhan3992__" target="_blank">@arishkhan3992__</a></div>
+    </div></div>
 
-    <nav class="navbar">
-        <div class="container">
-            <a href="index.html" class="logo">Aarish <span>Tiles</span></a>
-            <div class="hamburger" onclick="toggleMenu()">☰</div>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html">🏠 Home</a></li>
-                <li><a href="find-mason.html">🔨 Find Mason</a></li>
-                <li><a href="mason-register.html">👷 Mason Register</a></li>
-                <li><a href="tiles-catalog.html">🧱 Tiles Catalog</a></li>
-                <li><a href="tile-calculator.html">🧮 Calculator</a></li>
-                <li><a href="admin-login.html">⚙️ Admin</a></li>
-            </ul>
-        </div>
-    </nav>
+    <nav class="navbar"><div class="container">
+        <a href="index.html" class="logo">Aarish <span>Tiles</span></a>
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="index.html">🏠 Home</a></li>
+            <li><a href="find-mason.html">🔨 Find Mason</a></li>
+            <li><a href="mason-register.html">👷 Mason Register</a></li>
+            <li><a href="tiles-catalog.html">🧱 Tiles Catalog</a></li>
+            <li><a href="tile-calculator.html">🧮 Calculator</a></li>
+            <li><a href="admin-login.html">⚙️ Admin</a></li>
+        </ul>
+    </div></nav>
 
     <div class="container">
         <h1 class="text-center mt-3">🔨 मिस्त्री खोजें</h1>
         <p class="text-center">अपने गाँव या शहर में अनुभवी मिस्त्री खोजें</p>
-        <p class="text-center" style="color: var(--primary);">संचालक: अरिश खान (ARK001) - 8755687268</p>
-
         <div class="search-box">
             <div class="search-input-group">
-                <input type="text" class="search-input" id="searchCity" placeholder="गाँव या शहर का नाम दर्ज करें...">
+                <input type="text" class="search-input" id="searchCity" placeholder="गाँव या शहर का नाम...">
                 <button class="btn btn-primary" onclick="searchMasons()">खोजें</button>
             </div>
         </div>
-
         <h2 class="mb-2">उपलब्ध मिस्त्री</h2>
-        <div class="card-grid" id="masonGrid">
-            <div class="card mason-card">
-                <div class="card-content">
-                    <h3 class="mason-name">रामप्रसाद यादव</h3>
-                    <p class="mason-experience">⭐ 15 वर्ष का अनुभव</p>
-                    <div class="rating">★★★★★ (5.0)</div>
-                    <p>📍 गाँव: औरंगाबाद, बिहार</p>
-                    <p>🛠️ विशेषता: फ्लोरिंग, वॉल टाइल्स</p>
-                    <button class="btn btn-outline" style="width: 100%; margin-top: 1rem;" onclick="whatsappOwner('रामप्रसाद यादव से संपर्क करना है')">📞 कॉन्टैक्ट करें</button>
-                </div>
-            </div>
-
-            <div class="card mason-card">
-                <div class="card-content">
-                    <h3 class="mason-name">सुरेश कुमार</h3>
-                    <p class="mason-experience">⭐ 10 वर्ष का अनुभव</p>
-                    <div class="rating">★★★★☆ (4.5)</div>
-                    <p>📍 गाँव: पटना सिटी, बिहार</p>
-                    <p>🛠️ विशेषता: बाथरूम टाइल्स, मार्बल</p>
-                    <button class="btn btn-outline" style="width: 100%; margin-top: 1rem;" onclick="whatsappOwner('सुरेश कुमार से संपर्क करना है')">📞 कॉन्टैक्ट करें</button>
-                </div>
-            </div>
-
-            <div class="card mason-card">
-                <div class="card-content">
-                    <h3 class="mason-name">मोहन शर्मा</h3>
-                    <p class="mason-experience">⭐ 8 वर्ष का अनुभव</p>
-                    <div class="rating">★★★★☆ (4.3)</div>
-                    <p>📍 गाँव: गया, बिहार</p>
-                    <p>🛠️ विशेषता: आउटडोर टाइल्स</p>
-                    <button class="btn btn-outline" style="width: 100%; margin-top: 1rem;" onclick="whatsappOwner('मोहन शर्मा से संपर्क करना है')">📞 कॉन्टैक्ट करें</button>
-                </div>
-            </div>
-        </div>
+        <div id="masonList" class="card-grid"></div>
     </div>
 
-    <div style="position: fixed; bottom: 10px; right: 10px; z-index: 9999;">
-        <button onclick="testFirebaseConnection().then(result => alert(result.message))" 
-                style="background: var(--primary); color: white; border: none; padding: 10px 15px; border-radius: 50px; font-size: 14px; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.2);">
-            🔌 Test Firebase
-        </button>
+    <div style="position:fixed; bottom:10px; right:10px;">
+        <button onclick="testFirebaseConnection().then(r=>alert(r.message))" style="background:var(--primary); color:white; border:none; padding:10px 15px; border-radius:50px;">🔌 Test</button>
     </div>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Aarish Tiles Network</p>
-            <p><strong>अरिश खान (ARK001)</strong> - 8755687268</p>
-        </div>
-    </footer>
+    <footer><div class="container"><p>&copy; 2024 Aarish Tiles Network</p><p><strong>अरिश खान</strong> - 8755687268</p></div></footer>
 
     <script>
-        function toggleMenu() {
-            document.getElementById('navMenu').classList.toggle('active');
+        function toggleMenu(){document.getElementById('navMenu').classList.toggle('active');}
+        async function searchMasons(){
+            const city = document.getElementById('searchCity').value.trim();
+            const container = document.getElementById('masonList');
+            container.innerHTML = '<div class="text-center">⏳ लोड हो रहा...</div>';
+            let q = db.collection('masons').where('status', '==', 'approved');
+            if(city) q = q.where('city', '>=', city).where('city', '<=', city+'\uf8ff');
+            try{
+                const snap = await q.get();
+                if(snap.empty){
+                    container.innerHTML = '<div class="text-center">❌ कोई मिस्त्री नहीं मिला</div>';
+                    return;
+                }
+                let html = '';
+                snap.forEach(doc=>{
+                    const d = doc.data();
+                    html += `<div class="card"><div class="card-content"><h3 class="mason-name">${d.name}</h3>
+                    <p class="mason-experience">⭐ ${d.experience} अनुभव</p>
+                    <p>📍 ${d.village}, ${d.city}</p>
+                    <button class="btn btn-outline" style="margin-top:1rem;" onclick="whatsappOwner('${d.name} से संपर्क करना है')">📞 कॉन्टैक्ट करें</button></div></div>`;
+                });
+                container.innerHTML = html;
+            }catch(e){ container.innerHTML = '<div class="text-center">❌ त्रुटि: '+e.message+'</div>'; }
         }
-
-        function searchMasons() {
-            const city = document.getElementById('searchCity').value;
-            if (city) {
-                alert(`'${city}' में मिस्त्री खोज रहे हैं...`);
-            } else {
-                alert('कृपया गाँव या शहर का नाम दर्ज करें');
-            }
-        }
+        window.addEventListener('load', searchMasons);
     </script>
 </body>
 </html>
