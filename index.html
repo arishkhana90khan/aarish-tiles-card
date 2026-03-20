@@ -3,38 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <meta name="description" content="Aarish Tiles Network - अपने शहर में मिस्त्री खोजें, टाइल्स खरीदें, या मिस्त्री बनें">
-    <title>Aarish Tiles Network - Home</title>
-    
-    <!-- Firebase SDK -->
+    <title>Aarish Tiles Network – Home</title>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
-    
-    <!-- Firebase Config -->
     <script src="firebase.js"></script>
-    
-    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Contact Bar - Owner Information -->
     <div class="contact-bar">
         <div class="container">
-            <div class="contact-item">
-                📞 <a href="tel:8755687268">8755687268</a> | <a href="tel:9528340961">9528340961</a>
-            </div>
-            <div class="contact-item">
-                📧 <a href="mailto:arishkhana90@gmail.com">arishkhana90@gmail.com</a>
-            </div>
-            <div class="contact-item">
-                📷 <a href="https://instagram.com/arishkhan3992__" target="_blank">@arishkhan3992__</a>
-            </div>
+            <div class="contact-item">📞 <a href="tel:8755687268">8755687268</a> | <a href="tel:9528340961">9528340961</a></div>
+            <div class="contact-item">📧 <a href="mailto:arishkhana90@gmail.com">arishkhana90@gmail.com</a></div>
+            <div class="contact-item">📷 <a href="https://www.instagram.com/arishkhan3992__" target="_blank">@arishkhan3992__</a></div>
         </div>
     </div>
 
-    <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="container">
             <a href="index.html" class="logo">Aarish <span>Tiles</span></a>
@@ -50,145 +35,80 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <h1>Aarish Tiles Network</h1>
             <p>आपका विश्वसनीय टाइल्स और मिस्त्री नेटवर्क। गाँव से शहर तक, हर जगह।</p>
-            <p><strong>संचालक: अरिश खान (Owner ID: ARK001)</strong></p>
-            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 1rem;">
+            <p><strong>संचालक: अरिश खान</strong></p>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;">
                 <a href="find-mason.html" class="btn btn-primary">🔨 Find Mason</a>
                 <a href="mason-register.html" class="btn btn-secondary">👷 Register as Mason</a>
                 <a href="tiles-catalog.html" class="btn btn-outline">🧱 View Tiles</a>
                 <a href="tile-calculator.html" class="btn btn-outline">🧮 Calculator</a>
             </div>
             <div style="margin-top: 1.5rem;">
-                <button onclick="whatsappOwner()" class="btn btn-outline" style="background: #25D366; color: white; border: none;">📱 WhatsApp</button>
+                <button onclick="whatsappOwner()" class="btn" style="background:#25D366; color:white; border:none;">📱 WhatsApp</button>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
     <section class="container mt-4 mb-4">
         <h2 class="text-center">हमारे बारे में</h2>
-        <p class="text-center" style="max-width: 800px; margin: 1rem auto;">
-            Aarish Tiles Network एक ऐसा प्लेटफॉर्म है जो गाँव और शहर के मिस्त्रियों को 
-            ग्राहकों से जोड़ता है। हम उच्च गुणवत्ता वाली टाइल्स भी उपलब्ध कराते हैं 
-            जिन्हें आप सीधे WhatsApp से ऑर्डर कर सकते हैं।
-        </p>
+        <p class="text-center" style="max-width:800px; margin:1rem auto;">Aarish Tiles Network गाँव और शहर के मिस्त्रियों को ग्राहकों से जोड़ता है। उच्च गुणवत्ता वाली टाइल्स, सीधे WhatsApp से ऑर्डर करें।</p>
     </section>
 
-    <!-- Features Section -->
     <section class="container mt-4 mb-4">
         <div class="card-grid">
-            <div class="card">
-                <div class="card-content text-center">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">🔍</div>
-                    <h3>खोजें मिस्त्री</h3>
-                    <p>अपने गाँव या शहर में अनुभवी मिस्त्री खोजें। रेटिंग और समीक्षा देखें।</p>
-                    <a href="find-mason.html" class="btn btn-primary" style="margin-top: 1rem;">खोजें</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-content text-center">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">👷</div>
-                    <h3>मिस्त्री बनें</h3>
-                    <p>अपनी सेवाएँ दें, नए ग्राहक पाएँ, और अपना कारोबार बढ़ाएँ।</p>
-                    <a href="mason-register.html" class="btn btn-secondary" style="margin-top: 1rem;">रजिस्टर करें</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-content text-center">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">🧱</div>
-                    <h3>टाइल्स कैटलॉग</h3>
-                    <p>विभिन्न साइज़ और कीमतों में टाइल्स देखें। WhatsApp से ऑर्डर करें।</p>
-                    <a href="tiles-catalog.html" class="btn btn-outline" style="margin-top: 1rem;">देखें</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-content text-center">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">🧮</div>
-                    <h3>टाइल कैलकुलेटर</h3>
-                    <p>अपनी जरूरत के अनुसार टाइल्स की गणना करें। पेटी और वर्ग फुट निकालें।</p>
-                    <a href="tile-calculator.html" class="btn btn-outline" style="margin-top: 1rem;">कैलकुलेट करें</a>
-                </div>
-            </div>
+            <div class="card"><div class="card-content text-center">
+                <div style="font-size:3rem;">🔍</div><h3>खोजें मिस्त्री</h3>
+                <p>अपने गाँव/शहर में अनुभवी मिस्त्री खोजें।</p>
+                <a href="find-mason.html" class="btn btn-primary">खोजें</a>
+            </div></div>
+            <div class="card"><div class="card-content text-center">
+                <div style="font-size:3rem;">👷</div><h3>मिस्त्री बनें</h3>
+                <p>अपनी सेवाएँ दें, नए ग्राहक पाएँ।</p>
+                <a href="mason-register.html" class="btn btn-secondary">रजिस्टर करें</a>
+            </div></div>
+            <div class="card"><div class="card-content text-center">
+                <div style="font-size:3rem;">🧱</div><h3>टाइल्स कैटलॉग</h3>
+                <p>विभिन्न साइज़ और कीमतों में टाइल्स देखें।</p>
+                <a href="tiles-catalog.html" class="btn btn-outline">देखें</a>
+            </div></div>
+            <div class="card"><div class="card-content text-center">
+                <div style="font-size:3rem;">🧮</div><h3>टाइल कैलकुलेटर</h3>
+                <p>पेटी के हिसाब से वर्ग फुट निकालें।</p>
+                <a href="tile-calculator.html" class="btn btn-outline">कैलकुलेट करें</a>
+            </div></div>
         </div>
     </section>
 
-    <!-- Tiles Catalog Preview -->
     <section class="container mt-4 mb-4">
-        <h2 class="text-center mb-3">लोकप्रिय टाइल्स</h2>
-        <div class="card-grid">
-            <div class="card">
-                <div class="tile-image">🏢</div>
-                <div class="card-content">
-                    <h3>प्रीमियम फ्लोर टाइल</h3>
-                    <p class="tile-size">साइज़: 2x2 फुट</p>
-                    <p class="tile-price">₹65 / वर्ग फुट</p>
-                    <a href="tiles-catalog.html" class="btn btn-outline">देखें</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="tile-image">🚿</div>
-                <div class="card-content">
-                    <h3>वाटरप्रूफ बाथ टाइल</h3>
-                    <p class="tile-size">साइज़: 1x1 फुट</p>
-                    <p class="tile-price">₹45 / वर्ग फुट</p>
-                    <a href="tiles-catalog.html" class="btn btn-outline">देखें</a>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="tile-image">🍳</div>
-                <div class="card-content">
-                    <h3>ऑयल-प्रूफ किचन टाइल</h3>
-                    <p class="tile-size">साइज़: 12x18 इंच</p>
-                    <p class="tile-price">₹55 / वर्ग फुट</p>
-                    <a href="tiles-catalog.html" class="btn btn-outline">देखें</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Owner Section -->
-    <section class="container mt-4 mb-4">
-        <div class="card" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white;">
+        <div class="card" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color:white;">
             <div class="card-content text-center">
-                <h2 style="color: white;">📞 संपर्क करें</h2>
-                <p style="margin: 1rem 0;">किसी भी समस्या या जानकारी के लिए सीधे संपर्क करें:</p>
-                <div style="display: flex; flex-direction: column; gap: 0.8rem; align-items: center;">
-                    <button onclick="callOwner('8755687268')" class="btn" style="background: white; color: var(--primary); width: 200px;">📞 8755687268</button>
-                    <button onclick="callOwner('9528340961')" class="btn" style="background: white; color: var(--primary); width: 200px;">📞 9528340961</button>
-                    <button onclick="emailOwner()" class="btn" style="background: white; color: var(--primary); width: 200px;">📧 Email</button>
-                    <button onclick="openInstagram()" class="btn" style="background: white; color: var(--primary); width: 200px;">📷 Instagram</button>
-                    <button onclick="whatsappOwner()" class="btn" style="background: #25D366; color: white; width: 200px;">📱 WhatsApp</button>
+                <h2 style="color:white;">📞 संपर्क करें</h2>
+                <div style="display:flex; flex-direction:column; gap:0.8rem; align-items:center; margin-top:1rem;">
+                    <button onclick="callOwner('8755687268')" class="btn" style="background:white; color:var(--primary); width:200px;">📞 8755687268</button>
+                    <button onclick="callOwner('9528340961')" class="btn" style="background:white; color:var(--primary); width:200px;">📞 9528340961</button>
+                    <button onclick="emailOwner()" class="btn" style="background:white; color:var(--primary); width:200px;">📧 Email</button>
+                    <button onclick="openInstagram()" class="btn" style="background:white; color:var(--primary); width:200px;">📷 Instagram</button>
+                    <button onclick="whatsappOwner()" class="btn" style="background:#25D366; color:white; width:200px;">📱 WhatsApp</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Test Connection Button -->
-    <div style="position: fixed; bottom: 10px; right: 10px; z-index: 9999;">
-        <button onclick="testFirebaseConnection().then(result => alert(result.message))" 
-                style="background: var(--primary); color: white; border: none; padding: 10px 15px; border-radius: 50px; font-size: 14px; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.2);">
-            🔌 Test Firebase
-        </button>
+    <div style="position:fixed; bottom:10px; right:10px; z-index:9999;">
+        <button onclick="testFirebaseConnection().then(r=>alert(r.message))" style="background:var(--primary); color:white; border:none; padding:10px 15px; border-radius:50px; cursor:pointer;">🔌 Test</button>
     </div>
 
     <footer>
         <div class="container">
             <p>&copy; 2024 Aarish Tiles Network</p>
-            <p><strong>अरिश खान (ARK001)</strong> - संचालक</p>
+            <p><strong>अरिश खान</strong> - 8755687268</p>
             <div class="social-links">
-                <a href="tel:8755687268">📞</a>
-                <a href="tel:9528340961">📞</a>
+                <a href="tel:8755687268">📞</a><a href="tel:9528340961">📞</a>
                 <a href="mailto:arishkhana90@gmail.com">📧</a>
-                <a href="https://instagram.com/arishkhan3992__" target="_blank">📷</a>
+                <a href="https://www.instagram.com/arishkhan3992__" target="_blank">📷</a>
                 <a href="#" onclick="whatsappOwner()">📱</a>
             </div>
         </div>
@@ -196,16 +116,8 @@
 
     <script>
         function toggleMenu() {
-            const menu = document.getElementById('navMenu');
-            menu.classList.toggle('active');
+            document.getElementById('navMenu').classList.toggle('active');
         }
-
-        document.addEventListener('click', function(event) {
-            const menu = document.getElementById('navMenu');
-            if (!event.target.closest('.navbar') && menu.classList.contains('active')) {
-                menu.classList.remove('active');
-            }
-        });
     </script>
 </body>
-</html>                                                                               
+                        </html>
