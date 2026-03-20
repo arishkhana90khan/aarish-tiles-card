@@ -2,203 +2,77 @@
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Aarish Tiles - Tile Calculator</title>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aarish Tiles – Calculator</title>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
     <script src="firebase.js"></script>
     <link rel="stylesheet" href="style.css">
-    
-    <style>
-        .calculator-container { max-width: 600px; margin: 2rem auto; background: white; border-radius: var(--border-radius); box-shadow: var(--shadow); padding: 2rem; }
-        .tile-size-card { background: var(--light); border-radius: var(--border-radius); padding: 1.5rem; margin-bottom: 1.5rem; border-left: 5px solid var(--primary); }
-        .tile-size-title { font-size: 1.3rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem; }
-        .tile-info { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px dashed var(--gray-light); }
-        .tile-spec { background: white; padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.9rem; font-weight: 600; color: var(--dark); }
-        .tile-spec span { color: var(--primary); font-size: 1.1rem; margin-right: 0.3rem; }
-        .input-group { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
-        .input-group label { font-weight: 600; min-width: 60px; }
-        .input-group input { flex: 1; min-width: 120px; padding: 10px; border: 2px solid var(--gray-light); border-radius: var(--border-radius-sm); font-size: 1rem; }
-        .result-box { background: var(--primary-light); color: var(--dark); padding: 1rem; border-radius: var(--border-radius-sm); margin-top: 1rem; font-weight: 600; text-align: center; font-size: 1.2rem; }
-        .total-result { background: var(--primary); color: white; padding: 1.5rem; border-radius: var(--border-radius); margin-top: 2rem; text-align: center; font-size: 1.5rem; font-weight: 700; }
-        .reset-btn { background: var(--secondary); color: white; border: none; padding: 10px 20px; border-radius: 50px; font-size: 1rem; cursor: pointer; margin-top: 1rem; }
-        .note-box { background: #fff3cd; border: 1px solid #ffeeba; color: #856404; padding: 1rem; border-radius: var(--border-radius-sm); margin-top: 1.5rem; font-size: 0.95rem; }
-    </style>
+    <style>.tile-size-card{background:var(--light); border-radius:var(--border-radius); padding:1.5rem; margin-bottom:1.5rem; border-left:5px solid var(--primary);}
+    .tile-size-title{font-size:1.3rem; font-weight:700; color:var(--primary); margin-bottom:0.5rem;}
+    .tile-info{display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:1rem; padding-bottom:0.5rem; border-bottom:1px dashed var(--gray-light);}
+    .tile-spec{background:white; padding:0.5rem 1rem; border-radius:50px; font-size:0.9rem; font-weight:600;}
+    .tile-spec span{color:var(--primary);}
+    .input-group{display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;}
+    .input-group label{font-weight:600; min-width:60px;}
+    .input-group input{flex:1; min-width:120px; padding:10px; border:2px solid var(--gray-light); border-radius:var(--border-radius-sm);}
+    .total-result{background:var(--primary); color:white; padding:1.5rem; border-radius:var(--border-radius); margin-top:2rem; text-align:center; font-size:1.5rem; font-weight:700;}
+    .reset-btn{background:var(--secondary); color:white; border:none; padding:10px 20px; border-radius:50px; cursor:pointer; margin-top:1rem;}</style>
 </head>
 <body>
-    <div class="contact-bar">
-        <div class="container">
-            <div class="contact-item">📞 <a href="tel:8755687268">8755687268</a> | <a href="tel:9528340961">9528340961</a></div>
-            <div class="contact-item">📧 <a href="mailto:arishkhana90@gmail.com">arishkhana90@gmail.com</a></div>
-            <div class="contact-item">📷 <a href="https://instagram.com/arishkhan3992__" target="_blank">@arishkhan3992__</a></div>
-        </div>
-    </div>
-
-    <nav class="navbar">
-        <div class="container">
-            <a href="index.html" class="logo">Aarish <span>Tiles</span></a>
-            <div class="hamburger" onclick="toggleMenu()">☰</div>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html">🏠 Home</a></li>
-                <li><a href="find-mason.html">🔨 Find Mason</a></li>
-                <li><a href="mason-register.html">👷 Mason Register</a></li>
-                <li><a href="tiles-catalog.html">🧱 Tiles Catalog</a></li>
-                <li><a href="tile-calculator.html">🧮 Calculator</a></li>
-                <li><a href="admin-login.html">⚙️ Admin</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <div class="container">
-        <div class="calculator-container">
-            <h1 class="text-center" style="color: var(--primary);">🧮 टाइल कैलकुलेटर</h1>
-            <p class="text-center mb-3">पेटी के हिसाब से वर्ग फुट निकालें</p>
-            <p class="text-center" style="color: var(--primary);">संचालक: अरिश खान (ARK001) - 8755687268</p>
-
-            <!-- 1x1 टाइल्स -->
-            <div class="tile-size-card">
-                <div class="tile-size-title">⬜ 1x1 फुट टाइल्स</div>
-                <div class="tile-info">
-                    <span class="tile-spec"><span>📦</span> 1 पेटी = 12 वर्ग फुट</span>
-                    <span class="tile-spec"><span>🧱</span> 1 पेटी में 12 टाइल्स</span>
-                </div>
-                <div class="input-group">
-                    <label>पेटी:</label>
-                    <input type="number" id="boxes1x1" min="0" value="0" step="0.5" oninput="calculateTotal()">
-                    <span style="font-weight: 600;">× 12 = <span id="sqft1x1">0</span> वर्ग फुट</span>
-                </div>
-            </div>
-
-            <!-- 2x2 टाइल्स -->
-            <div class="tile-size-card">
-                <div class="tile-size-title">🔲 2x2 फुट टाइल्स</div>
-                <div class="tile-info">
-                    <span class="tile-spec"><span>📦</span> 1 पेटी = 16 वर्ग फुट</span>
-                    <span class="tile-spec"><span>🧱</span> 1 पेटी में 4 टाइल्स</span>
-                </div>
-                <div class="input-group">
-                    <label>पेटी:</label>
-                    <input type="number" id="boxes2x2" min="0" value="0" step="0.5" oninput="calculateTotal()">
-                    <span style="font-weight: 600;">× 16 = <span id="sqft2x2">0</span> वर्ग फुट</span>
-                </div>
-            </div>
-
-            <!-- 2x4 टाइल्स -->
-            <div class="tile-size-card">
-                <div class="tile-size-title">📏 2x4 फुट टाइल्स</div>
-                <div class="tile-info">
-                    <span class="tile-spec"><span>📦</span> 1 पेटी = 16 वर्ग फुट</span>
-                    <span class="tile-spec"><span>🧱</span> 1 पेटी में 2 टाइल्स</span>
-                </div>
-                <div class="input-group">
-                    <label>पेटी:</label>
-                    <input type="number" id="boxes2x4" min="0" value="0" step="0.5" oninput="calculateTotal()">
-                    <span style="font-weight: 600;">× 16 = <span id="sqft2x4">0</span> वर्ग फुट</span>
-                </div>
-            </div>
-
-            <!-- 12x18 टाइल्स -->
-            <div class="tile-size-card">
-                <div class="tile-size-title">📐 12x18 इंच टाइल्स</div>
-                <div class="tile-info">
-                    <span class="tile-spec"><span>📦</span> 1 पेटी = 8.5 वर्ग फुट</span>
-                    <span class="tile-spec"><span>🧱</span> 1 पेटी में 6 टाइल्स</span>
-                </div>
-                <div class="input-group">
-                    <label>पेटी:</label>
-                    <input type="number" id="boxes12x18" min="0" value="0" step="0.5" oninput="calculateTotal()">
-                    <span style="font-weight: 600;">× 8.5 = <span id="sqft12x18">0</span> वर्ग फुट</span>
-                </div>
-            </div>
-
-            <!-- 2.5x5 टाइल्स -->
-            <div class="tile-size-card">
-                <div class="tile-size-title">📏 2.5x5 फुट टाइल्स</div>
-                <div class="tile-info">
-                    <span class="tile-spec"><span>📦</span> 1 पेटी = 28 वर्ग फुट</span>
-                    <span class="tile-spec"><span>🧱</span> 1 पेटी में 2 टाइल्स</span>
-                </div>
-                <div class="input-group">
-                    <label>पेटी:</label>
-                    <input type="number" id="boxes2_5x5" min="0" value="0" step="0.5" oninput="calculateTotal()">
-                    <span style="font-weight: 600;">× 28 = <span id="sqft2_5x5">0</span> वर्ग फुट</span>
-                </div>
-            </div>
-
-            <!-- कुल योग -->
-            <div class="total-result" id="totalArea">
-                कुल क्षेत्रफल: 0 वर्ग फुट
-            </div>
-
-            <div style="text-align: center;">
-                <button class="reset-btn" onclick="resetCalculator()">⟲ सभी रीसेट करें</button>
-            </div>
-
-            <div class="note-box">
-                <strong>📌 नोट:</strong><br>
-                • 1x1 टाइल्स: 1 पेटी = 12 वर्ग फुट (12 टाइल्स)<br>
-                • 2x2 टाइल्स: 1 पेटी = 16 वर्ग फुट (4 टाइल्स)<br>
-                • 2x4 टाइल्स: 1 पेटी = 16 वर्ग फुट (2 टाइल्स)<br>
-                • 12x18 टाइल्स: 1 पेटी = 8.5 वर्ग फुट (6 टाइल्स)<br>
-                • 2.5x5 टाइल्स: 1 पेटी = 28 वर्ग फुट (2 टाइल्स)<br>
-                <br>
-                <strong>📞 समस्या होने पर:</strong> 8755687268
-            </div>
-        </div>
-    </div>
-
-    <div style="position: fixed; bottom: 10px; right: 10px; z-index: 9999;">
-        <button onclick="testFirebaseConnection().then(result => alert(result.message))" 
-                style="background: var(--primary); color: white; border: none; padding: 10px 15px; border-radius: 50px; font-size: 14px; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.2);">
-            🔌 Test Firebase
-        </button>
-    </div>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Aarish Tiles Network</p>
-            <p><strong>अरिश खान (ARK001)</strong> - 8755687268</p>
-        </div>
-    </footer>
-
+    <div class="contact-bar"><div class="container">
+        <div class="contact-item">📞 <a href="tel:8755687268">8755687268</a> | <a href="tel:9528340961">9528340961</a></div>
+        <div class="contact-item">📧 <a href="mailto:arishkhana90@gmail.com">arishkhana90@gmail.com</a></div>
+        <div class="contact-item">📷 <a href="https://www.instagram.com/arishkhan3992__" target="_blank">@arishkhan3992__</a></div>
+    </div></div>
+    <nav class="navbar"><div class="container">
+        <a href="index.html" class="logo">Aarish <span>Tiles</span></a>
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="index.html">🏠 Home</a></li>
+            <li><a href="find-mason.html">🔨 Find Mason</a></li>
+            <li><a href="mason-register.html">👷 Mason Register</a></li>
+            <li><a href="tiles-catalog.html">🧱 Tiles Catalog</a></li>
+            <li><a href="tile-calculator.html">🧮 Calculator</a></li>
+            <li><a href="admin-login.html">⚙️ Admin</a></li>
+        </ul>
+    </div></nav>
+    <div class="container"><div style="max-width:600px; margin:2rem auto; background:white; border-radius:var(--border-radius); box-shadow:var(--shadow); padding:2rem;">
+        <h1 class="text-center" style="color:var(--primary);">🧮 टाइल कैलकुलेटर</h1>
+        <p class="text-center mb-3">पेटी के हिसाब से वर्ग फुट निकालें</p>
+        <div class="tile-size-card"><div class="tile-size-title">⬜ 1x1 फुट टाइल्स</div><div class="tile-info"><span class="tile-spec"><span>📦</span> 1 पेटी = 12 वर्ग फुट</span><span class="tile-spec"><span>🧱</span> 12 टाइल्स</span></div><div class="input-group"><label>पेटी:</label><input type="number" id="b1" min="0" value="0" step="0.5" oninput="calc()"><span>× 12 = <span id="s1">0</span> वर्ग फुट</span></div></div>
+        <div class="tile-size-card"><div class="tile-size-title">🔲 2x2 फुट टाइल्स</div><div class="tile-info"><span class="tile-spec"><span>📦</span> 1 पेटी = 16 वर्ग फुट</span><span class="tile-spec"><span>🧱</span> 4 टाइल्स</span></div><div class="input-group"><label>पेटी:</label><input type="number" id="b2" min="0" value="0" step="0.5" oninput="calc()"><span>× 16 = <span id="s2">0</span> वर्ग फुट</span></div></div>
+        <div class="tile-size-card"><div class="tile-size-title">📏 2x4 फुट टाइल्स</div><div class="tile-info"><span class="tile-spec"><span>📦</span> 1 पेटी = 16 वर्ग फुट</span><span class="tile-spec"><span>🧱</span> 2 टाइल्स</span></div><div class="input-group"><label>पेटी:</label><input type="number" id="b3" min="0" value="0" step="0.5" oninput="calc()"><span>× 16 = <span id="s3">0</span> वर्ग फुट</span></div></div>
+        <div class="tile-size-card"><div class="tile-size-title">📐 12x18 इंच टाइल्स</div><div class="tile-info"><span class="tile-spec"><span>📦</span> 1 पेटी = 8.5 वर्ग फुट</span><span class="tile-spec"><span>🧱</span> 6 टाइल्स</span></div><div class="input-group"><label>पेटी:</label><input type="number" id="b4" min="0" value="0" step="0.5" oninput="calc()"><span>× 8.5 = <span id="s4">0</span> वर्ग फुट</span></div></div>
+        <div class="tile-size-card"><div class="tile-size-title">📏 2.5x5 फुट टाइल्स</div><div class="tile-info"><span class="tile-spec"><span>📦</span> 1 पेटी = 28 वर्ग फुट</span><span class="tile-spec"><span>🧱</span> 2 टाइल्स</span></div><div class="input-group"><label>पेटी:</label><input type="number" id="b5" min="0" value="0" step="0.5" oninput="calc()"><span>× 28 = <span id="s5">0</span> वर्ग फुट</span></div></div>
+        <div class="total-result" id="totalArea">कुल: 0 वर्ग फुट</div>
+        <div style="text-align:center;"><button class="reset-btn" onclick="resetCalc()">⟲ सभी रीसेट</button></div>
+        <div class="note-box mt-3" style="background:#fff3cd; padding:1rem; border-radius:var(--border-radius-sm);"><strong>📌 नोट:</strong> 1x1 = 12sqft, 2x2 = 16sqft, 2x4 = 16sqft, 12x18 = 8.5sqft, 2.5x5 = 28sqft</div>
+    </div></div>
+    <div style="position:fixed; bottom:10px; right:10px;"><button onclick="testFirebaseConnection().then(r=>alert(r.message))" style="background:var(--primary); color:white; border:none; padding:10px 15px; border-radius:50px;">🔌 Test</button></div>
+    <footer><div class="container"><p>&copy; 2024 Aarish Tiles Network</p><p><strong>अरिश खान</strong> - 8755687268</p></div></footer>
     <script>
-        function toggleMenu() {
-            document.getElementById('navMenu').classList.toggle('active');
+        function toggleMenu(){document.getElementById('navMenu').classList.toggle('active');}
+        function calc(){
+            let b1=parseFloat(document.getElementById('b1').value)||0, s1=b1*12;
+            let b2=parseFloat(document.getElementById('b2').value)||0, s2=b2*16;
+            let b3=parseFloat(document.getElementById('b3').value)||0, s3=b3*16;
+            let b4=parseFloat(document.getElementById('b4').value)||0, s4=b4*8.5;
+            let b5=parseFloat(document.getElementById('b5').value)||0, s5=b5*28;
+            document.getElementById('s1').innerText=s1.toFixed(1);
+            document.getElementById('s2').innerText=s2.toFixed(1);
+            document.getElementById('s3').innerText=s3.toFixed(1);
+            document.getElementById('s4').innerText=s4.toFixed(1);
+            document.getElementById('s5').innerText=s5.toFixed(1);
+            let total = s1+s2+s3+s4+s5;
+            document.getElementById('totalArea').innerHTML = `कुल: ${total.toFixed(1)} वर्ग फुट`;
         }
-
-        function calculateTotal() {
-            let boxes1x1 = parseFloat(document.getElementById('boxes1x1').value) || 0;
-            let boxes2x2 = parseFloat(document.getElementById('boxes2x2').value) || 0;
-            let boxes2x4 = parseFloat(document.getElementById('boxes2x4').value) || 0;
-            let boxes12x18 = parseFloat(document.getElementById('boxes12x18').value) || 0;
-            let boxes2_5x5 = parseFloat(document.getElementById('boxes2_5x5').value) || 0;
-
-            let sqft1x1 = boxes1x1 * 12;
-            let sqft2x2 = boxes2x2 * 16;
-            let sqft2x4 = boxes2x4 * 16;
-            let sqft12x18 = boxes12x18 * 8.5;
-            let sqft2_5x5 = boxes2_5x5 * 28;
-
-            document.getElementById('sqft1x1').innerText = sqft1x1.toFixed(1);
-            document.getElementById('sqft2x2').innerText = sqft2x2.toFixed(1);
-            document.getElementById('sqft2x4').innerText = sqft2x4.toFixed(1);
-            document.getElementById('sqft12x18').innerText = sqft12x18.toFixed(1);
-            document.getElementById('sqft2_5x5').innerText = sqft2_5x5.toFixed(1);
-
-            let total = sqft1x1 + sqft2x2 + sqft2x4 + sqft12x18 + sqft2_5x5;
-            document.getElementById('totalArea').innerHTML = `कुल क्षेत्रफल: ${total.toFixed(1)} वर्ग फुट`;
-        }
-
-        function resetCalculator() {
-            document.getElementById('boxes1x1').value = 0;
-            document.getElementById('boxes2x2').value = 0;
-            document.getElementById('boxes2x4').value = 0;
-            document.getElementById('boxes12x18').value = 0;
-            document.getElementById('boxes2_5x5').value = 0;
-            calculateTotal();
+        function resetCalc(){
+            document.getElementById('b1').value=0; document.getElementById('b2').value=0;
+            document.getElementById('b3').value=0; document.getElementById('b4').value=0;
+            document.getElementById('b5').value=0; calc();
         }
     </script>
 </body>
