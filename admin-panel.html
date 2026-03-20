@@ -3,166 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aarish Tiles - Admin Panel</title>
-    
+    <title>Aarish Tiles – Admin Panel</title>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
     <script src="firebase.js"></script>
     <link rel="stylesheet" href="style.css">
-    
-    <style>
-        .warning-badge {
-            background: #dc3545;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 50px;
-            font-size: 0.7rem;
-            margin-left: 5px;
-        }
-    </style>
+    <style>.admin-card button{margin-top:0.5rem;}</style>
 </head>
 <body>
-    <div class="contact-bar">
-        <div class="container">
-            <div class="contact-item">📞 <a href="tel:8755687268">8755687268</a> | <a href="tel:9528340961">9528340961</a></div>
-            <div class="contact-item">📧 <a href="mailto:arishkhana90@gmail.com">arishkhana90@gmail.com</a></div>
-            <div class="contact-item">📷 <a href="https://instagram.com/arishkhan3992__" target="_blank">@arishkhan3992__</a></div>
-        </div>
-    </div>
-
-    <nav class="navbar">
-        <div class="container">
-            <a href="index.html" class="logo">Aarish <span>Tiles</span></a>
-            <div class="hamburger" onclick="toggleMenu()">☰</div>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html">🏠 Home</a></li>
-                <li><a href="find-mason.html">🔨 Find Mason</a></li>
-                <li><a href="mason-register.html">👷 Mason Register</a></li>
-                <li><a href="tiles-catalog.html">🧱 Tiles Catalog</a></li>
-                <li><a href="tile-calculator.html">🧮 Calculator</a></li>
-                <li><a href="admin-login.html">⚙️ Admin</a></li>
-            </ul>
-        </div>
-    </nav>
-
+    <div class="contact-bar"><div class="container">
+        <div class="contact-item">📞 <a href="tel:8755687268">8755687268</a> | <a href="tel:9528340961">9528340961</a></div>
+        <div class="contact-item">📧 <a href="mailto:arishkhana90@gmail.com">arishkhana90@gmail.com</a></div>
+        <div class="contact-item">📷 <a href="https://www.instagram.com/arishkhan3992__" target="_blank">@arishkhan3992__</a></div>
+    </div></div>
+    <nav class="navbar"><div class="container">
+        <a href="index.html" class="logo">Aarish <span>Tiles</span></a>
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="index.html">🏠 Home</a></li>
+            <li><a href="find-mason.html">🔨 Find Mason</a></li>
+            <li><a href="mason-register.html">👷 Mason Register</a></li>
+            <li><a href="tiles-catalog.html">🧱 Tiles Catalog</a></li>
+            <li><a href="tile-calculator.html">🧮 Calculator</a></li>
+            <li><a href="admin-login.html">⚙️ Admin</a></li>
+        </ul>
+    </div></nav>
     <div class="container">
         <h1 class="mt-3">⚙️ एडमिन पैनल</h1>
-        <p>स्वागत है, <strong>अरिश खान (ARK001)</strong>!</p>
-
-        <!-- Security Check -->
-        <script>
-            if (!isAdminLoggedIn()) {
-                window.location.href = 'admin-login.html';
-            }
-        </script>
-
-        <div style="background: #d4edda; color: #155724; padding: 1rem; border-radius: var(--border-radius); margin-bottom: 1rem;">
-            <strong>✅ आप लॉगिन हैं!</strong> आपका Owner ID: ARK001 सत्यापित हुआ।
-        </div>
+        <p>स्वागत है, <strong>अरिश खान</strong>!</p>
+        <script>if(!isAdminLoggedIn()) window.location.href='admin-login.html';</script>
 
         <div class="admin-grid">
-            <!-- Approve Mason Section -->
+            <!-- Approve Mason -->
             <div class="admin-card">
-                <h3>✅ मिस्त्री स्वीकृति <span class="warning-badge">2 नए</span></h3>
-                <div style="margin: 1rem 0;">
-                    <p><strong>रमेश कुमार</strong> - 8 वर्ष, औरंगाबाद</p>
-                    <div style="display: flex; gap: 0.5rem;">
-                        <button class="btn btn-primary" style="flex: 1;">✅ स्वीकारें</button>
-                        <button class="btn btn-secondary" style="flex: 1;">❌ अस्वीकारें</button>
-                    </div>
-                </div>
-                <div style="margin: 1rem 0;">
-                    <p><strong>सुरेश यादव</strong> - 5 वर्ष, पटना</p>
-                    <div style="display: flex; gap: 0.5rem;">
-                        <button class="btn btn-primary" style="flex: 1;">✅ स्वीकारें</button>
-                        <button class="btn btn-secondary" style="flex: 1;">❌ अस्वीकारें</button>
-                    </div>
-                </div>
-                <button class="btn btn-outline" style="width: 100%;">सभी देखें</button>
+                <h3>✅ मिस्त्री स्वीकृति</h3>
+                <div id="pendingMasons"></div>
             </div>
-
-            <!-- Add Tiles Section -->
+            <!-- Add Tile -->
             <div class="admin-card">
                 <h3>➕ नई टाइल जोड़ें</h3>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="टाइल का नाम">
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="साइज़ (जैसे: 2x2)">
-                </div>
-                <div class="form-group">
-                    <input type="number" class="form-control" placeholder="कीमत प्रति वर्ग फुट">
-                </div>
-                <div class="form-group">
-                    <input type="file" class="form-control" accept="image/*">
-                </div>
-                <button class="btn btn-primary" style="width: 100%;">टाइल जोड़ें</button>
+                <form id="addTileForm">
+                    <div class="form-group"><input type="text" class="form-control" id="tileName" placeholder="टाइल का नाम" required></div>
+                    <div class="form-group"><input type="text" class="form-control" id="tileSize" placeholder="साइज़ (जैसे 2x2 फुट)" required></div>
+                    <div class="form-group"><input type="number" class="form-control" id="tilePrice" placeholder="कीमत प्रति वर्ग फुट" required></div>
+                    <div class="form-group"><input type="text" class="form-control" id="tileIcon" placeholder="आइकॉन (🧱,🏢,🚿)" value="🧱"></div>
+                    <button type="submit" class="btn btn-primary" style="width:100%;">टाइल जोड़ें</button>
+                </form>
+                <div id="tileMsg" class="message" style="margin-top:0.5rem; display:none;"></div>
             </div>
-
-            <!-- Reviews Section -->
+            <!-- View Reviews -->
             <div class="admin-card">
                 <h3>📝 हाल की समीक्षाएँ</h3>
-                <div class="review-item">
-                    <strong>राहुल:</strong> प्रीमियम टाइल - "बहुत अच्छी" ⭐⭐⭐⭐⭐
-                </div>
-                <div class="review-item">
-                    <strong>सीमा:</strong> बाथ टाइल - "वाटरप्रूफ बढ़िया" ⭐⭐⭐⭐
-                </div>
-                <div class="review-item">
-                    <strong>अमित:</strong> किचन टाइल - "ऑयल प्रूफ सही" ⭐⭐⭐⭐⭐
-                </div>
-                <button class="btn btn-outline" style="width: 100%; margin-top: 1rem;">सभी देखें</button>
+                <div id="reviewsList"></div>
+                <button class="btn btn-outline" style="width:100%;" onclick="loadReviews()">रिफ्रेश</button>
             </div>
-
             <!-- Bonus Progress -->
             <div class="admin-card">
                 <h3>💰 बोनस प्रोग्रेस</h3>
-                <p>मासिक टार्गेट: 500 टाइल्स</p>
-                <div class="progress-bar"><div class="progress-fill" style="width: 65%;"></div></div>
+                <p>मासिक टार्गेट: 500 टाइल्स</p><div class="progress-bar"><div class="progress-fill" style="width:65%;"></div></div>
                 <p>बिक्री: 325 टाइल्स (65%)</p>
-                <p>नए मिस्त्री: 12/20</p>
-                <div class="progress-bar"><div class="progress-fill" style="width: 60%;"></div></div>
+                <p>नए मिस्त्री: 12/20</p><div class="progress-bar"><div class="progress-fill" style="width:60%;"></div></div>
                 <p>बोनस: ₹4,500</p>
-                <button class="btn btn-primary" style="width: 100%;">बोनस क्लेम करें</button>
+                <button class="btn btn-primary" style="width:100%;">बोनस क्लेम करें</button>
             </div>
-
-            <!-- Owner Info Card -->
-            <div class="admin-card" style="grid-column: span 2;">
+            <!-- Owner Info -->
+            <div class="admin-card" style="grid-column:span 2;">
                 <h3>👤 संचालक जानकारी</h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                    <div>
-                        <p><strong>नाम:</strong> अरिश खान</p>
-                        <p><strong>Owner ID:</strong> ARK001</p>
-                        <p><strong>फोन:</strong> 8755687268, 9528340961</p>
-                    </div>
-                    <div>
-                        <p><strong>Email:</strong> arishkhana90@gmail.com</p>
-                        <p><strong>Instagram:</strong> @arishkhan3992__</p>
-                        <p><strong>Owner Key:</strong> arish@tiles#2024</p>
-                        <button class="btn btn-outline" onclick="openInstagram()">Instagram खोलें</button>
-                    </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                    <div><p><strong>नाम:</strong> अरिश खान</p><p><strong>Owner ID:</strong> ARK001</p><p><strong>फोन:</strong> 8755687268, 9528340961</p></div>
+                    <div><p><strong>Email:</strong> arishkhana90@gmail.com</p><p><strong>Instagram:</strong> @arishkhan3992__</p><p><strong>Key:</strong> arish@tiles#2024</p><button class="btn btn-outline" onclick="openInstagram()">Instagram खोलें</button></div>
                 </div>
             </div>
         </div>
-
-        <div style="text-align: center; margin: 2rem 0;">
-            <button class="btn btn-secondary" onclick="adminLogout()">🚪 लॉगआउट</button>
-        </div>
+        <div style="text-align:center; margin:2rem 0;"><button class="btn btn-secondary" onclick="adminLogout()">🚪 लॉगआउट</button></div>
     </div>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Aarish Tiles Network</p>
-            <p><strong>अरिश खान (ARK001)</strong> - 8755687268</p>
-        </div>
-    </footer>
-
+    <footer><div class="container"><p>&copy; 2024 Aarish Tiles Network</p><p><strong>अरिश खान</strong> - 8755687268</p></div></footer>
     <script>
-        function toggleMenu() {
-            document.getElementById('navMenu').classList.toggle('active');
+        function toggleMenu(){document.getElementById('navMenu').classList.toggle('active');}
+        async function loadPendingMasons(){
+            const container = document.getElementById('pendingMasons');
+            const snap = await db.collection('masons').where('status','==','pending').get();
+            if(snap.empty){ container.innerHTML = '<p>कोई पेंडिंग मिस्त्री नहीं।</p>'; return; }
+            let html='';
+            snap.forEach(doc=>{
+                const d = doc.data();
+                html += `<div style="border-bottom:1px solid #eee; padding:0.5rem 0;"><strong>${d.name}</strong> (${d.village}, ${d.city})<br>📞 ${d.phone}<br>
+                <button class="btn btn-primary btn-sm" style="margin:0.2rem;" onclick="approveMason('${doc.id}')">✅ स्वीकारें</button>
+                <button class="btn btn-secondary btn-sm" onclick="rejectMason('${doc.id}')">❌ अस्वीकारें</button></div>`;
+            });
+            container.innerHTML = html;
         }
+        window.approveMason = async (id)=>{ await db.collection('masons').doc(id).update({status:'approved'}); loadPendingMasons(); alert('स्वीकृत!'); };
+        window.rejectMason = async (id)=>{ await db.collection('masons').doc(id).delete(); loadPendingMasons(); alert('हटा दिया गया।'); };
+        const addForm = document.getElementById('addTileForm');
+        addForm.addEventListener('submit', async(e)=>{
+            e.preventDefault();
+            const name = document.getElementById('tileName').value.trim();
+            const size = document.getElementById('tileSize').value.trim();
+            const price = parseFloat(document.getElementById('tilePrice').value);
+            const icon = document.getElementById('tileIcon').value.trim() || '🧱';
+            if(!name || !size || isNaN(price)){ alert('सभी फील्ड भरें'); return; }
+            try{
+                await db.collection('tiles').add({
+                    name, size, price, imageIcon: icon,
+                    reviewCount:0,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                const msgDiv = document.getElementById('tileMsg');
+                msgDiv.textContent = '✅ टाइल जोड़ दी गई!';
+                msgDiv.className = 'message success';
+                msgDiv.style.display = 'block';
+                setTimeout(()=>msgDiv.style.display='none',3000);
+                addForm.reset();
+            }catch(e){ alert('त्रुटि: '+e.message); }
+        });
+        async function loadReviews(){
+            const container = document.getElementById('reviewsList');
+            container.innerHTML = '⏳ लोड हो रहा...';
+            const snap = await db.collection('reviews').orderBy('createdAt','desc').limit(10).get();
+            if(snap.empty){ container.innerHTML = '<p>कोई रिव्यू नहीं।</p>'; return; }
+            let html='';
+            snap.forEach(doc=>{
+                const r = doc.data();
+                html += `<div class="review-item"><strong>${r.tileName}</strong>: ${r.comment}<br><div class="rating">⭐⭐⭐⭐</div>
+                <button onclick="deleteReview('${doc.id}')" style="background:none; border:none; color:red; cursor:pointer;">🗑️ हटाएं</button></div>`;
+            });
+            container.innerHTML = html;
+        }
+        window.deleteReview = async (id)=>{ if(confirm('हटाएं?')){ await db.collection('reviews').doc(id).delete(); loadReviews(); } };
+        window.addEventListener('load',()=>{ loadPendingMasons(); loadReviews(); });
     </script>
 </body>
 </html>
